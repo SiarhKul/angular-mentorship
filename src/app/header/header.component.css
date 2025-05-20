@@ -5,6 +5,10 @@
   padding: 1rem
 }
 
+.logo{
+  text-decoration: none;
+}
+
 .navigation {
   background-color: #f8f9fa;
   padding: 1rem;
