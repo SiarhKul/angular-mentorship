@@ -1,12 +1,11 @@
 
-
 .main {
-  padding: 1rem;
+  padding: var(--spacing-md);
 }
 
 .content {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.25rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: var(--text-color-on-primary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  box-shadow: 0 var(--spacing-xs) var(--spacing-sm) var(--shadow-color);
 }
