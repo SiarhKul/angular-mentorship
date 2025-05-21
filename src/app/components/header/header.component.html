@@ -1,8 +1,10 @@
-<script src='header.component.ts'></script>
+
 <header class='header'>
   <div class='logo'>
     Budgetify
   </div>
+
+<div class='nav-badge'>
 
   <nav class='navigation'>
     <ul>
@@ -11,9 +13,10 @@
       <li><a routerLink='obligatory' routerLinkActive='active'>Obligatory</a></li>
       <li><a routerLink='statistic' routerLinkActive='active'>Statistic</a></li>
       <li><a routerLink='admin' routerLinkActive='active'>Admin</a></li>
-      <li><a routerLink='icons' routerLinkActive='active'>Icons</a></li>
     </ul>
   </nav>
 
   <app-user-profile-badge/>
+</div>
+
 </header>

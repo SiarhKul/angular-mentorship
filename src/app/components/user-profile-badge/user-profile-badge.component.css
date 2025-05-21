@@ -1,0 +1,7 @@
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  background: var(--background-color-light);
+}

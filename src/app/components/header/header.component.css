@@ -1,20 +1,30 @@
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md);
+  background: var(--text-color-on-primary);
 }
 
-.logo{
+.nav-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  gap: var(--gap-sm);
+}
+
+
+.logo {
   text-decoration: none;
-  padding: var(--spacing-md);
-  background: var(--background-color-light);
+  /*padding: var(--spacing-md);*/
+
 }
 
 .navigation {
-  background-color: var(--background-color-light);
-  padding: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
+  /*background-color: var(--background-color-light);*/
+  /*padding: var(--spacing-md);*/
+  /*border-bottom: 1px solid var(--border-color);*/
 }
 
 .navigation ul {
