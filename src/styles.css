@@ -1,4 +1,4 @@
-:root{
+:root {
   /* Primary colors */
   --primary-color: #007bff;
   --primary-color-light: #4da3ff;
@@ -48,10 +48,28 @@ body {
   box-sizing: inherit;
 }
 
-.no-pointer{
-  cursor: default ;
+.no-pointer {
+  cursor: default;
   pointer-events: none;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.medium {
+  min-width: 960px;
+  max-width: 1279.98px;
+  margin: 0 auto;
+}
+
+.large {
+  min-width: 1280px;
+  max-width: 1919.98px;
+  margin: 0 auto;
+}
