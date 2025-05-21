@@ -47,3 +47,11 @@ body {
 *, *::before, *::after {
   box-sizing: inherit;
 }
+
+.no-pointer{
+  cursor: default ;
+  pointer-events: none;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

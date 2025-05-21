@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { CategoriesComponent } from './categories/categories.component';
-import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
-import { ObligatoryComponent } from './obligatory/obligatory.component';
-import { StatisticComponent } from './statistic/statistic.component';
-import { AdminComponent } from './admin/admin.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { ObligatoryComponent } from './components/obligatory/obligatory.component';
+import { StatisticComponent } from './components/statistic/statistic.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 export const routes: Routes = [
   { path: 'categories', component: CategoriesComponent },
