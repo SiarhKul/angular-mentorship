@@ -1,0 +1,27 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: var(--spacing-lg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  margin: var(--spacing-xl) 0;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-card-header {
+  padding-bottom: var(--spacing-md);
+}
+
+.button-block {
+  display: flex;
+  justify-content: flex-end;
+
+}
