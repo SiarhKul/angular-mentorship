@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
-import { ObligatoryComponent } from './components/obligatory/obligatory.component';
-import { StatisticComponent } from './components/statistic/statistic.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { LoginComponent } from './components/login/login.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
+import { ObligatoryComponent } from './pages/obligatory/obligatory.component';
+import { StatisticComponent } from './pages/statistic/statistic.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { LoginComponent } from './features/login/login.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
