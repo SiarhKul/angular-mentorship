@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const crypto = require('crypto');
 
 const FAKE_DB = [
   {id: 1, username: "Jon", password: "1"},
@@ -27,7 +26,9 @@ router.post('/', (req, res, next) => {
     return next(error);
   }
 
-  res.json({jwt: crypto.randomUUID()});
+  const {password, ...userResponse} = user
+
+  res.json(userResponse);
 });
 
 module.exports = router;
