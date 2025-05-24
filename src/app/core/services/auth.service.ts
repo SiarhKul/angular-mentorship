@@ -15,9 +15,10 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     const url = `${API_URLS.baseUrl}${AUTH_ENDPOINT.login}`;
 
-    return this.http.post(url, {
+    let objectObservable = this.http.post(url, {
       username,
       password
     });
+    return objectObservable;
   }
 }

@@ -54,7 +54,7 @@ export class LoginComponent {
             this.loading = false;
           },
           error: (err) => {
-            console.error('Login failed', err);
+            console.log('Login failed', err);
             this.error = 'Login failed. Please check your credentials.';
             this.loading = false;
             this.submitted = false;
