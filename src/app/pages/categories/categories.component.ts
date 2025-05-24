@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
-import {
-  PlusButtonComponent
-} from "../../shared/components/plus-button/plus-button.component";
+import {DrawerComponent} from "../../shared/components/drawer/drawer.component";
 
 @Component({
   selector: 'app-categories',
   imports: [
-    PlusButtonComponent
+    DrawerComponent
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'

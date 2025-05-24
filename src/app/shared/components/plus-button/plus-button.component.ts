@@ -5,7 +5,8 @@ import {MatIconModule} from "@angular/material/icon";
   selector: 'app-plus-button',
   imports: [MatIconModule],
   templateUrl: './plus-button.component.html',
-  styleUrl: './plus-button.component.css'
+  styleUrl: './plus-button.component.css',
+  standalone: true
 })
 export class PlusButtonComponent {
 
