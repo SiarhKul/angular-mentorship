@@ -1,20 +1,30 @@
 <div class='login-container'>
 
   <mat-card class='login-card'>
-    {{ model | json }}
 
     <mat-card-header class='mat-card-header'>
       <mat-card-title>Login to Budgetify</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-      <div [hidden]="submitted">
+      <div *ngIf="error" class="error-message"
+           style="color: red; margin-bottom: 15px;">
+        {{ error }}
+      </div>
+
+      <div *ngIf="loading" class="loading-spinner"
+           style="display: flex; justify-content: center; margin: 20px 0;">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <div [hidden]="submitted && loading">
         <form #actorForm="ngForm" (ngSubmit)="onSubmit()" class='form'>
           <mat-form-field appearance='outline' class='mat-form-field'>
             <mat-label>Username</mat-label>
             <input [(ngModel)]='model.username' autocomplete='username'
                    matInput
-                   name='usename'
+                   name='username'
+                   required
                    type='text'
             >
             <mat-error>
@@ -27,8 +37,8 @@
                 [(ngModel)]='model.password' autocomplete='current-password'
                 matInput
                 name='password'
+                required
                 type='password'
-
             >
             <mat-error>
               Password is required
@@ -37,7 +47,7 @@
 
           <div class='button-block'>
             <button
-                [disabled]="!actorForm.form.valid"
+                [disabled]="!actorForm.form.valid || loading"
                 color='primary'
                 mat-raised-button
                 type='submit'>
@@ -47,7 +57,6 @@
         </form>
       </div>
     </mat-card-content>
-
 
   </mat-card>
 </div>

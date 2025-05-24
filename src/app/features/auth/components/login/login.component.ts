@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {AuthService} from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,15 +32,37 @@ export class LoginComponent {
     password: '',
   };
   submitted = false;
+  loading = false;
+  error = '';
 
   @ViewChild('actorForm')
   actorForm!: NgForm;
 
+  constructor(private authService: AuthService) {
+  }
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.model);
-    console.log(this.actorForm);
+    this.loading = true;
+    this.error = '';
 
+    if (this.actorForm.valid) {
+      this.authService.login(this.model.username, this.model.password)
+        .subscribe({
+          next: (response) => {
+            console.log('Login successful', response);
+            this.loading = false;
+          },
+          error: (err) => {
+            console.error('Login failed', err);
+            this.error = 'Login failed. Please check your credentials.';
+            this.loading = false;
+            this.submitted = false;
+          }
+        });
+    } else {
+      this.loading = false;
+      this.submitted = false;
+    }
   }
 }
