@@ -9,6 +9,7 @@ import {AUTH_ENDPOINT} from "../../shared/constants/endpoints";
 })
 export class AuthService {
 
+
   constructor(private http: HttpClient) {
   }
 
@@ -19,6 +20,7 @@ export class AuthService {
       username,
       password
     });
+
     return objectObservable;
   }
 }
