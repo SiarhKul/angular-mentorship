@@ -15,6 +15,10 @@ import {PlusButtonComponent} from "../plus-button/plus-button.component";
         <div [class.drawer--open]="isOpen" class="drawer">
           <div class="drawer__header">
             <ng-content select="h3"/>
+
+            <button mat-icon-button (click)="closeDrawer()">
+              <mat-icon>close</mat-icon>
+            </button>
           </div>
 
           <div class="drawer__content">
