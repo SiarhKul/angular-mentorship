@@ -8,6 +8,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 @Component({
   standalone: true,
   selector: 'account-money-creator',
+  styleUrls: ['account-money-creator.css'],
   imports: [
     DrawerComponent,
     MatButtonModule,
@@ -16,7 +17,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatInput,
     MatLabel
   ],
-  styleUrls: ['account-money-creator.css'],
   template:
     `
       <app-drawer [textHeader]="'Create money account'">
@@ -31,10 +31,10 @@ import {MatFormFieldModule} from "@angular/material/form-field";
             >
               <mat-label>Account Name</mat-label>
               <input
-                  [(ngModel)]='model.account'
-                  autocomplete='account'
+                  [(ngModel)]='model.typeCard'
+                  autocomplete='typeCard'
                   matInput
-                  name='accountcreate'
+                  name='typeCard'
                   required
                   type='text'
               >
@@ -60,8 +60,11 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 })
 export class AccountMoneyCreator {
   model = {
-    account: "",
+    currency: "",
+    initSum: 0,
+    typeCard: ""
   };
+
   @ViewChild('createMoneyAccountRef')
   createMoneyAccountRef!: NgForm
 
