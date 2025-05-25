@@ -22,32 +22,35 @@ import {MatFormFieldModule} from "@angular/material/form-field";
       <app-drawer [textHeader]="'Create money account'">
         <div ngProjectAs="drawer__content">
           <form
+              id="create-money-account"
               #createMoneyAccountRef='ngForm'
               (ngSubmit)="onSubmit()">
             <mat-form-field
                 appearance='outline'
                 class='mat-form-field'
             >
-              <mat-label>Username</mat-label>
-              <input [(ngModel)]='model.account'
-                     autocomplete='account'
-                     matInput
-                     name='account'
-                     required
-                     type='text'
+              <mat-label>Account Name</mat-label>
+              <input
+                  [(ngModel)]='model.account'
+                  autocomplete='account'
+                  matInput
+                  name='accountcreate'
+                  required
+                  type='text'
               >
               <mat-error>
-                Username is required
+                Account name is required
               </mat-error>
             </mat-form-field>
           </form>
         </div>
-        {{ model }}
 
         <div ngProjectAs="footer__buttons">
           <button
               mat-stroked-button
+              form="create-money-account"
               type="submit"
+              [disabled]="createMoneyAccountRef.invalid"
           >
             Save
           </button>
@@ -63,6 +66,9 @@ export class AccountMoneyCreator {
   createMoneyAccountRef!: NgForm
 
   onSubmit() {
-    console.log(this.createMoneyAccountRef);
+    if (this.createMoneyAccountRef.valid) {
+      console.log('Form submitted with value:', this.model);
+      this.createMoneyAccountRef.resetForm();
+    }
   }
 }

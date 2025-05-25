@@ -33,9 +33,9 @@
 }
 
 .drawer__content {
-    /*height: 100%;*/
     flex-grow: 1;
     overflow-y: auto;
+    padding-top: var(--spacing-md);
 }
 
 .drawer__button-block {
