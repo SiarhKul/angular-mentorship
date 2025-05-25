@@ -62,9 +62,10 @@ import {MatSelectModule} from "@angular/material/select";
 
             <mat-form-field>
               <mat-label>Select currency</mat-label>
-              <mat-select>
-                @for (food of foods; track food) {
-                  <mat-option [value]="food.value">{{ food.viewValue }}
+              <mat-select [(ngModel)]="model.currency" name="currency">
+                @for (currency of currencies; track currency) {
+                  <mat-option [value]="currency.value">
+                    {{ currency.viewValue }}
                   </mat-option>
                 }
               </mat-select>
@@ -95,7 +96,7 @@ export class AccountMoneyCreator {
   @ViewChild('createMoneyAccountRef')
   createMoneyAccountRef!: NgForm
 
-  foods = [
+  currencies = [
     {value: 'dollar', viewValue: '$'},
     {value: 'euro', viewValue: '€'},
   ];
