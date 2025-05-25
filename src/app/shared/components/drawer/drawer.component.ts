@@ -1,13 +1,12 @@
 import {Component, Input} from "@angular/core";
 import {MatButtonModule} from "@angular/material/button";
-import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {PlusButtonComponent} from "../plus-button/plus-button.component";
 
 @Component({
   selector: 'app-drawer',
   styleUrls: ['./drawer.component.css'],
-  imports: [MatButtonModule, MatDividerModule, MatIconModule, PlusButtonComponent],
+  imports: [MatButtonModule, MatIconModule, PlusButtonComponent],
   standalone: true,
   template:
     `
@@ -24,12 +23,17 @@ import {PlusButtonComponent} from "../plus-button/plus-button.component";
           </div>
 
           <div class="drawer__content">
-            <ng-content/>
+            <ng-content select="drawer__content"/>
           </div>
 
 
           <section class="drawer__button-block">
-            <button (click)="closeDrawer()" mat-button>Cancel</button>
+            <ng-content select="footer__buttons"/>
+
+            @if (isCloseButtonVisible) {
+              <button (click)="closeDrawer()" mat-button>Cancel</button>
+            }
+
           </section>
         </div>
         <div (click)="toggleDrawer()">
@@ -43,6 +47,9 @@ export class DrawerComponent {
 
   @Input()
   textHeader = 'Drawer header';
+
+  @Input()
+  isCloseButtonVisible = true;
 
   toggleDrawer() {
     this.isOpen = !this.isOpen;

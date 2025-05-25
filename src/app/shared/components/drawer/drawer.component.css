@@ -22,7 +22,6 @@
 }
 
 .drawer--open {
-
     right: 0;
 }
 
@@ -41,7 +40,7 @@
 
 .drawer__button-block {
     display: flex;
-    gap: var(--spacing-md);
+    gap: var(--spacing-xs);
     align-items: center;
     justify-content: right;
 }
