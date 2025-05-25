@@ -8,8 +8,7 @@ import {DrawerComponent} from "../../shared/components/drawer/drawer.component";
   styleUrls: ['account-money-creator.css'],
   template:
     `
-      <app-drawer>
-        <h3>Create money account</h3>
+      <app-drawer [textHeader]="'Create money account'">
         Test content
       </app-drawer>
     `

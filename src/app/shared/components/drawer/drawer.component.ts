@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
@@ -14,7 +14,9 @@ import {PlusButtonComponent} from "../plus-button/plus-button.component";
       <div class="drawer-container">
         <div [class.drawer--open]="isOpen" class="drawer">
           <div class="drawer__header">
-            <ng-content select="h3"/>
+            <h3>
+              {{ textHeader }}
+            </h3>
 
             <button mat-icon-button (click)="closeDrawer()">
               <mat-icon>close</mat-icon>
@@ -38,6 +40,9 @@ import {PlusButtonComponent} from "../plus-button/plus-button.component";
 })
 export class DrawerComponent {
   isOpen = false;
+
+  @Input()
+  textHeader = 'Drawer header';
 
   toggleDrawer() {
     this.isOpen = !this.isOpen;
