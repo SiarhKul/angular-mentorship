@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
-import {DrawerComponent} from "../../shared/components/drawer/drawer.component";
+import {
+  AccountMoneyCreator
+} from "../../features/account-money-creator/account-money-creator";
 
 @Component({
   selector: 'app-categories',
   imports: [
-    DrawerComponent
+    AccountMoneyCreator,
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
