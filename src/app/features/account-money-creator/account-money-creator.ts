@@ -4,6 +4,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, NgForm} from "@angular/forms";
 import {MatInput, MatLabel} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
 
 @Component({
   standalone: true,
@@ -15,7 +16,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     FormsModule,
     MatFormFieldModule,
     MatInput,
-    MatLabel
+    MatLabel,
+    MatSelectModule
   ],
   template:
     `
@@ -41,6 +43,31 @@ import {MatFormFieldModule} from "@angular/material/form-field";
               <mat-error>
                 Account name is required
               </mat-error>
+            </mat-form-field>
+            <mat-form-field
+                appearance='outline'
+                class='mat-form-field'
+            >
+              <mat-label>Initial summa</mat-label>
+              <input
+                  [(ngModel)]='model.initSum'
+                  autocomplete='initSum'
+                  matInput
+                  name='initSum'
+                  type='number'
+                  min="0"
+
+              >
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Select currency</mat-label>
+              <mat-select>
+                @for (food of foods; track food) {
+                  <mat-option [value]="food.value">{{ food.viewValue }}
+                  </mat-option>
+                }
+              </mat-select>
             </mat-form-field>
           </form>
         </div>
@@ -68,8 +95,13 @@ export class AccountMoneyCreator {
   @ViewChild('createMoneyAccountRef')
   createMoneyAccountRef!: NgForm
 
+  foods = [
+    {value: 'dollar', viewValue: '$'},
+    {value: 'euro', viewValue: '€'},
+  ];
+
   onSubmit() {
-    if (this.createMoneyAccountRef.valid) {
+    if (this.createMoneyAccountRef.valid && this.model.initSum >= 0) {
       console.log('Form submitted with value:', this.model);
       this.createMoneyAccountRef.resetForm();
     }
