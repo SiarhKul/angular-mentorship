@@ -5,6 +5,8 @@ import {FormsModule, NgForm} from "@angular/forms";
 import {MatInput, MatLabel} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
+import {AccountMoney} from "./services/models/AccountMoney";
+import {AccountMoneyService} from "./services/api/account-money.service";
 
 @Component({
   standalone: true,
@@ -87,24 +89,46 @@ import {MatSelectModule} from "@angular/material/select";
     `
 })
 export class AccountMoneyCreator {
-  model = {
-    currency: "",
-    initSum: 0,
-    typeCard: ""
-  };
-
-  @ViewChild('createMoneyAccountRef')
-  createMoneyAccountRef!: NgForm
-
+  model = new AccountMoney()
   currencies = [
     {value: 'dollar', viewValue: '$'},
     {value: 'euro', viewValue: '€'},
   ];
+  submitted = false;
+  loading = false;
+  error = '';
+
+  @ViewChild('createMoneyAccountRef')
+  createMoneyAccountRef!: NgForm
+  
+  constructor(private service: AccountMoneyService) {
+  }
 
   onSubmit() {
-    if (this.createMoneyAccountRef.valid && this.model.initSum >= 0) {
+    this.submitted = true;
+    this.loading = true;
+    this.error = '';
+
+    if (this.createMoneyAccountRef.valid) {
+      this.service.create(this.model).subscribe(
+        {
+          next: result => {
+            console.log('result', result)
+            this.loading = false;
+          },
+          error: error => {
+            this.error = error;
+          },
+          complete: () => {
+            this.loading = false
+          }
+        }
+      )
       console.log('Form submitted with value:', this.model);
       this.createMoneyAccountRef.resetForm();
+    } else {
+      this.submitted = false;
+      this.loading = false;
     }
   }
 }

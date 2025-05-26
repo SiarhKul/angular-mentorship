@@ -1,3 +1,8 @@
 export const AUTH_ENDPOINT = {
-  login: '/login'
+  login: '/login',
+
 } as const
+
+export const ACCOUNT_MONEY_ENDPOINT = {
+  moneyAccount: '/money-account'
+}
