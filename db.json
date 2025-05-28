@@ -1,6 +1,14 @@
-{
-  "currency": "euro",
-  "typeCard": "4",
-  "initSum": 4,
-  "id": 1748292098043
-}
+[
+  {
+    "currency": "euro",
+    "typeCard": "4",
+    "initSum": 4,
+    "id": 1748292098043
+  },
+  {
+    "currency": "euro",
+    "typeCard": "5",
+    "initSum": 6,
+    "id": 1748459574312
+  }
+]
