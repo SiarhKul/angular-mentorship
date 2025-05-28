@@ -1,4 +1,7 @@
 :root {
+    --sky-300: #51a2ff;
+
+
     /* Primary colors */
     --primary-color: #007bff;
     --primary-color-light: #4da3ff;
@@ -12,6 +15,7 @@
     --background-color: #f5f5f5;
     --background-color-light: #f8f9fa;
     --background-color-dark: #e9ecef;
+    --background-color-primary: var(--sky-300);
 
     /* UI colors */
     --border-color: #e9ecef;

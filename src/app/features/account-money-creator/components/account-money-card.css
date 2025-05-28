@@ -1,0 +1,50 @@
+.account-money-card {
+    width: 300px;
+    height: 180px;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-summary {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.card-title {
+    font-size: 32px;
+    font-weight: lighter;
+}
+
+.card-sum {
+    font-size: 44px;
+}
+
+.currency {
+    width: 80px;
+    height: 80px;
+    font-size: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--background-color-dark);
+    color: #2c3e50
+}
+
+
+.card-decoration {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -30px;
+    right: -30px;
+}
