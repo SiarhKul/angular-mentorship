@@ -1,13 +1,12 @@
 import {Component} from '@angular/core';
 import {
-  MoneyAccountList
-} from "../../features/account-money-creator/components/money-account-list/money-account-list";
+  MoneyAccounts
+} from "../../features/money-accounts/components/money-accounts";
 
 @Component({
   selector: 'app-categories',
   imports: [
-    MoneyAccountList
-  ],
+    MoneyAccounts],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
 })

@@ -36,4 +36,24 @@ router.post("/", async (req, res) => {
   res.json(account);
 });
 
+router.get("/", async (req, res) => {
+  console.log("Received request for money accounts");
+
+  try {
+    const fileData = await readFile("db.json", "utf-8");
+    let accounts = [];
+    try {
+      accounts = JSON.parse(fileData);
+      if (!Array.isArray(accounts)) accounts = [];
+    } catch {
+      accounts = [];
+    }
+    log("Accounts loaded:", accounts);
+    res.json(accounts);
+  } catch (err) {
+    console.error("Error reading db.json:", err);
+    res.status(500).json({ error: "Failed to read accounts" });
+  }
+});
+
 module.exports = router;

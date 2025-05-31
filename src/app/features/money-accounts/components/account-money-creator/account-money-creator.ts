@@ -1,12 +1,14 @@
 import {Component, ViewChild} from "@angular/core";
-import {DrawerComponent} from "../../shared/components/drawer/drawer.component";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, NgForm} from "@angular/forms";
 import {MatInput, MatLabel} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
-import {AccountMoney} from "./services/models/AccountMoney";
-import {AccountMoneyService} from "./services/api/account-money.service";
+import {
+  DrawerComponent
+} from "../../../../shared/components/drawer/drawer.component";
+import {AccountMoney} from "../../services/models/AccountMoney";
+import {AccountMoneyService} from "../../services/api/account-money.service";
 
 @Component({
   standalone: true,
@@ -100,7 +102,7 @@ export class AccountMoneyCreator {
 
   @ViewChild('createMoneyAccountRef')
   createMoneyAccountRef!: NgForm
-  
+
   constructor(private service: AccountMoneyService) {
   }
 

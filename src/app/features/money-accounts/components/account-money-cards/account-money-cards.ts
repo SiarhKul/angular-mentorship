@@ -10,19 +10,17 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
 }
 
 @Component({
-  selector: 'account-money-card',
+  selector: 'account-money-cards',
   standalone: true,
-  styleUrls: ['account-money-card.css'],
+  styleUrls: ['account-money-cards.css'],
   imports: [
     AsyncPipe
   ],
   template: `
-
     @if (moneyAccounts$ | async; as accounts) {
-      <ul>
+      <ul class="account-money-cards">
         @for (account of accounts; track account.currency) {
-
-          <div class="account-money-card">
+          <li class="account-money-card">
             <div class="card-summary">
               <span class="card-title">{{ account.typeCard }}</span>
               <span
@@ -30,17 +28,15 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
             </div>
             <span class="card-sum">{{ account.initSum }}</span>
             {{ account.currency }}
-          </div>
-
+          </li>
         }
       </ul>
     } @else {
       <p>Загрузка...</p>
     }
-
   `
 })
-export class AccountMoneyCard {
+export class AccountMoneyCards {
   moneyAccounts$: Observable<any[]>;
   protected readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
 

@@ -1,3 +1,9 @@
+.account-money-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
 .account-money-card {
     width: 300px;
     height: 180px;
