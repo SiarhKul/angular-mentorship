@@ -10,5 +10,29 @@
     "typeCard": "Debit",
     "initSum": 1000,
     "id": 1748459574312
+  },
+  {
+    "currency": "euro",
+    "typeCard": "test",
+    "initSum": 5,
+    "id": 1748718944194
+  },
+  {
+    "currency": "euro",
+    "typeCard": "test1",
+    "initSum": 1,
+    "id": 1748719297508
+  },
+  {
+    "currency": "euro",
+    "typeCard": "test2",
+    "initSum": 44,
+    "id": 1748719367177
+  },
+  {
+    "currency": "euro",
+    "typeCard": "555",
+    "initSum": 555,
+    "id": 1748719672590
   }
 ]

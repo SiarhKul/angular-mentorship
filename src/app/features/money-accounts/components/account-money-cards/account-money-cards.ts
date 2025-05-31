@@ -1,5 +1,6 @@
 import {Component} from '@angular/core'
 import {AccountMoneyService} from "../../services/api/account-money.service";
+import {AccountMoney} from "../../services/models/AccountMoney";
 import {Observable} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 
@@ -16,6 +17,7 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
   imports: [
     AsyncPipe
   ],
+  providers: [AccountMoneyService],
   template: `
     @if (moneyAccounts$ | async; as accounts) {
       <ul class="account-money-cards">
@@ -32,12 +34,12 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
         }
       </ul>
     } @else {
-      <p>Загрузка...</p>
+      <p>Loading...</p>
     }
   `
 })
 export class AccountMoneyCards {
-  moneyAccounts$: Observable<any[]>;
+  moneyAccounts$: Observable<AccountMoney[]>;
   protected readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
 
   constructor(private ams: AccountMoneyService) {

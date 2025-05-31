@@ -23,6 +23,7 @@ import {AccountMoneyService} from "../../services/api/account-money.service";
     MatLabel,
     MatSelectModule
   ],
+  providers: [AccountMoneyService],
   template:
     `
       <app-drawer [textHeader]="'Create money account'">
@@ -103,7 +104,7 @@ export class AccountMoneyCreator {
   @ViewChild('createMoneyAccountRef')
   createMoneyAccountRef!: NgForm
 
-  constructor(private service: AccountMoneyService) {
+  constructor(private ams: AccountMoneyService) {
   }
 
   onSubmit() {
@@ -112,11 +113,13 @@ export class AccountMoneyCreator {
     this.error = '';
 
     if (this.createMoneyAccountRef.valid) {
-      this.service.create(this.model).subscribe(
+      this.ams.create(this.model).subscribe(
         {
           next: result => {
+
             console.log('result', result)
             this.loading = false;
+            this.ams.getMoneyAccounts()
           },
           error: error => {
             this.error = error;

@@ -1,12 +1,11 @@
 import {HttpClient} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Observable} from "rxjs";
 import {AccountMoney} from "../models/AccountMoney";
 import {ACCOUNT_MONEY_ENDPOINT} from "../../../../shared/constants/endpoints";
 import {API_URLS} from "../../../../shared/constants/api-url";
-import {Injectable} from "@angular/core";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AccountMoneyService {
   constructor(private http: HttpClient) {
   }
@@ -16,7 +15,7 @@ export class AccountMoneyService {
     return this.http.post(url, moneyAccount)
   }
 
-  getMoneyAccounts() {
+  getMoneyAccounts(): Observable<AccountMoney[]> {
     const url = `${API_URLS.baseUrl}${ACCOUNT_MONEY_ENDPOINT.moneyAccount}`
     return this.http.get<AccountMoney[]>(url)
   }
