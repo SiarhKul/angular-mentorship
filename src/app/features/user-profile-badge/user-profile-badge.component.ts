@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
-import {UserService} from "../../shared/services/user.service";
+import {User} from "../../shared/types/interfaces";
 
 @Component({
   selector: 'app-user-profile-badge',
@@ -8,15 +8,15 @@ import {UserService} from "../../shared/services/user.service";
   imports: [
     MatIconModule,
   ],
-  templateUrl: './user-profile-badge.component.html',
-  styleUrl: './user-profile-badge.component.css'
+  styleUrl: './user-profile-badge.component.css',
+  template: `
+    <span class='badge'>
+      <mat-icon>account_circle</mat-icon>
+      <span>Bob Red</span>
+      <span>{{ user?.username }}11</span>
+    </span>
+  `,
 })
 export class UserProfileBadgeComponent {
-  user: Record<string, string> | null = null;
-
-  constructor(
-    private userService: UserService
-  ) {
-    this.user = userService.user;
-  }
+  @Input() user: User | null | undefined;
 }

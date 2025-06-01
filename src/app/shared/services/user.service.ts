@@ -1,12 +1,17 @@
 import {Injectable} from "@angular/core";
+import {User} from "../types/interfaces";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  user: Record<string, string> | null = null
-
-  setUser(user: Record<string, string>) {
+  user: User | null = null
+  
+  setUser(user: User) {
     this.user = user
+  }
+
+  getUser() {
+    return this.user;
   }
 }
