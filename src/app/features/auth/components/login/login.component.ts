@@ -8,6 +8,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AuthService} from "../../services/api/auth.service";
+import {UserService,} from "../../../../shared/services/user.service";
 
 @Component({
   selector: 'app-login',
@@ -38,7 +39,10 @@ export class LoginComponent {
   @ViewChild('actorForm')
   actorForm!: NgForm;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {
   }
 
   onSubmit() {
@@ -52,6 +56,7 @@ export class LoginComponent {
           next: (response) => {
             console.log('Login successful', response);
             this.loading = false;
+            this.userService.setUser(response);
           },
           error: (err) => {
             console.log('Login failed', err);

@@ -45,4 +45,8 @@ export class AccountMoneyCards {
   constructor(private ams: AccountMoneyService) {
     this.moneyAccounts$ = this.ams.getMoneyAccounts()
   }
+
+  refreshAccounts() {
+    this.moneyAccounts$ = this.ams.getMoneyAccounts();
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component, Input, ViewChild} from "@angular/core";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, NgForm} from "@angular/forms";
 import {MatInput, MatLabel} from "@angular/material/input";
@@ -9,6 +9,7 @@ import {
 } from "../../../../shared/components/drawer/drawer.component";
 import {AccountMoney} from "../../services/models/AccountMoney";
 import {AccountMoneyService} from "../../services/api/account-money.service";
+import {AccountMoneyCards} from "../account-money-cards/account-money-cards";
 
 @Component({
   standalone: true,
@@ -92,6 +93,8 @@ import {AccountMoneyService} from "../../services/api/account-money.service";
     `
 })
 export class AccountMoneyCreator {
+  @Input() cardsComponent!: AccountMoneyCards;
+
   model = new AccountMoney()
   currencies = [
     {value: 'dollar', viewValue: '$'},
@@ -116,10 +119,13 @@ export class AccountMoneyCreator {
       this.ams.create(this.model).subscribe(
         {
           next: result => {
-
             console.log('result', result)
             this.loading = false;
             this.ams.getMoneyAccounts()
+            /*        // Refresh the accounts in the AccountMoneyCards component
+            if (this.cardsComponent) {
+              this.cardsComponent.refreshAccounts();
+            }*/
           },
           error: error => {
             this.error = error;

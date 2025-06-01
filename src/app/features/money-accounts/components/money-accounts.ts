@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, ViewChild} from "@angular/core";
 import {AccountMoneyCards} from "./account-money-cards/account-money-cards";
 import {
   AccountMoneyCreator
@@ -14,12 +14,14 @@ import {
   ],
   template: `
     <div>
-      <account-money-creator/>
-      <account-money-cards/>
+      <account-money-creator [cardsComponent]="accountMoneyCards"/>
+      <account-money-cards #accountMoneyCards/>
     </div>
 
   `
 })
 export class MoneyAccounts {
 
+
+  @ViewChild(AccountMoneyCards) accountMoneyCards!: AccountMoneyCards;
 }
