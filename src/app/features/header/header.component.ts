@@ -22,7 +22,7 @@ export class HeaderComponent {
   constructor(
     private userService: UserService
   ) {
-    this.userInfo = userService.getUser();
+    this.userInfo = this.userService.getUser();
   }
 
 
