@@ -1,18 +1,17 @@
-import {Injectable} from "@angular/core";
+import {Injectable, signal} from "@angular/core";
 import {User} from "../types/interfaces";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  //signal
-  user: User | null = null
+  userSignal = signal<User | null>(null);
 
   setUser(user: User) {
-    this.user = user
+    this.userSignal.set(user);
   }
 
-  getUser() {
-    return this.user;
+  getUserSignal() {
+    return this.userSignal;
   }
 }

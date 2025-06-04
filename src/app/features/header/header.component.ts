@@ -3,7 +3,6 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 import {
   UserProfileBadgeComponent
 } from '../user-profile-badge/user-profile-badge.component';
-import {User} from "../../shared/types/interfaces";
 import {UserService} from "../../shared/services/user.service";
 
 @Component({
@@ -17,13 +16,12 @@ import {UserService} from "../../shared/services/user.service";
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  userInfo: User | null;
+  userSignal;
 
   constructor(
     private userService: UserService
   ) {
-    this.userInfo = userService.getUser();
+    this.userSignal = userService.getUserSignal();
   }
-
 
 }
