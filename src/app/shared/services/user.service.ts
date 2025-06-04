@@ -5,8 +5,9 @@ import {User} from "../types/interfaces";
   providedIn: 'root'
 })
 export class UserService {
+  //signal
   user: User | null = null
-  
+
   setUser(user: User) {
     this.user = user
   }

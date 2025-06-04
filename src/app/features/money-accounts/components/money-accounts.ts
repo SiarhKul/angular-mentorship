@@ -1,8 +1,12 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component} from "@angular/core";
 import {AccountMoneyCards} from "./account-money-cards/account-money-cards";
 import {
   AccountMoneyCreator
 } from "./account-money-creator/account-money-creator";
+import {AccountMoney} from "../services/models/AccountMoney";
+import {Observable} from "rxjs";
+import {AccountMoneyService} from "../services/api/account-money.service";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: "money-accounts",
@@ -10,18 +14,30 @@ import {
   styleUrl: "./money-accounts.css",
   imports: [
     AccountMoneyCards,
-    AccountMoneyCreator
+    AccountMoneyCreator,
+    AsyncPipe
   ],
-  template: `
-    <div>
-      <account-money-creator [cardsComponent]="accountMoneyCards"/>
-      <account-money-cards #accountMoneyCards/>
-    </div>
-
-  `
+  template:
+    `
+      <div>
+        <account-money-creator (createSucced)="onCreateSucced($event)"/>
+        <account-money-cards [moneyAccounts]="moneyAccounts$ | async"/>
+      </div>
+    `
 })
 export class MoneyAccounts {
+  moneyAccounts$: Observable<AccountMoney[]> | undefined;
+
+  constructor(private ams: AccountMoneyService) {
+    this.moneyAccounts$ = this.ams.getMoneyAccounts();
+  }
+
+  onCreateSucced(flag: boolean) {
+    if (!flag) {
+      console.log("show error message")
+    }
+    this.moneyAccounts$ = this.ams.getMoneyAccounts();
+  };
 
 
-  @ViewChild(AccountMoneyCards) accountMoneyCards!: AccountMoneyCards;
 }

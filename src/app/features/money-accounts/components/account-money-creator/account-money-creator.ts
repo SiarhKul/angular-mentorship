@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from "@angular/core";
+import {Component, EventEmitter, Input, Output, ViewChild} from "@angular/core";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, NgForm} from "@angular/forms";
 import {MatInput, MatLabel} from "@angular/material/input";
@@ -94,6 +94,7 @@ import {AccountMoneyCards} from "../account-money-cards/account-money-cards";
 })
 export class AccountMoneyCreator {
   @Input() cardsComponent!: AccountMoneyCards;
+  @Output() createSucced: EventEmitter<boolean> = new EventEmitter();
 
   model = new AccountMoney()
   currencies = [
@@ -121,13 +122,15 @@ export class AccountMoneyCreator {
           next: result => {
             console.log('result', result)
             this.loading = false;
-            this.ams.getMoneyAccounts()
-            /*        // Refresh the accounts in the AccountMoneyCards component
-            if (this.cardsComponent) {
-              this.cardsComponent.refreshAccounts();
-            }*/
+            // this.ams.getMoneyAccounts()
+            // Refresh the accounts in the AccountMoneyCards component
+            // if (this.cardsComponent) {
+            //   this.cardsComponent.refreshAccounts();
+            // }
+            this.createSucced.emit(true);
           },
           error: error => {
+            this.createSucced.emit(false);
             this.error = error;
           },
           complete: () => {
