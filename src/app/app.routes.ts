@@ -11,7 +11,7 @@ import {ObligatoryComponent} from "./pages/obligatory/obligatory.component";
 import {StatisticComponent} from "./pages/statistic/statistic.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 
-export const mainRoutes: Routes = [
+const mainRoutes: Routes = [
   {path: 'categories', component: CategoriesComponent},
   {path: 'subscriptions', component: SubscriptionsComponent},
   {path: 'obligatory', component: ObligatoryComponent},
@@ -22,7 +22,9 @@ export const mainRoutes: Routes = [
 
 const authRoutes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
+
 export const routes: Routes = [
   {path: '', component: MainLayout, children: mainRoutes},
   {path: 'auth', component: AuthLayout, children: authRoutes},
