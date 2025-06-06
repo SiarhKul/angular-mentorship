@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -41,7 +41,8 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
   }
 
@@ -57,6 +58,7 @@ export class LoginComponent {
             console.log('Login successful', response);
             this.loading = false;
             this.userService.setUser(response);
+            this.router.navigate(['/categories']);
           },
           error: (err) => {
             console.log('Login failed', err);
