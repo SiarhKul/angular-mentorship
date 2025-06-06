@@ -1,14 +1,14 @@
-import {Component, DestroyRef, ViewChild} from '@angular/core';
-import {FormsModule, NgForm} from '@angular/forms';
-import {Router, RouterModule} from '@angular/router';
-import {CommonModule} from '@angular/common';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {AuthService} from "../../services/api/auth.service";
-import {UserService,} from "../../../../shared/services/user.service";
+import { Component, DestroyRef, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthService } from '../../services/api/auth.service';
+import { UserService } from '../../../../shared/services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { takeUntil } from 'rxjs';
 import { CdkFixedSizeVirtualScroll } from '@angular/cdk/scrolling';
@@ -30,7 +30,6 @@ import { CdkFixedSizeVirtualScroll } from '@angular/cdk/scrolling';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-
   model = {
     username: '',
     password: '',
@@ -47,8 +46,7 @@ export class LoginComponent {
     private userService: UserService,
     private destroyRef: DestroyRef,
     private router: Router
-  ) {
-  }
+  ) {}
 
   onSubmit() {
     this.submitted = true;
@@ -56,7 +54,8 @@ export class LoginComponent {
     this.error = '';
 
     if (this.actorForm.valid) {
-      this.authService.login(this.model.username, this.model.password)
+      this.authService
+        .login(this.model.username, this.model.password)
         .pipe(takeUntilDestroyed(this.destroyRef)) // takeUntilDestroyed это отписка, произойдет в момент уничтожения компонента (если использовать в сервисе - в момент уничтожения сервиса и тд). это самый простой и наиболее испольуземый вариант
         //variant 2:
         //.pipe(takeUntil(#destroy$)) //destroy$ - какой-то сабжект который коплитишь сам в любом месте, и когда от комплитнется - то и здесь будет отписка
@@ -67,14 +66,14 @@ export class LoginComponent {
             console.log('Login successful', response);
             this.loading = false;
             this.userService.setUser(response);
-            this.router.navigate(['/']); //дефолтный путь (  {path: '', redirectTo: 'categories', pathMatch: 'full'}), но можешь любой прописать
+            this.router.navigate(['/categories']);
           },
           error: (err) => {
             console.log('Login failed', err);
             this.error = 'Login failed. Please check your credentials.';
             this.loading = false;
             this.submitted = false;
-          }
+          },
         });
     } else {
       this.loading = false;

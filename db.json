@@ -10,5 +10,17 @@
     "typeCard": "Debit",
     "initSum": 1000,
     "id": 1748459574312
+  },
+  {
+    "currency": "euro",
+    "typeCard": "ffffff",
+    "initSum": 444,
+    "id": 1748873282494
+  },
+  {
+    "currency": "euro",
+    "typeCard": "test",
+    "initSum": 4,
+    "id": 1748874829038
   }
 ]

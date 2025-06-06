@@ -1,8 +1,6 @@
-import {Component} from '@angular/core'
+import {Component, Input} from '@angular/core'
 import {AccountMoneyService} from "../../services/api/account-money.service";
 import {AccountMoney} from "../../services/models/AccountMoney";
-import {Observable} from "rxjs";
-import {AsyncPipe} from "@angular/common";
 
 
 const CURRENCIES_DICTIONARY: Record<string, string> = {
@@ -14,12 +12,10 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
   selector: 'account-money-cards',
   standalone: true,
   styleUrls: ['account-money-cards.css'],
-  imports: [
-    AsyncPipe
-  ],
+  imports: [],
   providers: [AccountMoneyService],
   template: `
-    @if (moneyAccounts$ | async; as accounts) {
+    @if (moneyAccounts; as accounts) {
       <ul class="account-money-cards">
         @for (account of accounts; track account.currency) {
           <li class="account-money-card">
@@ -39,14 +35,8 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
   `
 })
 export class AccountMoneyCards {
-  moneyAccounts$: Observable<AccountMoney[]>;
+  @Input()
+  moneyAccounts: AccountMoney[] | null = null;
+
   protected readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
-
-  constructor(private ams: AccountMoneyService) {
-    this.moneyAccounts$ = this.ams.getMoneyAccounts()
-  }
-
-  refreshAccounts() {
-    this.moneyAccounts$ = this.ams.getMoneyAccounts();
-  }
 }
