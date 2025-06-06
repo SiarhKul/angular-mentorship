@@ -10,13 +10,26 @@ import {
 import {ObligatoryComponent} from "./pages/obligatory/obligatory.component";
 import {StatisticComponent} from "./pages/statistic/statistic.component";
 import {AdminComponent} from "./pages/admin/admin.component";
+import {AuthGuard} from "./features/auth/services/auth.server";
 
 const mainRoutes: Routes = [
-  {path: 'categories', component: CategoriesComponent},
-  {path: 'subscriptions', component: SubscriptionsComponent},
-  {path: 'obligatory', component: ObligatoryComponent},
-  {path: 'statistic', component: StatisticComponent},
-  {path: 'admin', component: AdminComponent},
+  {
+    path: 'categories',
+    component: CategoriesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'subscriptions',
+    component: SubscriptionsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'obligatory',
+    component: ObligatoryComponent,
+    canActivate: [AuthGuard]
+  },
+  {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: 'categories', pathMatch: 'full'}
 ];
 

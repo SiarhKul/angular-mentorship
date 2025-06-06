@@ -14,4 +14,9 @@ export class UserService {
   getUserSignal() {
     return this.userSignal;
   }
+
+  isLoggedIn(): boolean {
+    return !!this.userSignal()
+  }
+
 }
