@@ -1,8 +1,8 @@
-import {Component, Input, WritableSignal} from '@angular/core'
+import {Component, Input, OnInit, WritableSignal} from '@angular/core'
 import {AccountMoneyService} from "../../services/api/account-money.service";
 import {AccountMoney} from "../../services/models/AccountMoney";
 import {NgClass} from "@angular/common";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 const CURRENCIES_DICTIONARY: Record<string, string> = {
@@ -44,17 +44,26 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
     }
   `
 })
-export class AccountMoneyCards {
+export class AccountMoneyCards implements OnInit {
+  readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
+
   @Input()
   selectedMoneyAccountIdSignal: WritableSignal<number | null> | null = null
+
   @Input()
   moneyAccounts: Required<AccountMoney>[] | null = null;
 
-  readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
-
   constructor(
-    private router: Router
+    private router: Router,
+    private activeRoute: ActivatedRoute
   ) {
+  }
+
+  ngOnInit(): void {
+    this.activeRoute.queryParamMap.subscribe(params => {
+      const moneyAccountId = params.get('moneyAccountId');
+      this.selectedMoneyAccountIdSignal?.set(Number(moneyAccountId));
+    });
   }
 
   @Input()
