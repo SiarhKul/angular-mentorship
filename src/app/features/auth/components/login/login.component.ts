@@ -46,7 +46,7 @@ export class LoginComponent {
   ) {
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
     this.loading = true;
     this.error = '';

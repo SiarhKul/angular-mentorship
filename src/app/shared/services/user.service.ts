@@ -1,5 +1,6 @@
 import {Injectable, signal} from "@angular/core";
-import {User} from "../types/interfaces";
+import type {User} from "../types/interfaces";
+import {getLSValue} from "../heplers/localstorage.helpers";
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,15 @@ import {User} from "../types/interfaces";
 export class UserService {
   userSignal = signal<User | null>(null);
 
+  constructor() {
+    getLSValue<User>('user', (user: User) => this.userSignal.set(user))
+
+  }
+
+
   setUser(user: User) {
     this.userSignal.set(user);
+    this.storeToLocalStorage(user);
   }
 
   getUserSignal() {
@@ -17,6 +25,10 @@ export class UserService {
 
   isLoggedIn(): boolean {
     return !!this.userSignal()
+  }
+
+  storeToLocalStorage(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
 }
