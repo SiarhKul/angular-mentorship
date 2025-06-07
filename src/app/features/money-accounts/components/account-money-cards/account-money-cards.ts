@@ -1,4 +1,10 @@
-import {Component, Input, OnInit, WritableSignal} from '@angular/core'
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  WritableSignal
+} from '@angular/core'
 import {AccountMoneyService} from "../../services/api/account-money.service";
 import {AccountMoney} from "../../services/models/AccountMoney";
 import {NgClass} from "@angular/common";
@@ -45,14 +51,12 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
     }
   `
 })
-export class AccountMoneyCards implements OnInit {
-  readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
-
+export class AccountMoneyCards implements OnChanges {
   @Input()
   selectedMoneyAccountIdSignal: WritableSignal<number | null> | null = null
-
   @Input()
   moneyAccounts: Required<AccountMoney>[] | null = null;
+  protected readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
 
   constructor(
     private router: Router,
@@ -60,14 +64,19 @@ export class AccountMoneyCards implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-    this.activeRoute.queryParamMap.subscribe(params => {
-      const moneyAccountId = params.get('moneyAccountId');
-      this.selectedMoneyAccountIdSignal?.set(Number(moneyAccountId));
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['moneyAccounts'] && this.moneyAccounts?.length) {
+      const moneyAccountId = this.activeRoute.snapshot.queryParamMap.get('moneyAccountId');
+      const firstElement = this.moneyAccounts[0];
+
+      if (moneyAccountId === null && firstElement) {
+        this.selectedMoneyAccountIdSignal?.set(firstElement.id);
+      } else {
+        this.selectedMoneyAccountIdSignal?.set(Number(moneyAccountId));
+      }
+    }
   }
 
-  @Input()
   async setSelectedMoneyAccount(selectedMoneyAccountId: number) {
     this.selectedMoneyAccountIdSignal?.set(selectedMoneyAccountId);
     await this.router.navigate([`/${RoutePaths.ROOT}`], {
