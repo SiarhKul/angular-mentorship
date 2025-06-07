@@ -22,5 +22,11 @@
     "typeCard": "test",
     "initSum": 4,
     "id": 1748874829038
+  },
+  {
+    "currency": "euro",
+    "typeCard": "1",
+    "initSum": 4,
+    "id": 1749279632999
   }
 ]

@@ -11,6 +11,10 @@ import {PlusButtonComponent} from "../plus-button/plus-button.component";
   template:
     `
       <div class="drawer-container">
+        @if (isOpen) {
+          <div class="drawer-overlay" (click)="closeDrawer()"></div>
+        }
+
         <div [class.drawer--open]="isOpen" class="drawer">
           <div class="drawer__header">
             <h3>
@@ -39,6 +43,7 @@ import {PlusButtonComponent} from "../plus-button/plus-button.component";
         <div (click)="toggleDrawer()">
           <app-plus-button/>
         </div>
+
       </div>
     `,
 })
