@@ -1,6 +1,5 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
 import {AccountMoney} from "../models/AccountMoney";
 import {ACCOUNT_MONEY_ENDPOINT} from "../../../../shared/constants/endpoints";
 import {API_URLS} from "../../../../shared/constants/api-url";
@@ -15,8 +14,8 @@ export class AccountMoneyService {
     return this.http.post(url, moneyAccount)
   }
 
-  getMoneyAccounts(): Observable<AccountMoney[]> {
+  getMoneyAccounts() {
     const url = `${API_URLS.baseUrl}${ACCOUNT_MONEY_ENDPOINT.moneyAccount}`
-    return this.http.get<AccountMoney[]>(url)
+    return this.http.get<Required<AccountMoney>[]>(url)
   }
 }

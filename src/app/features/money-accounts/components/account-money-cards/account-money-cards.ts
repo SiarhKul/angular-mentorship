@@ -34,7 +34,7 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
                 {{ CURRENCIES_DICTIONARY[account.currency] }}
               </span>
             </div>
-            <span class="card-sum">{{ account.initSum }}</span>
+            <span cmoneyAccountslass="card-sum">{{ account.initSum }}</span>
             {{ account.currency }}
           </li>
         }
@@ -47,7 +47,6 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
 export class AccountMoneyCards {
   @Input()
   moneyAccounts: Required<AccountMoney>[] | null = null;
-
   @Input()
   selectedMoneyAccountId: number | null = null;
   protected readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
@@ -64,4 +63,5 @@ export class AccountMoneyCards {
       }
     });
   }
+
 }

@@ -20,24 +20,22 @@ import {AsyncPipe} from "@angular/common";
   template:
     `
       <div>
-        <account-money-creator (createSucced)="onCreateSucced($event)"/>
+        <account-money-creator (createSucced)="onCreateSuccess($event)"/>
         <account-money-cards [moneyAccounts]="moneyAccounts$ | async"/>
       </div>
     `
 })
 export class MoneyAccounts {
-  moneyAccounts$: Observable<AccountMoney[]> | undefined;
+  moneyAccounts$: Observable<Required<AccountMoney>[]> | null = null;
 
   constructor(private ams: AccountMoneyService) {
     this.moneyAccounts$ = this.ams.getMoneyAccounts();
   }
 
-  onCreateSucced(flag: boolean) {
+  onCreateSuccess(flag: boolean) {
     if (!flag) {
       console.log("show error message")
     }
     this.moneyAccounts$ = this.ams.getMoneyAccounts();
   };
-
-
 }
