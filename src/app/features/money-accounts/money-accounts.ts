@@ -50,7 +50,7 @@ export class MoneyAccounts {
 
     this.selectedMoneyAccountIdSignal.set(moneyAccount);
 
-    await this.router.navigate([`/${RoutePaths.CATEGORIES}`], {
+    await this.router.navigate([`/${RoutePaths.ROOT}`], {
       queryParams: {
         moneyAccountId: moneyAccount
       }

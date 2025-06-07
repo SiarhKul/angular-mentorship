@@ -12,6 +12,7 @@ import {StatisticComponent} from "./pages/statistic/statistic.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {AuthGuard} from "./features/auth/services/auth.server";
 import {RoutePaths} from "./shared/constants/route-pathes";
+import {RootComponent} from "./pages/root/root.component";
 
 const mainRoutes: Routes = [
   {
@@ -35,7 +36,7 @@ const mainRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {path: RoutePaths.ADMIN, component: AdminComponent, canActivate: [AuthGuard]},
-  {path: RoutePaths.ROOT, redirectTo: RoutePaths.CATEGORIES, pathMatch: 'full'}
+  {path: RoutePaths.ROOT, component: RootComponent, canActivate: [AuthGuard]}
 ];
 
 const authRoutes: Routes = [

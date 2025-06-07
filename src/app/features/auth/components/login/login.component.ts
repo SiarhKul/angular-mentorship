@@ -9,6 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AuthService} from "../../services/api/auth.service";
 import {UserService,} from "../../../../shared/services/user.service";
+import {RoutePaths} from "../../../../shared/constants/route-pathes";
 
 @Component({
   selector: 'app-login',
@@ -58,7 +59,7 @@ export class LoginComponent {
             console.log('Login successful', response);
             this.loading = false;
             this.userService.setUser(response);
-            this.router.navigate(['/categories']);
+            this.router.navigate([`/${RoutePaths.ROOT}`]);
           },
           error: (err) => {
             console.log('Login failed', err);

@@ -12,7 +12,6 @@ import {HeaderComponent} from "../features/header/header.component";
   template: `
     <article>
       <app-header/>
-      <h1>Main Layout</h1>
       <router-outlet/>
     </article>
   `

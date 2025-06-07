@@ -3,6 +3,7 @@ import {AccountMoneyService} from "../../services/api/account-money.service";
 import {AccountMoney} from "../../services/models/AccountMoney";
 import {NgClass} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
+import {RoutePaths} from "../../../../shared/constants/route-pathes";
 
 
 const CURRENCIES_DICTIONARY: Record<string, string> = {
@@ -69,7 +70,7 @@ export class AccountMoneyCards implements OnInit {
   @Input()
   async setSelectedMoneyAccount(selectedMoneyAccountId: number) {
     this.selectedMoneyAccountIdSignal?.set(selectedMoneyAccountId);
-    await this.router.navigate(['/categories'], {
+    await this.router.navigate([`/${RoutePaths.ROOT}`], {
       queryParams: {
         moneyAccountId: selectedMoneyAccountId
       }
