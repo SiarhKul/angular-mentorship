@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core'
 import {AccountMoneyService} from "../../services/api/account-money.service";
 import {AccountMoney} from "../../services/models/AccountMoney";
 import {NgClass} from "@angular/common";
+import {Router} from "@angular/router";
 
 
 const CURRENCIES_DICTIONARY: Record<string, string> = {
@@ -26,9 +27,12 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
               [ngClass]="{'account-money-card--highlight': selectedMoneyAccountId === account.id}"
           >
             <div class="card-summary">
-              <span class="card-title">{{ account.typeCard }}</span>
-              <span
-                  class="currency">{{ CURRENCIES_DICTIONARY[account.currency] }}</span>
+              <span class="card-title">
+                {{ account.typeCard }}
+              </span>
+              <span class="currency">
+                {{ CURRENCIES_DICTIONARY[account.currency] }}
+              </span>
             </div>
             <span class="card-sum">{{ account.initSum }}</span>
             {{ account.currency }}
@@ -48,9 +52,16 @@ export class AccountMoneyCards {
   selectedMoneyAccountId: number | null = null;
   protected readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
 
-  @Input()
-  setSelectedMoneyAccount(selectedMoneyAccountId: number): void {
-    this.selectedMoneyAccountId = selectedMoneyAccountId;
+  constructor(private router: Router) {
   }
 
+  @Input()
+  async setSelectedMoneyAccount(selectedMoneyAccountId: number) {
+    this.selectedMoneyAccountId = selectedMoneyAccountId;
+    await this.router.navigate(['/categories'], {
+      queryParams: {
+        moneyAccountId: selectedMoneyAccountId
+      }
+    });
+  }
 }
