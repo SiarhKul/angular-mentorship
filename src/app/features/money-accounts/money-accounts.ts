@@ -10,6 +10,7 @@ import {Observable} from "rxjs";
 import {AccountMoneyService} from "./services/api/account-money.service";
 import {AsyncPipe} from "@angular/common";
 import {Router} from "@angular/router";
+import {RoutePaths} from "../../shared/constants/route-pathes";
 
 @Component({
   selector: "money-accounts",
@@ -49,7 +50,7 @@ export class MoneyAccounts {
 
     this.selectedMoneyAccountIdSignal.set(moneyAccount);
 
-    await this.router.navigate(['/categories'], {
+    await this.router.navigate([`/${RoutePaths.CATEGORIES}`], {
       queryParams: {
         moneyAccountId: moneyAccount
       }

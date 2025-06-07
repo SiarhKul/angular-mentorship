@@ -11,35 +11,40 @@ import {ObligatoryComponent} from "./pages/obligatory/obligatory.component";
 import {StatisticComponent} from "./pages/statistic/statistic.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {AuthGuard} from "./features/auth/services/auth.server";
+import {RoutePaths} from "./shared/constants/route-pathes";
 
 const mainRoutes: Routes = [
   {
-    path: 'categories',
+    path: RoutePaths.CATEGORIES,
     component: CategoriesComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'subscriptions',
+    path: RoutePaths.SUBSCRIPTIONS,
     component: SubscriptionsComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'obligatory',
+    path: RoutePaths.OBLIGATORY,
     component: ObligatoryComponent,
     canActivate: [AuthGuard]
   },
-  {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
-  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
-  {path: '', redirectTo: 'categories', pathMatch: 'full'}
+  {
+    path: RoutePaths.STATISTIC,
+    component: StatisticComponent,
+    canActivate: [AuthGuard]
+  },
+  {path: RoutePaths.ADMIN, component: AdminComponent, canActivate: [AuthGuard]},
+  {path: RoutePaths.ROOT, redirectTo: RoutePaths.CATEGORIES, pathMatch: 'full'}
 ];
 
 const authRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: '', redirectTo: 'login', pathMatch: 'full'}
+  {path: RoutePaths.LOGIN, component: LoginComponent},
+  {path: RoutePaths.ROOT, redirectTo: RoutePaths.LOGIN, pathMatch: 'full'}
 ];
 
 export const routes: Routes = [
-  {path: '', component: MainLayout, children: mainRoutes},
-  {path: 'auth', component: AuthLayout, children: authRoutes},
-  {path: 'landing', component: LandingLayout},
+  {path: RoutePaths.ROOT, component: MainLayout, children: mainRoutes},
+  {path: RoutePaths.AUTH, component: AuthLayout, children: authRoutes},
+  {path: RoutePaths.LANDING, component: LandingLayout},
 ];
