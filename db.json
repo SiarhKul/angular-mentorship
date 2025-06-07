@@ -16,5 +16,11 @@
     "typeCard": "Cashe",
     "initSum": 100,
     "id": 1749309821718
+  },
+  {
+    "currency": "euro",
+    "typeCard": "test",
+    "initSum": 56,
+    "id": 1749311573922
   }
 ]

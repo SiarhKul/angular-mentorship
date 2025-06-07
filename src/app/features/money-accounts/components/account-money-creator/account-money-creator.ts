@@ -93,8 +93,9 @@ import {AccountMoneyCards} from "../account-money-cards/account-money-cards";
     `
 })
 export class AccountMoneyCreator {
-  @Input()
 
+
+  @Input()
   cardsComponent!: AccountMoneyCards;
   @Output()
   onCreate: EventEmitter<number | null> = new EventEmitter();

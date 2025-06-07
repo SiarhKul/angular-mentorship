@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core'
+import {Component, Input, WritableSignal} from '@angular/core'
 import {AccountMoneyService} from "../../services/api/account-money.service";
 import {AccountMoney} from "../../services/models/AccountMoney";
 import {NgClass} from "@angular/common";
@@ -21,10 +21,10 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
   template: `
     @if (moneyAccounts; as accounts) {
       <ul class="account-money-cards">
-        @for (account of accounts; track account.currency) {
+        @for (account of accounts; track $index) {
           <li class="account-money-card"
               (click)="setSelectedMoneyAccount(account.id)"
-              [ngClass]="{'account-money-card--highlight': selectedMoneyAccountId === account.id}"
+              [ngClass]="{'account-money-card--highlight': selectedMoneyAccountIdSignal ? selectedMoneyAccountIdSignal() === account.id : false }"
           >
             <div class="card-summary">
               <span class="card-title">
@@ -46,22 +46,24 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
 })
 export class AccountMoneyCards {
   @Input()
-  moneyAccounts: Required<AccountMoney>[] | null = null;
+  selectedMoneyAccountIdSignal: WritableSignal<number | null> | null = null
   @Input()
-  selectedMoneyAccountId: number | null = null;
-  protected readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
+  moneyAccounts: Required<AccountMoney>[] | null = null;
 
-  constructor(private router: Router) {
+  readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
+
+  constructor(
+    private router: Router
+  ) {
   }
 
   @Input()
   async setSelectedMoneyAccount(selectedMoneyAccountId: number) {
-    this.selectedMoneyAccountId = selectedMoneyAccountId;
+    this.selectedMoneyAccountIdSignal?.set(selectedMoneyAccountId);
     await this.router.navigate(['/categories'], {
       queryParams: {
         moneyAccountId: selectedMoneyAccountId
       }
     });
   }
-
 }

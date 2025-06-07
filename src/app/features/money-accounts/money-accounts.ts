@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, signal} from "@angular/core";
 import {
   AccountMoneyCards
 } from "./components/account-money-cards/account-money-cards";
@@ -24,12 +24,14 @@ import {Router} from "@angular/router";
     `
       <div>
         <account-money-creator (onCreate)="createSuccessfully($event)"/>
-        <account-money-cards [moneyAccounts]="moneyAccounts$ | async"/>
+        <account-money-cards [moneyAccounts]="moneyAccounts$ | async"
+                             [selectedMoneyAccountIdSignal]="selectedMoneyAccountIdSignal"/>
       </div>
     `
 })
 export class MoneyAccounts {
   moneyAccounts$: Observable<Required<AccountMoney>[]> | null = null;
+  selectedMoneyAccountIdSignal = signal<number | null>(null)
 
   constructor(
     private ams: AccountMoneyService,
@@ -40,10 +42,12 @@ export class MoneyAccounts {
 
   async createSuccessfully(moneyAccount: number | null) {
     if (moneyAccount === null) {
-      console.log("show error message")
       return
     }
+
     this.moneyAccounts$ = this.ams.getMoneyAccounts();
+
+    this.selectedMoneyAccountIdSignal.set(moneyAccount);
 
     await this.router.navigate(['/categories'], {
       queryParams: {
