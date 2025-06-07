@@ -12,8 +12,7 @@ export class UserService {
     getLSValue<User>('user', (user: User) => this.userSignal.set(user))
 
   }
-
-
+  
   setUser(user: User) {
     this.userSignal.set(user);
     this.storeToLocalStorage(user);

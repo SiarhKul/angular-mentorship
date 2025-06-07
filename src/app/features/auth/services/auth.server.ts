@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {CanActivate, Router} from '@angular/router';
+import {CanActivate, Router, UrlTree} from '@angular/router';
 import {UserService} from "../../../shared/services/user.service";
 
 @Injectable({
@@ -13,13 +13,12 @@ export class AuthGuard implements CanActivate {
   ) {
   }
 
-  async canActivate() {
+  canActivate(): boolean | UrlTree {
     if (this.userService.isLoggedIn()) {
       return true;
     }
 
-    await this.router.navigate(['/auth/login']);
-    return false;
+    return this.router.parseUrl('/auth/login');
   }
 
 }
