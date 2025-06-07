@@ -7,7 +7,7 @@
 .account-money-card {
     width: 300px;
     height: 180px;
-    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    background: linear-gradient(135deg, #70a0ce, #c5dcde);
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -15,6 +15,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer;
+}
+
+
+.account-money-card--highlight {
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
 }
 
 .card-summary {
