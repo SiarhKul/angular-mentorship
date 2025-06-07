@@ -93,8 +93,11 @@ import {AccountMoneyCards} from "../account-money-cards/account-money-cards";
     `
 })
 export class AccountMoneyCreator {
-  @Input() cardsComponent!: AccountMoneyCards;
-  @Output() createSucced: EventEmitter<boolean> = new EventEmitter();
+  @Input()
+
+  cardsComponent!: AccountMoneyCards;
+  @Output()
+  onCreate: EventEmitter<number | null> = new EventEmitter();
 
   model = new AccountMoney()
   currencies = [
@@ -119,18 +122,13 @@ export class AccountMoneyCreator {
     if (this.createMoneyAccountRef.valid) {
       this.ams.create(this.model).subscribe(
         {
-          next: result => {
-            console.log('result', result)
+          next: moneyAccount => {
+            console.log('moneyAccount', moneyAccount)
             this.loading = false;
-            // this.ams.getMoneyAccounts()
-            // Refresh the accounts in the AccountMoneyCards component
-            // if (this.cardsComponent) {
-            //   this.cardsComponent.refreshAccounts();
-            // }
-            this.createSucced.emit(true);
+            this.onCreate.emit(moneyAccount.id);
           },
           error: error => {
-            this.createSucced.emit(false);
+            this.onCreate.emit(null);
             this.error = error;
           },
           complete: () => {

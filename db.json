@@ -13,20 +13,8 @@
   },
   {
     "currency": "euro",
-    "typeCard": "ffffff",
-    "initSum": 444,
-    "id": 1748873282494
-  },
-  {
-    "currency": "euro",
-    "typeCard": "test",
-    "initSum": 4,
-    "id": 1748874829038
-  },
-  {
-    "currency": "euro",
-    "typeCard": "1",
-    "initSum": 4,
-    "id": 1749279632999
+    "typeCard": "Cashe",
+    "initSum": 100,
+    "id": 1749309821718
   }
 ]

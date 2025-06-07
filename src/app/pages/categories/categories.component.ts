@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {
-  MoneyAccounts
-} from "../../features/money-accounts/components/money-accounts";
+import {MoneyAccounts} from "../../features/money-accounts/money-accounts";
 import {
   AccountMoneyService
 } from "../../features/money-accounts/services/api/account-money.service";

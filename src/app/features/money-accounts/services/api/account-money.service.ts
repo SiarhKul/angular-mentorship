@@ -11,7 +11,7 @@ export class AccountMoneyService {
 
   create(moneyAccount: AccountMoney) {
     const url = `${API_URLS.baseUrl}${ACCOUNT_MONEY_ENDPOINT.moneyAccount}`
-    return this.http.post(url, moneyAccount)
+    return this.http.post<Required<AccountMoney>>(url, moneyAccount)
   }
 
   getMoneyAccounts() {
