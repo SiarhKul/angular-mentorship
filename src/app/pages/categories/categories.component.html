@@ -5,22 +5,57 @@
     <div>Category 3</div>
   </div>
   <div class="categories-management">
-    <app-drawer [atternativeTrigger]=" alternativeTrigger"
+    <app-drawer [atternativeTrigger]="alternativeTrigger"
                 [textHeader]="'Create category'">
       <div ngProjectAs="drawer__content">
+
+        <form
+            #createCategoryFormRef='ngForm'
+            (ngSubmit)="onSubmit()"
+            id="create-category">
+          <mat-form-field
+              appearance='outline'
+              class='mat-form-field'
+          >
+            <mat-label>Account Name</mat-label>
+            <input
+                [(ngModel)]='model.name'
+                matInput
+                name='name'
+                required
+                type='text'
+            >
+            <mat-error>
+              Category name is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Select category</mat-label>
+            <mat-select [(ngModel)]="model.category"
+                        [value]="categories[0].id"
+                        name="category"
+            >
+              @for (category of categories; track $index) {
+                <mat-option [value]="category.id">
+                  {{ category.category }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </form>
 
       </div>
 
       <div ngProjectAs="footer__buttons">
         <button
-            form="create-money-account"
+            form="create-category"
             mat-stroked-button
             type="submit"
         >
           Save
         </button>
       </div>
-
     </app-drawer>
 
     <ng-template #alternativeTrigger>

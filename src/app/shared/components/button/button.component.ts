@@ -23,4 +23,6 @@ export class ButtonComponent {
   icon = 'add'
   @Input()
   customStyles!: Partial<CSSStyleDeclaration>
+
+
 }
