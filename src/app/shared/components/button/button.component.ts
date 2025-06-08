@@ -9,7 +9,7 @@ import {PlusButtonComponent} from "../plus-button/plus-button.component";
   styleUrl: './button.component.css',
   template: `
     <div class="button">
-      <app-plus-button/>
+      <app-plus-button [icon]="icon"/>
       <span>{{ buttonContent }}</span>
     </div>
   `,
@@ -17,4 +17,6 @@ import {PlusButtonComponent} from "../plus-button/plus-button.component";
 export class ButtonComponent {
   @Input()
   buttonContent = 'Default Value'
+  @Input()
+  icon = 'add'
 }
