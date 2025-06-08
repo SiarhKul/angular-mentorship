@@ -1,3 +1,26 @@
 <div>
-  Categories
+  <div class="categories">
+
+  </div>
+  <div class="categories-management">
+    <app-drawer [atternativeTrigger]=" atternativeTrigger"
+                [textHeader]="'Create money account'">
+      <div ngProjectAs="drawer__content">
+
+      </div>
+
+      <div ngProjectAs="footer__buttons">
+        <button type="submit"
+        >
+          Save
+        </button>
+      </div>
+
+
+    </app-drawer>
+    <ng-template #atternativeTrigger>
+      <app-button [buttonContent]="'Add categories'"/>
+    </ng-template>
+
+  </div>
 </div>
