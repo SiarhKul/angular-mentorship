@@ -36,6 +36,8 @@
 
     /* Border radius */
     --border-radius: 0.25rem;
+    --border-radius-sm: 0.5rem;
+    --border-radius-md: 1rem;
 
     /* Transitions */
     --transition-speed: 0.3s;
