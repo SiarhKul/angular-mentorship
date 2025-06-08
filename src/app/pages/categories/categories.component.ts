@@ -5,6 +5,7 @@ import {
 import {DrawerComponent} from "../../shared/components/drawer/drawer.component";
 import {FormsModule} from "@angular/forms";
 import {ButtonComponent} from "../../shared/components/button/button.component";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-categories',
@@ -15,6 +16,7 @@ import {ButtonComponent} from "../../shared/components/button/button.component";
     ButtonComponent,
     ButtonComponent,
     ButtonComponent,
+    MatButton,
 
   ],
   templateUrl: './categories.component.html',

@@ -21,8 +21,6 @@ export class ButtonComponent {
   buttonContent = 'Default Value'
   @Input()
   icon = 'add'
-
-  //todo: Ask mentor - real type for styles
   @Input()
-  customStyles!: { [key: string]: string };
+  customStyles!: Partial<CSSStyleDeclaration>
 }

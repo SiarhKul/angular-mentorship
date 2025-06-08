@@ -6,13 +6,16 @@
   </div>
   <div class="categories-management">
     <app-drawer [atternativeTrigger]=" alternativeTrigger"
-                [textHeader]="'Create money account'">
+                [textHeader]="'Create category'">
       <div ngProjectAs="drawer__content">
 
       </div>
 
       <div ngProjectAs="footer__buttons">
-        <button type="submit"
+        <button
+            form="create-money-account"
+            mat-stroked-button
+            type="submit"
         >
           Save
         </button>
@@ -24,8 +27,8 @@
       <app-button
           [buttonContent]="'Add categories'"
           [customStyles]="{
-          'background-color': 'var(--background-color-primary)',
-           'color': 'black'
+          backgroundColor: 'var(--background-color-primary)',
+           color: 'black'
            }"
           [icon]="'savings'"
       />
