@@ -1,9 +1,11 @@
-<div>
+<section class="categories-container">
   <div class="categories">
-
+    <div>Category 1</div>
+    <div>Category 2</div>
+    <div>Category 3</div>
   </div>
   <div class="categories-management">
-    <app-drawer [atternativeTrigger]=" atternativeTrigger"
+    <app-drawer [atternativeTrigger]=" alternativeTrigger"
                 [textHeader]="'Create money account'">
       <div ngProjectAs="drawer__content">
 
@@ -16,11 +18,14 @@
         </button>
       </div>
 
-
     </app-drawer>
-    <ng-template #atternativeTrigger>
-      <app-button [buttonContent]="'Add categories'" [icon]="'savings'"/>
+
+    <ng-template #alternativeTrigger>
+      <app-button
+          [buttonContent]="'Add categories'"
+          [icon]="'savings'"
+      />
     </ng-template>
 
   </div>
-</div>
+</section>
