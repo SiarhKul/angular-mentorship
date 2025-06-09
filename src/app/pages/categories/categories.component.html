@@ -10,8 +10,8 @@
       <div ngProjectAs="drawer__content">
 
         <form
-            #createCategoryFormRef='ngForm'
-            (ngSubmit)="onSubmit()"
+            #formRef="ngForm"
+            (ngSubmit)="onSubmit(formRef)"
             id="create-category">
           <mat-form-field
               appearance='outline'

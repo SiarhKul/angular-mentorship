@@ -3,14 +3,19 @@ import {
   AccountMoneyService
 } from "../../features/money-accounts/services/api/account-money.service";
 import {DrawerComponent} from "../../shared/components/drawer/drawer.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, NgForm} from "@angular/forms";
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {MatButton, MatButtonModule} from "@angular/material/button";
 import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
 import {MatOption} from "@angular/material/core";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {NgStyle} from "@angular/common";
+
+
+const CATEGORIES = [
+  {category: "Income", id: 1},
+  {category: "Expanses", id: 2},
+]
 
 @Component({
   selector: 'app-categories',
@@ -33,8 +38,7 @@ import {NgStyle} from "@angular/common";
     MatFormFieldModule,
     MatInput,
     MatLabel,
-    MatSelectModule,
-    NgStyle
+    MatSelectModule
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
@@ -43,16 +47,12 @@ import {NgStyle} from "@angular/common";
 export class CategoriesComponent {
   model = {
     name: '',
-    category: 1,  // Default to first category ID
+    category: 1,
   }
 
-  categories = [
-    {category: "Income", id: 1},
-    {category: "Expanses", id: 2},
-  ]
+  categories = CATEGORIES
 
-
-  onSubmit() {
-
+  onSubmit(formRef: NgForm) {
+    console.log("----------------------------", formRef)
   }
 }
