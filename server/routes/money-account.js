@@ -1,6 +1,4 @@
 const express = require("express");
-const { log } = require("node:console");
-const { read } = require("node:fs");
 const router = express.Router();
 const { writeFile } = require("node:fs/promises");
 const { readFile } = require("node:fs/promises");
@@ -17,7 +15,7 @@ router.post("/", async (req, res) => {
     try {
       const fileData = await readFile("db.json", "utf-8");
       accounts = JSON.parse(fileData);
-      log("Existing accounts loaded:", accounts);
+      console.log("Existing accounts loaded:", accounts);
     } catch (err) {
       console.error("Error reading db.json:", err);
       accounts = [];
@@ -27,10 +25,11 @@ router.post("/", async (req, res) => {
     const { signal } = controller;
 
     accounts.push(account);
-    log("New account added:", account);
+    console.log("New account added:", account);
     await writeFile("db.json", JSON.stringify(accounts, null, 2), { signal });
   } catch (err) {
     console.error(err);
+    return res.status(500).json({ error: "Failed to write account" });
   }
 
   res.json(account);

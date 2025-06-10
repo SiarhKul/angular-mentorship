@@ -8,6 +8,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const loginRouter = require("./routes/login");
 const moneyAccountRouter = require("./routes/money-account");
+const categoriesRouter = require("./routes/categories");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/money-account", moneyAccountRouter);
+app.use("/categories", categoriesRouter);
 
 app.use((err, req, res) => {
   const statusCode = err.statusCode || 500;

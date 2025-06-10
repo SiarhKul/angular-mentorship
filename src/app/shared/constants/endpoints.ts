@@ -5,5 +5,10 @@ export const AUTH_ENDPOINT = {
 
 export const ACCOUNT_MONEY_ENDPOINT = {
   moneyAccount: '/money-account'
-  
-}
+
+} as const
+
+export const CATEGORY_ENDPOINT = {
+  categories: '/categories'
+} as const
+
