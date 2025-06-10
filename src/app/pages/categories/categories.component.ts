@@ -2,57 +2,31 @@ import {Component} from '@angular/core';
 import {
   AccountMoneyService
 } from "../../features/money-accounts/services/api/account-money.service";
-import {DrawerComponent} from "../../shared/components/drawer/drawer.component";
-import {FormsModule, NgForm} from "@angular/forms";
-import {ButtonComponent} from "../../shared/components/button/button.component";
-import {MatButton, MatButtonModule} from "@angular/material/button";
-import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
-import {MatOption} from "@angular/material/core";
-import {MatSelect, MatSelectModule} from "@angular/material/select";
+import {FormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
+import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
-
-
-const CATEGORIES = [
-  {category: "Income", id: 1},
-  {category: "Expanses", id: 2},
-]
+import {
+  CategoriesCreator
+} from "../../features/categories/components/categories-creator/categories-creator";
+import {
+  CategoriesListCtrl
+} from "../../features/categories/components/categories-list/categories-list";
 
 @Component({
   selector: 'app-categories',
   imports: [
-    DrawerComponent,
     FormsModule,
-    ButtonComponent,
-    ButtonComponent,
-    ButtonComponent,
-    ButtonComponent,
-    MatButton,
-    MatInput,
-    MatLabel,
-    MatFormField,
-    MatOption,
-    MatSelect,
-    DrawerComponent,
     MatButtonModule,
     FormsModule,
     MatFormFieldModule,
-    MatInput,
-    MatLabel,
-    MatSelectModule
+    MatSelectModule,
+    CategoriesCreator,
+    CategoriesListCtrl
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
   providers: [AccountMoneyService]
 })
 export class CategoriesComponent {
-  model = {
-    name: '',
-    category: 1,
-  }
-
-  categories = CATEGORIES
-
-  onSubmit(formRef: NgForm) {
-    console.log("----------------------------", formRef)
-  }
 }
