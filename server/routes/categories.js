@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     res.json(newCategory);
   } catch (err) {
     console.error("Error writing to db.categories.json:", err);
-    return res.status(500).json({ error: "Failed to write category" });
+    return res.status(500).json({ error: "Failed to write/read category" });
   }
 });
 

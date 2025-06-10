@@ -10,9 +10,11 @@ export class CategoriesService {
 
   saveCategory(category: ICategory) {
     const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`
-    console.log("----------------------------", category)
     return this.http.post<Required<ICategory>>(url, category)
-
   }
 
+  getAllCategories() {
+    const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`
+    return this.http.get<Required<ICategory>[]>(url)
+  }
 }

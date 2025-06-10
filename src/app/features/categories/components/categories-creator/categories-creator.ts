@@ -18,12 +18,8 @@ import {MatSelect} from "@angular/material/select";
 import {CategoriesService} from "../../services/categories.service";
 import {ICategory} from "../../types/interfaces";
 import {Category} from "../../models/Category";
+import {CATEGORIES} from "../../../../shared/constants/dictionaries";
 
-
-const CATEGORIES = [
-  {category: "Income", id: 1},
-  {category: "Expanses", id: 2},
-]
 
 @Component({
   styleUrl: "./categories-creator.css",
@@ -132,7 +128,7 @@ export class CategoriesCreator {
     this.submitted = true;
     this.loading = true;
     this.error = '';
-    
+
 
     const category: ICategory = Category.builder()
       .setType(value.type)

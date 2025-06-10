@@ -1,0 +1,8 @@
+.categories-container {
+    display: flex;
+}
+
+
+.app-categories-list {
+    flex: 1;
+}
