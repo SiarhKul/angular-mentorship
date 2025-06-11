@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { writeFile, readFile } = require("node:fs/promises");
 const crypto = require("node:crypto");
+const { read } = require("node:fs");
 
 router.post("/", async (req, res) => {
   try {
@@ -26,6 +27,18 @@ router.post("/", async (req, res) => {
   } catch (err) {
     console.error("Error writing to db.categories.json:", err);
     return res.status(500).json({ error: "Failed to write/read category" });
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const categoryString =
+      (await readFile("db.categories.json", "utf-8")) || "[]";
+    const categories = JSON.parse(categoryString);
+    return res.json(categories);
+  } catch (err) {
+    console.error("Error reading categories:", err);
+    return res.status(500).json({ error: "Failed to read categories" });
   }
 });
 

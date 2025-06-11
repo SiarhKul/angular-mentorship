@@ -15,6 +15,10 @@ export class CategoriesService {
 
   getAllCategories() {
     const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`
-    return this.http.get<Required<ICategory>[]>(url)
+    let observable = this.http.get<Required<ICategory>[]>(url);
+
+    console.log(observable)
+
+    return observable
   }
 }
