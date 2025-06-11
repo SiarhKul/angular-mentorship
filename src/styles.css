@@ -20,7 +20,8 @@
     /* UI colors */
     --border-color: #e9ecef;
     --border-color-dark: #495057;
-
+    --border-color-red: #d95647;
+    --border-color-green: #3be764;
     --shadow-color: rgba(0, 0, 0, 0.075);
 
     /* Text colors */
@@ -48,6 +49,9 @@
     --gap-md: 1rem;
     --gap-lg: 1.5rem;
     --gap-xl: 2rem;
+
+    /*Font-weight*/
+    --font-weight-bold: 500
 }
 
 body {

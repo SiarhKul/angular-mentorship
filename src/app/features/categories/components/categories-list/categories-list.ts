@@ -1,8 +1,10 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {CategoriesService} from "../../services/categories.service";
 import {ICategory} from "../../types/interfaces";
 import {Observable} from "rxjs";
 import {AsyncPipe, NgForOf} from "@angular/common";
+import {CATEGORIES} from "../../../../shared/constants/dictionaries";
+import {CategoryComponent} from "../category/category.component";
 
 @Component({
   selector: "app-categories-list",
@@ -10,20 +12,24 @@ import {AsyncPipe, NgForOf} from "@angular/common";
   providers: [CategoriesService],
   imports: [
     NgForOf,
-    AsyncPipe
+    AsyncPipe,
+    CategoryComponent
   ],
   template:
     `
       <div class="categories">
         <div *ngFor="let category of categories$ | async">
-          <div>{{ category.name }}</div>
+          <app-category
+              [name]="category.name"
+              [type]="mappingIdToCategories[category.type]"
+          />
         </div>
       </div>
     `
 })
-export class CategoriesListCtrl {
+export class CategoriesListCtrl implements OnInit {
   categories$: Observable<Required<ICategory>[]>
-
+  mappingIdToCategories = _mappingIdToCategories
 
   constructor(
     private cs: CategoriesService
@@ -31,4 +37,17 @@ export class CategoriesListCtrl {
     this.categories$ = this.cs.getAllCategories()
   }
 
+  ngOnInit(): void {
+    console.log('-----------', this.mappingIdToCategories)
+  }
+
+
 }
+
+const _mappingIdToCategories = CATEGORIES
+  .reduce<Record<string, string>>((acc, currentValue) => {
+    return {
+      ...acc,
+      [currentValue.id]: currentValue.category
+    }
+  }, {})

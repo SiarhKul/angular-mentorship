@@ -1,0 +1,14 @@
+.category {
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.category--income {
+    border: 1px solid var(--border-color-green);
+}
+
+.category--expenses {
+    border: 1px solid var(--border-color-red);
+}

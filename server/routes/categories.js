@@ -30,11 +30,12 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", async (_req, res) => {
   try {
     const categoryString =
       (await readFile("db.categories.json", "utf-8")) || "[]";
     const categories = JSON.parse(categoryString);
+
     return res.json(categories);
   } catch (err) {
     console.error("Error reading categories:", err);
