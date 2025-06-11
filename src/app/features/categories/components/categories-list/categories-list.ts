@@ -40,8 +40,7 @@ export class CategoriesListCtrl implements OnInit {
   ngOnInit(): void {
     console.log('-----------', this.mappingIdToCategories)
   }
-
-
+  
 }
 
 const _mappingIdToCategories = CATEGORIES
