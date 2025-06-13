@@ -3,6 +3,7 @@ import {
   CategoriesCreator
 } from "./components/categories-creator/categories-creator";
 import {CategoriesListCtrl} from "./components/categories-list/categories-list";
+import {ICategory} from "./types/interfaces";
 
 @Component({
   selector: "app-categories",
@@ -15,9 +16,15 @@ import {CategoriesListCtrl} from "./components/categories-list/categories-list";
   template: `
     <section class="categories-container">
       <app-categories-list class="app-categories-list"/>
-      <app-categories-creator/>
+      <app-categories-creator
+          (onSuccessSubmit)="handleOnSuccessSubmit($event)"/>
     </section>`
 })
+//todo: Mentor: Ask about naming convention 'handleOnSuccessSubmit'
 export class CategoriesComponent {
 
+
+  handleOnSuccessSubmit($event: Required<ICategory>) {
+    console.log("handleOnSuccessSubmit", $event);
+  }
 }

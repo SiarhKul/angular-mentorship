@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, output} from "@angular/core";
 import {
   ButtonComponent
 } from "../../../../shared/components/button/button.component";
@@ -110,15 +110,15 @@ import {CATEGORIES} from "../../../../shared/constants/dictionaries";
 export class CategoriesCreator {
   submitted = false;
   loading = false;
+  categories = CATEGORIES
   error = '';
-
-
   model: ICategory = {
     name: '',
     type: 1,
   }
 
-  categories = CATEGORIES
+  onSuccessSubmit = output<Required<ICategory>>()
+
 
   constructor(private service: CategoriesService) {
   }
@@ -138,7 +138,8 @@ export class CategoriesCreator {
     if (valid) {
       this.service.saveCategory(category).subscribe({
         next: (response) => {
-
+          this.onSuccessSubmit.emit(response);
+          console.log('1', response);
         },
         error: error => {
         },
