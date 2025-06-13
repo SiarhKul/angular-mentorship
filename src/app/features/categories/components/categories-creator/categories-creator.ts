@@ -116,7 +116,7 @@ export class CategoriesCreator {
   }
 
   onSuccessSubmit = output<Required<ICategory>>()
-  
+
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent
 
@@ -130,7 +130,6 @@ export class CategoriesCreator {
     this.loading = true;
     this.error = '';
 
-
     const category: ICategory = Category.builder()
       .setType(value.type)
       .setName(value.name)
@@ -143,11 +142,13 @@ export class CategoriesCreator {
           if (this.drawer) {
             this.drawer.closeDrawer();
           }
-          console.log('1', response);
         },
         error: error => {
+          this.error = "Error creating category";
+          this.submitted = false;
         },
         complete: () => {
+          this.loading = false;
         }
       })
 
