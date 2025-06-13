@@ -1,4 +1,4 @@
-import {Component, output} from "@angular/core";
+import {Component, output, ViewChild} from "@angular/core";
 import {
   ButtonComponent
 } from "../../../../shared/components/button/button.component";
@@ -40,9 +40,9 @@ import {CATEGORIES} from "../../../../shared/constants/dictionaries";
   template: `
     <div class="categories-management">
       <app-drawer [atternativeTrigger]="alternativeTrigger"
-                  [textHeader]="'Create category'">
+                  [textHeader]="'Create category'"
+      >
         <div ngProjectAs="drawer__content">
-
           <form
               #formRef="ngForm"
               (ngSubmit)="onSubmit(formRef)"
@@ -103,8 +103,6 @@ import {CATEGORIES} from "../../../../shared/constants/dictionaries";
         />
       </ng-template>
     </div>
-
-
   `
 })
 export class CategoriesCreator {
@@ -118,10 +116,13 @@ export class CategoriesCreator {
   }
 
   onSuccessSubmit = output<Required<ICategory>>()
-
+  
+  @ViewChild(DrawerComponent)
+  drawer!: DrawerComponent
 
   constructor(private service: CategoriesService) {
   }
+
 
   onSubmit(formRef: NgForm) {
     const {form: {value}, valid} = formRef;
@@ -139,6 +140,9 @@ export class CategoriesCreator {
       this.service.saveCategory(category).subscribe({
         next: (response) => {
           this.onSuccessSubmit.emit(response);
+          if (this.drawer) {
+            this.drawer.closeDrawer();
+          }
           console.log('1', response);
         },
         error: error => {
