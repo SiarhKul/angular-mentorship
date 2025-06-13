@@ -7,26 +7,22 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {
-  CategoriesCreator
-} from "../../features/categories/components/categories-creator/categories-creator";
-import {
-  CategoriesListCtrl
-} from "../../features/categories/components/categories-list/categories-list";
+  CategoriesComponent
+} from "../../features/categories/categories.component";
 
 @Component({
-  selector: 'app-categories',
+  selector: 'app-categories-page',
   imports: [
     FormsModule,
     MatButtonModule,
     FormsModule,
     MatFormFieldModule,
     MatSelectModule,
-    CategoriesCreator,
-    CategoriesListCtrl
+    CategoriesComponent
   ],
-  templateUrl: './categories.component.html',
-  styleUrl: './categories.component.css',
+  templateUrl: './categories.page.html',
+  styleUrl: './categories.page.css',
   providers: [AccountMoneyService]
 })
-export class CategoriesComponent {
+export class CategoriesPage {
 }

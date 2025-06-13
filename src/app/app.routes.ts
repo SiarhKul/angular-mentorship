@@ -3,7 +3,7 @@ import {MainLayout} from "./layouts/main.layout";
 import {AuthLayout} from "./layouts/auth.layout";
 import {LandingLayout} from "./layouts/landing.layout";
 import {LoginComponent} from "./features/auth/components/login/login.component";
-import {CategoriesComponent} from './pages/categories/categories.component';
+import {CategoriesPage} from './pages/categories/categories.page';
 import {
   SubscriptionsComponent
 } from './pages/subscriptions/subscriptions.component';
@@ -17,7 +17,7 @@ import {RootComponent} from "./pages/root/root.component";
 const mainRoutes: Routes = [
   {
     path: RoutePaths.CATEGORIES,
-    component: CategoriesComponent,
+    component: CategoriesPage,
     canActivate: [AuthGuard]
   },
   {
