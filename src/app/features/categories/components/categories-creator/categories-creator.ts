@@ -122,8 +122,7 @@ export class CategoriesCreator {
 
   constructor(private service: CategoriesService) {
   }
-
-
+  
   onSubmit(formRef: NgForm) {
     const {form: {value}, valid} = formRef;
     this.submitted = true;

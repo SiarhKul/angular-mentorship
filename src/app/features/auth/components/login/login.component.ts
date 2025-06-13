@@ -1,7 +1,6 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, DestroyRef, inject, ViewChild} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
 import {Router, RouterModule} from '@angular/router';
-import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -10,12 +9,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AuthService} from "../../services/api/auth.service";
 import {UserService,} from "../../../../shared/services/user.service";
 import {RoutePaths} from "../../../../shared/constants/route-pathes";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     RouterModule,
     MatCardModule,
@@ -28,7 +27,6 @@ import {RoutePaths} from "../../../../shared/constants/route-pathes";
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-
   model = {
     username: '',
     password: '',
@@ -36,9 +34,9 @@ export class LoginComponent {
   submitted = false;
   loading = false;
   error = '';
-
   @ViewChild('actorForm')
   actorForm!: NgForm;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private authService: AuthService,
@@ -47,6 +45,7 @@ export class LoginComponent {
   ) {
   }
 
+//todo: Mentor: Ask about takeUntilDestroyed
   async onSubmit() {
     this.submitted = true;
     this.loading = true;
@@ -54,6 +53,7 @@ export class LoginComponent {
 
     if (this.actorForm.valid) {
       this.authService.login(this.model.username, this.model.password)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (response) => {
             console.log('Login successful', response);
