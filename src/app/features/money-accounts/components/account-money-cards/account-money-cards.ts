@@ -28,7 +28,7 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
   template: `
     @if (moneyAccounts; as accounts) {
       <ul class="account-money-cards">
-        @for (account of accounts; track $index) {
+        @for (account of accounts; track account.currency + $index) {
           <li class="account-money-card"
               (click)="setSelectedMoneyAccount(account.id)"
               [ngClass]="{'account-money-card--highlight': selectedMoneyAccountIdSignal ? selectedMoneyAccountIdSignal() === account.id : false }"
