@@ -47,7 +47,8 @@ router.get("/", async (req, res) => {
     } catch {
       accounts = [];
     }
-    log("Accounts loaded:", accounts);
+
+    console.log("Accounts loaded:", accounts);
     res.json(accounts);
   } catch (err) {
     console.error("Error reading db.json:", err);
