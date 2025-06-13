@@ -1,8 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {CategoriesService} from "../../services/categories.service";
 import {ICategory} from "../../types/interfaces";
-import {Observable} from "rxjs";
-import {AsyncPipe, NgForOf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {CATEGORIES} from "../../../../shared/constants/dictionaries";
 import {CategoryComponent} from "../category/category.component";
 
@@ -12,13 +11,12 @@ import {CategoryComponent} from "../category/category.component";
   providers: [CategoriesService],
   imports: [
     NgForOf,
-    AsyncPipe,
     CategoryComponent
   ],
   template:
     `
       <div class="categories">
-        <div *ngFor="let category of categories$ | async">
+        <div *ngFor="let category of categories">
           <app-category
               [name]="category.name"
               [type]="mappingIdToCategories[category.type]"
@@ -27,20 +25,10 @@ import {CategoryComponent} from "../category/category.component";
       </div>
     `
 })
-export class CategoriesListCtrl implements OnInit {
-  categories$: Observable<Required<ICategory>[]>
+export class CategoriesListCtrl {
   mappingIdToCategories = _mappingIdToCategories
+  @Input() categories!: Required<ICategory>[] | null;
 
-  constructor(
-    private cs: CategoriesService
-  ) {
-    this.categories$ = this.cs.getAllCategories()
-  }
-
-  ngOnInit(): void {
-    console.log('-----------', this.mappingIdToCategories)
-  }
-  
 }
 
 const _mappingIdToCategories = CATEGORIES

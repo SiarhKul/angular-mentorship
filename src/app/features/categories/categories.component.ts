@@ -4,27 +4,39 @@ import {
 } from "./components/categories-creator/categories-creator";
 import {CategoriesListCtrl} from "./components/categories-list/categories-list";
 import {ICategory} from "./types/interfaces";
+import {CategoriesService} from "./services/categories.service";
+import {Observable} from "rxjs";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: "app-categories",
   styleUrl: "./categories.component.css",
   standalone: true,
+  providers: [CategoriesService],
   imports: [
     CategoriesCreator,
-    CategoriesListCtrl
+    CategoriesListCtrl,
+    AsyncPipe
   ],
   template: `
     <section class="categories-container">
-      <app-categories-list class="app-categories-list"/>
+      <app-categories-list [categories]="categories$| async"
+                           class="app-categories-list"/>
       <app-categories-creator
           (onSuccessSubmit)="handleOnSuccessSubmit($event)"/>
     </section>`
 })
 //todo: Mentor: Ask about naming convention 'handleOnSuccessSubmit'
 export class CategoriesComponent {
+  categories$: Observable<Required<ICategory>[]>
 
+  constructor(private cs: CategoriesService) {
+    this.categories$ = this.cs.getAllCategories()
 
-  handleOnSuccessSubmit($event: Required<ICategory>) {
+  }
+
+  protected handleOnSuccessSubmit($event: Required<ICategory>) {
     console.log("handleOnSuccessSubmit", $event);
+    this.categories$ = this.cs.getAllCategories()
   }
 }
