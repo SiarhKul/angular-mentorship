@@ -3,6 +3,10 @@
     class="category"
 >
   <span class="category__name">{{ name }}</span>
-  <mat-icon>edit</mat-icon>
-  <mat-icon>delete</mat-icon>
+  <button (click)="onEdit()" mat-icon-button>
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button (click)="onDelete()" mat-icon-button>
+    <mat-icon>delete</mat-icon>
+  </button>
 </div>
