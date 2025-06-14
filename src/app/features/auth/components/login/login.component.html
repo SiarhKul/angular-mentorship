@@ -7,15 +7,19 @@
     </mat-card-header>
 
     <mat-card-content>
-      <div *ngIf="error" class="error-message"
-           style="color: red; margin-bottom: 15px;">
-        {{ error }}
-      </div>
+      @if (error) {
+        <div class="error-message"
+             style="color: red; margin-bottom: 15px;">
+          {{ error }}
+        </div>
+      }
 
-      <div *ngIf="loading" class="loading-spinner"
-           style="display: flex; justify-content: center; margin: 20px 0;">
-        <mat-spinner diameter="40"></mat-spinner>
-      </div>
+      @if (loading) {
+        <div class="loading-spinner"
+             style="display: flex; justify-content: center; margin: 20px 0;">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      }
 
       <div [hidden]="submitted && loading">
         <form #actorForm="ngForm" (ngSubmit)="onSubmit()" class='form'>
