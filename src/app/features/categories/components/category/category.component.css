@@ -2,7 +2,15 @@
     padding: var(--spacing-md);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.category__name {
     font-weight: var(--font-weight-bold);
+    margin-right: var(--spacing-md);
 }
 
 .category--income {

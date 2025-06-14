@@ -94,7 +94,6 @@ import {AccountMoneyCards} from "../account-money-cards/account-money-cards";
 })
 export class AccountMoneyCreator {
 
-
   @Input()
   cardsComponent!: AccountMoneyCards;
   @Output()
@@ -124,9 +123,10 @@ export class AccountMoneyCreator {
       this.ams.create(this.model).subscribe(
         {
           next: moneyAccount => {
-            console.log('moneyAccount', moneyAccount)
             this.loading = false;
             this.onCreate.emit(moneyAccount.id);
+            this.createMoneyAccountRef.resetForm();
+            console.log('Form submitted with value:', this.model);
           },
           error: error => {
             this.onCreate.emit(null);
@@ -137,8 +137,6 @@ export class AccountMoneyCreator {
           }
         }
       )
-      console.log('Form submitted with value:', this.model);
-      this.createMoneyAccountRef.resetForm();
     } else {
       this.submitted = false;
       this.loading = false;

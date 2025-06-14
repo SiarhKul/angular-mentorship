@@ -1,8 +1,8 @@
-<div [ngClass]="{
-  'category--income': type==='Income',
-  'category--expenses': type==='Expanses'
-}" class="category">
-  <span>
-    {{ name }}
-  </span>
+<div
+    [ngClass]="{'category--income': type==='Income','category--expenses': type==='Expanses'}"
+    class="category"
+>
+  <span class="category__name">{{ name }}</span>
+  <mat-icon>edit</mat-icon>
+  <mat-icon>delete</mat-icon>
 </div>
