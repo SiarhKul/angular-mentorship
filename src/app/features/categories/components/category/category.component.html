@@ -1,12 +1,12 @@
 <div
-    [ngClass]="{'category--income': type==='Income','category--expenses': type==='Expanses'}"
-    class="category"
+        [ngClass]="{'category--income': type==='Income','category--expenses': type==='Expanses'}"
+        class="category"
 >
-  <span class="category__name">{{ name }}</span>
-  <button (click)="onEdit()" mat-icon-button>
-    <mat-icon>edit</mat-icon>
-  </button>
-  <button (click)="onDelete()" mat-icon-button>
-    <mat-icon>delete</mat-icon>
-  </button>
+    <span class="category__name">{{ name }}</span>
+    <button (click)="onEdit()" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+    </button>
+    <button (click)="onDelete(id)" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+    </button>
 </div>

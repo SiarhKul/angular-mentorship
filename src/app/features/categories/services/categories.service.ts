@@ -6,19 +6,21 @@ import {CATEGORY_ENDPOINT} from "../../../shared/constants/endpoints";
 
 @Injectable()
 export class CategoriesService {
-  private http = inject(HttpClient);
+    private http = inject(HttpClient);
 
-  saveCategory(category: ICategory) {
-    const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`
-    return this.http.post<Required<ICategory>>(url, category)
-  }
+    saveCategory(category: ICategory) {
+        const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`
+        return this.http.post<Required<ICategory>>(url, category)
+    }
 
-  getAllCategories() {
-    const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`
-    let observable = this.http.get<Required<ICategory>[]>(url);
+    getAllCategories() {
+        const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`
+        return this.http.get<Required<ICategory>[]>(url);
+    }
 
-    console.log(observable)
+    deleteCategory(categoryId: number) {
+        const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}/${categoryId}`;
+        return this.http.delete(url);
+    }
 
-    return observable
-  }
 }

@@ -21,6 +21,7 @@ import {AsyncPipe} from "@angular/common";
   template: `
     <section class="categories-container">
       <app-categories-list [categories]="categories$| async"
+                           (categoryDeleted)="handleCategoryDeleted($event)"
                            class="app-categories-list"/>
       <app-categories-creator
           (onSuccessSubmit)="handleOnSuccessSubmit($event)"/>
@@ -37,6 +38,11 @@ export class CategoriesComponent {
 
   protected handleOnSuccessSubmit($event: Required<ICategory>) {
     console.log("handleOnSuccessSubmit", $event);
+    this.categories$ = this.cs.getAllCategories()
+  }
+
+  protected handleCategoryDeleted(id: number) {
+    console.log("handleCategoryDeleted", id);
     this.categories$ = this.cs.getAllCategories()
   }
 }
