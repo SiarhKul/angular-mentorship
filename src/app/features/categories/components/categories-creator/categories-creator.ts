@@ -1,4 +1,4 @@
-import { Component, output, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -106,8 +106,6 @@ export class CategoriesCreator {
     name: '',
     type: 1,
   };
-
-  onSuccessSubmit = output<Required<ICategory>>();
 
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;

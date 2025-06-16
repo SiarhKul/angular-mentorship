@@ -38,8 +38,4 @@ export class CategoriesService {
 
     this.categories$ = this.cs.getAllCategories();
   }
-
-  handleCategoryDeleted() {
-    this.categories$ = this.cs.getAllCategories();
-  }
 }
