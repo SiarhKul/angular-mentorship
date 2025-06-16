@@ -1,21 +1,20 @@
-import {HttpClient} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {AccountMoney} from "../models/AccountMoney";
-import {ACCOUNT_MONEY_ENDPOINT} from "../../../../shared/constants/endpoints";
-import {API_URLS} from "../../../../shared/constants/api-url";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AccountMoney } from '../models/AccountMoney';
+import { ACCOUNT_MONEY_ENDPOINT } from '../../../../shared/constants/endpoints';
+import { API_URLS } from '../../../../shared/constants/api-url';
 
 @Injectable()
 export class AccountMoneyService {
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   create(moneyAccount: AccountMoney) {
-    const url = `${API_URLS.baseUrl}${ACCOUNT_MONEY_ENDPOINT.moneyAccount}`
-    return this.http.post<Required<AccountMoney>>(url, moneyAccount)
+    const url = `${API_URLS.baseUrl}${ACCOUNT_MONEY_ENDPOINT.moneyAccount}`;
+    return this.http.post<Required<AccountMoney>>(url, moneyAccount);
   }
 
   getMoneyAccounts() {
-    const url = `${API_URLS.baseUrl}${ACCOUNT_MONEY_ENDPOINT.moneyAccount}`
-    return this.http.get<Required<AccountMoney>[]>(url)
+    const url = `${API_URLS.baseUrl}${ACCOUNT_MONEY_ENDPOINT.moneyAccount}`;
+    return this.http.get<Required<AccountMoney>[]>(url);
   }
 }

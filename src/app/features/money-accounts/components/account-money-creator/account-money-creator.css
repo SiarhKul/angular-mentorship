@@ -1,9 +1,9 @@
 .mat-form-field {
-    width: 100%;
-    margin-bottom: var(--spacing-md);
+  width: 100%;
+  margin-bottom: var(--spacing-md);
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }

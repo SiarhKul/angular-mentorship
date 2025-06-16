@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-obligatory',
   imports: [],
   templateUrl: './obligatory.component.html',
-  styleUrl: './obligatory.component.css'
+  styleUrl: './obligatory.component.css',
 })
-export class ObligatoryComponent {
-
-}
+export class ObligatoryComponent {}

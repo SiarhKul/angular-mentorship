@@ -12,5 +12,5 @@ export const RoutePaths = {
   // Layout routes
   ROOT: '',
   AUTH: 'auth',
-  LANDING: 'landing'
+  LANDING: 'landing',
 };

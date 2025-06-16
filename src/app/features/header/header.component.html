@@ -1,25 +1,27 @@
-<header class='header'>
-  <div class='logo'>
-    Budgetify
-  </div>
+<header class="header">
+  <div class="logo">Budgetify</div>
 
-  <div class='nav-badge'>
-
-    <nav class='navigation'>
+  <div class="nav-badge">
+    <nav class="navigation">
       <ul>
-        <li><a routerLink='categories' routerLinkActive='active'>Categories</a>
+        <li>
+          <a routerLink="categories" routerLinkActive="active">Categories</a>
         </li>
-        <li><a routerLink='subscriptions' routerLinkActive='active'>Subscriptions</a>
+        <li>
+          <a routerLink="subscriptions" routerLinkActive="active"
+            >Subscriptions</a
+          >
         </li>
-        <li><a routerLink='obligatory' routerLinkActive='active'>Obligatory</a>
+        <li>
+          <a routerLink="obligatory" routerLinkActive="active">Obligatory</a>
         </li>
-        <li><a routerLink='statistic' routerLinkActive='active'>Statistic</a>
+        <li>
+          <a routerLink="statistic" routerLinkActive="active">Statistic</a>
         </li>
-        <li><a routerLink='admin' routerLinkActive='active'>Admin</a></li>
+        <li><a routerLink="admin" routerLinkActive="active">Admin</a></li>
       </ul>
     </nav>
 
-    <app-user-profile-badge [userSignal]="userSignal"/>
+    <app-user-profile-badge [userSignal]="userSignal" />
   </div>
-
 </header>

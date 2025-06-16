@@ -8,9 +8,8 @@ describe('ObligatoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ObligatoryComponent]
-    })
-    .compileComponents();
+      imports: [ObligatoryComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ObligatoryComponent);
     component = fixture.componentInstance;

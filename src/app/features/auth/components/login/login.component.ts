@@ -1,15 +1,15 @@
-import {Component, DestroyRef, inject, ViewChild} from '@angular/core';
-import {FormsModule, NgForm} from '@angular/forms';
-import {Router, RouterModule} from '@angular/router';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {AuthService} from "../../services/api/auth.service";
-import {UserService,} from "../../../../shared/services/user.service";
-import {RoutePaths} from "../../../../shared/constants/route-pathes";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import { Component, DestroyRef, inject, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthService } from '../../services/api/auth.service';
+import { UserService } from '../../../../shared/services/user.service';
+import { RoutePaths } from '../../../../shared/constants/route-pathes';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -41,18 +41,18 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private router: Router
-  ) {
-  }
+    private router: Router,
+  ) {}
 
-//todo: Mentor: Ask about takeUntilDestroyed
+  //todo: Mentor: Ask about takeUntilDestroyed
   async onSubmit() {
     this.submitted = true;
     this.loading = true;
     this.error = '';
 
     if (this.actorForm.valid) {
-      this.authService.login(this.model.username, this.model.password)
+      this.authService
+        .login(this.model.username, this.model.password)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (response) => {
@@ -66,7 +66,7 @@ export class LoginComponent {
             this.error = 'Login failed. Please check your credentials.';
             this.loading = false;
             this.submitted = false;
-          }
+          },
         });
     } else {
       this.loading = false;

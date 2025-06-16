@@ -1,16 +1,11 @@
-import {Component} from '@angular/core';
-import {MoneyAccounts} from "../../features/money-accounts/money-accounts";
-import {
-  AccountMoneyService
-} from "../../features/money-accounts/services/api/account-money.service";
+import { Component } from '@angular/core';
+import { MoneyAccounts } from '../../features/money-accounts/money-accounts';
+import { AccountMoneyService } from '../../features/money-accounts/services/api/account-money.service';
 
 @Component({
   selector: 'app-categories',
-  imports: [
-    MoneyAccounts],
+  imports: [MoneyAccounts],
   templateUrl: './root.component.html',
-  providers: [AccountMoneyService]
+  providers: [AccountMoneyService],
 })
-export class RootComponent {
-
-}
+export class RootComponent {}

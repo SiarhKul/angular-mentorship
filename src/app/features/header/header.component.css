@@ -14,11 +14,9 @@
   gap: var(--gap-sm);
 }
 
-
 .logo {
   text-decoration: none;
   /*padding: var(--spacing-md);*/
-
 }
 
 .navigation {

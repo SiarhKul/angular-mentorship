@@ -1,12 +1,11 @@
-import {ICategory} from "../types/interfaces";
+import { ICategory } from '../types/interfaces';
 
 export class Category implements ICategory {
   id?: number;
-  type!: number
+  type!: number;
   name!: string;
 
-  constructor() {
-  }
+  constructor() {}
 
   static builder() {
     return new Category();
@@ -14,21 +13,20 @@ export class Category implements ICategory {
 
   setId(id: number) {
     this.id = id;
-    return this
+    return this;
   }
 
   setName(name: string) {
     this.name = name;
-    return this
+    return this;
   }
 
   setType(type: number) {
     this.type = type;
-    return this
+    return this;
   }
 
   build(): this {
-    return this
+    return this;
   }
-
 }

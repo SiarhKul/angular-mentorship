@@ -1,28 +1,23 @@
-import {Component, output, ViewChild} from "@angular/core";
-import {
-  ButtonComponent
-} from "../../../../shared/components/button/button.component";
-import {
-  DrawerComponent
-} from "../../../../shared/components/drawer/drawer.component";
-import {FormsModule, NgForm} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
+import { Component, output, ViewChild } from '@angular/core';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
+import { FormsModule, NgForm } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import {
   MatError,
   MatFormField,
   MatInput,
-  MatLabel
-} from "@angular/material/input";
-import {MatOption} from "@angular/material/core";
-import {MatSelect} from "@angular/material/select";
-import {CategoriesService} from "../../services/categories.service";
-import {ICategory} from "../../types/interfaces";
-import {Category} from "../../models/Category";
-import {CATEGORIES} from "../../../../shared/constants/dictionaries";
-
+  MatLabel,
+} from '@angular/material/input';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
+import { CategoriesService } from '../../services/categories.service';
+import { ICategory } from '../../types/interfaces';
+import { Category } from '../../models/Category';
+import { CATEGORIES } from '../../../../shared/constants/dictionaries';
 
 @Component({
-  styleUrl: "./categories-creator.css",
+  styleUrl: './categories-creator.css',
   selector: 'app-categories-creator',
   providers: [CategoriesService],
   imports: [
@@ -35,40 +30,38 @@ import {CATEGORIES} from "../../../../shared/constants/dictionaries";
     MatInput,
     MatLabel,
     MatOption,
-    MatSelect
+    MatSelect,
   ],
   template: `
     <div class="categories-management">
-      <app-drawer [atternativeTrigger]="alternativeTrigger"
-                  [textHeader]="'Create category'"
+      <app-drawer
+        [atternativeTrigger]="alternativeTrigger"
+        [textHeader]="'Create category'"
       >
         <div ngProjectAs="drawer__content">
           <form
-              #formRef="ngForm"
-              (ngSubmit)="onSubmit(formRef)"
-              id="create-category">
-            <mat-form-field
-                appearance='outline'
-                class='mat-form-field'
-            >
+            #formRef="ngForm"
+            (ngSubmit)="onSubmit(formRef)"
+            id="create-category"
+          >
+            <mat-form-field appearance="outline" class="mat-form-field">
               <mat-label>Account Name</mat-label>
               <input
-                  [(ngModel)]='model.name'
-                  matInput
-                  name='name'
-                  required
-                  type='text'
-              >
-              <mat-error>
-                Category name is required
-              </mat-error>
+                [(ngModel)]="model.name"
+                matInput
+                name="name"
+                required
+                type="text"
+              />
+              <mat-error> Category name is required </mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <mat-label>Select category</mat-label>
-              <mat-select [(ngModel)]="model.type"
-                          [value]="categories[0].id"
-                          name="type"
+              <mat-select
+                [(ngModel)]="model.type"
+                [value]="categories[0].id"
+                name="type"
               >
                 @for (category of categories; track $index) {
                   <mat-option [value]="category.id">
@@ -78,15 +71,10 @@ import {CATEGORIES} from "../../../../shared/constants/dictionaries";
               </mat-select>
             </mat-form-field>
           </form>
-
         </div>
 
         <div ngProjectAs="footer__buttons">
-          <button
-              form="create-category"
-              mat-stroked-button
-              type="submit"
-          >
+          <button form="create-category" mat-stroked-button type="submit">
             Save
           </button>
         </div>
@@ -94,37 +82,39 @@ import {CATEGORIES} from "../../../../shared/constants/dictionaries";
 
       <ng-template #alternativeTrigger>
         <app-button
-            [buttonContent]="'Add categories'"
-            [customStyles]="{
+          [buttonContent]="'Add categories'"
+          [customStyles]="{
             backgroundColor: 'var(--background-color-primary)',
-           color: 'black'
-           }"
-            [icon]="'savings'"
+            color: 'black',
+          }"
+          [icon]="'savings'"
         />
       </ng-template>
     </div>
-  `
+  `,
 })
 export class CategoriesCreator {
   submitted = false;
   loading = false;
-  categories = CATEGORIES
+  categories = CATEGORIES;
   error = '';
   model: ICategory = {
     name: '',
     type: 1,
-  }
+  };
 
-  onSuccessSubmit = output<Required<ICategory>>()
+  onSuccessSubmit = output<Required<ICategory>>();
 
   @ViewChild(DrawerComponent)
-  drawer!: DrawerComponent
+  drawer!: DrawerComponent;
 
-  constructor(private service: CategoriesService) {
-  }
-  
+  constructor(private service: CategoriesService) {}
+
   onSubmit(formRef: NgForm) {
-    const {form: {value}, valid} = formRef;
+    const {
+      form: { value },
+      valid,
+    } = formRef;
     this.submitted = true;
     this.loading = true;
     this.error = '';
@@ -132,7 +122,7 @@ export class CategoriesCreator {
     const category: ICategory = Category.builder()
       .setType(value.type)
       .setName(value.name)
-      .build()
+      .build();
 
     if (valid) {
       this.service.saveCategory(category).subscribe({
@@ -142,18 +132,16 @@ export class CategoriesCreator {
             this.drawer.closeDrawer();
           }
         },
-        error: error => {
-          this.error = "Error creating category";
+        error: (error) => {
+          this.error = 'Error creating category';
           this.submitted = false;
         },
         complete: () => {
           this.loading = false;
-        }
-      })
-
+        },
+      });
     } else {
       this.loading = false;
     }
-
   }
 }
