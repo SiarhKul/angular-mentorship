@@ -1,25 +1,45 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { CategoriesApiService } from './categories.api.service';
+import { Observable } from 'rxjs';
 import { ICategory } from '../types/interfaces';
-import { API_URLS } from '../../../shared/constants/api-url';
-import { CATEGORY_ENDPOINT } from '../../../shared/constants/endpoints';
 
 @Injectable()
 export class CategoriesService {
-  private http = inject(HttpClient);
+  categories$: Observable<Required<ICategory>[]>;
+  submitted = false;
+  loading = false;
+  error = '';
 
-  saveCategory(category: ICategory) {
-    const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`;
-    return this.http.post<Required<ICategory>>(url, category);
+  constructor(private cs: CategoriesApiService) {
+    this.categories$ = this.cs.getAllCategories();
   }
 
-  getAllCategories() {
-    const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`;
-    return this.http.get<Required<ICategory>[]>(url);
+  handleOnSuccessSubmit(
+    category: ICategory,
+    props: { onSuccess?: Function; onError?: Function; onComplete?: Function },
+  ) {
+    this.submitted = true;
+    this.loading = true;
+    this.error = '';
+    this.cs.saveCategory(category).subscribe({
+      next: (response) => {
+        props.onSuccess?.(response);
+      },
+      error: (error: unknown) => {
+        props.onError?.(error);
+        this.error = 'Error creating category';
+        this.submitted = false;
+      },
+      complete: () => {
+        props.onComplete?.();
+        this.loading = false;
+      },
+    });
+
+    this.categories$ = this.cs.getAllCategories();
   }
 
-  deleteCategory(categoryId: number) {
-    const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}/${categoryId}`;
-    return this.http.delete(url);
+  handleCategoryDeleted() {
+    this.categories$ = this.cs.getAllCategories();
   }
 }

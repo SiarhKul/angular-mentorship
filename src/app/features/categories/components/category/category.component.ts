@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { CategoriesService } from '../../services/categories.service';
+import { CategoriesApiService } from '../../services/categories.api.service';
 
 @Component({
   selector: 'app-category',
@@ -16,7 +16,7 @@ export class CategoryComponent {
   @Input() id!: number;
   @Output() categoryDeleted = new EventEmitter<number>();
 
-  constructor(private cs: CategoriesService) {}
+  constructor(private cs: CategoriesApiService) {}
 
   onEdit() {
     console.log(1);

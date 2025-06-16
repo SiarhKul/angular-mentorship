@@ -11,15 +11,16 @@ import {
 } from '@angular/material/input';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
-import { CategoriesService } from '../../services/categories.service';
+import { CategoriesApiService } from '../../services/categories.api.service';
 import { ICategory } from '../../types/interfaces';
 import { Category } from '../../models/Category';
 import { CATEGORIES } from '../../../../shared/constants/dictionaries';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
   styleUrl: './categories-creator.css',
   selector: 'app-categories-creator',
-  providers: [CategoriesService],
+  providers: [CategoriesApiService, CategoriesService],
   imports: [
     ButtonComponent,
     DrawerComponent,
@@ -53,7 +54,7 @@ import { CATEGORIES } from '../../../../shared/constants/dictionaries';
                 required
                 type="text"
               />
-              <mat-error> Category name is required </mat-error>
+              <mat-error> Category name is required</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -74,7 +75,12 @@ import { CATEGORIES } from '../../../../shared/constants/dictionaries';
         </div>
 
         <div ngProjectAs="footer__buttons">
-          <button form="create-category" mat-stroked-button type="submit">
+          <button
+            [disabled]="isLoading()"
+            form="create-category"
+            mat-stroked-button
+            type="submit"
+          >
             Save
           </button>
         </div>
@@ -94,8 +100,6 @@ import { CATEGORIES } from '../../../../shared/constants/dictionaries';
   `,
 })
 export class CategoriesCreator {
-  submitted = false;
-  loading = false;
   categories = CATEGORIES;
   error = '';
   model: ICategory = {
@@ -108,16 +112,17 @@ export class CategoriesCreator {
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
 
-  constructor(private service: CategoriesService) {}
+  constructor(private categoriesService: CategoriesService) {}
+
+  isLoading() {
+    return this.categoriesService.loading;
+  }
 
   onSubmit(formRef: NgForm) {
     const {
       form: { value },
       valid,
     } = formRef;
-    this.submitted = true;
-    this.loading = true;
-    this.error = '';
 
     const category: ICategory = Category.builder()
       .setType(value.type)
@@ -125,23 +130,13 @@ export class CategoriesCreator {
       .build();
 
     if (valid) {
-      this.service.saveCategory(category).subscribe({
-        next: (response) => {
-          this.onSuccessSubmit.emit(response);
+      this.categoriesService.handleOnSuccessSubmit(category, {
+        onSuccess: () => {
           if (this.drawer) {
             this.drawer.closeDrawer();
           }
         },
-        error: (error) => {
-          this.error = 'Error creating category';
-          this.submitted = false;
-        },
-        complete: () => {
-          this.loading = false;
-        },
       });
-    } else {
-      this.loading = false;
     }
   }
 }

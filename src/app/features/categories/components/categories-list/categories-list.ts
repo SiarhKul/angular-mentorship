@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CategoriesService } from '../../services/categories.service';
+import { CategoriesApiService } from '../../services/categories.api.service';
 import { ICategory } from '../../types/interfaces';
 import { NgForOf } from '@angular/common';
 import { CATEGORIES } from '../../../../shared/constants/dictionaries';
@@ -8,7 +8,7 @@ import { CategoryComponent } from '../category/category.component';
 @Component({
   selector: 'app-categories-list',
   styleUrl: './categories-list.css',
-  providers: [CategoriesService],
+  providers: [CategoriesApiService],
   imports: [NgForOf, CategoryComponent],
   template: `
     <div class="categories">
@@ -33,9 +33,12 @@ export class CategoriesListCtrl {
   }
 }
 
-const _mappingIdToCategories = CATEGORIES.reduce<Record<string, string>>((acc, currentValue) => {
-  return {
-    ...acc,
-    [currentValue.id]: currentValue.category,
-  };
-}, {});
+const _mappingIdToCategories = CATEGORIES.reduce<Record<string, string>>(
+  (acc, currentValue) => {
+    return {
+      ...acc,
+      [currentValue.id]: currentValue.category,
+    };
+  },
+  {},
+);
