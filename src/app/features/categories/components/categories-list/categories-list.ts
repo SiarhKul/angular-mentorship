@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { CategoriesService } from '../../services/categories.service'
-import { ICategory } from '../../types/interfaces'
-import { NgForOf } from '@angular/common'
-import { CATEGORIES } from '../../../../shared/constants/dictionaries'
-import { CategoryComponent } from '../category/category.component'
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CategoriesService } from '../../services/categories.service';
+import { ICategory } from '../../types/interfaces';
+import { NgForOf } from '@angular/common';
+import { CATEGORIES } from '../../../../shared/constants/dictionaries';
+import { CategoryComponent } from '../category/category.component';
 
 @Component({
   selector: 'app-categories-list',
@@ -20,24 +20,22 @@ import { CategoryComponent } from '../category/category.component'
           (categoryDeleted)="onCategoryDeleted($event)"
         />
       </div>
-      
-      
-      
     </div>
   `,
 })
 export class CategoriesListCtrl {
-  mappingIdToCategories = _mappingIdToCategories
-  @Input() categories!: Required<ICategory>[] | null
-  @Output() categoryDeleted = new EventEmitter<number>()
+  mappingIdToCategories = _mappingIdToCategories;
+  @Input() categories!: Required<ICategory>[] | null;
+  @Output() categoryDeleted = new EventEmitter<number>();
 
   onCategoryDeleted(id: number) {
-               this.categoryDeleted.emit(id)
+    this.categoryDeleted.emit(id);
   }
 }
 
 const _mappingIdToCategories = CATEGORIES.reduce<Record<string, string>>((acc, currentValue) => {
   return {
-    ...acc, [currentValue.id]: currentValue.category,
-  }
-}, {})
+    ...acc,
+    [currentValue.id]: currentValue.category,
+  };
+}, {});
