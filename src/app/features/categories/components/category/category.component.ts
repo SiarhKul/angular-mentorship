@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CategoriesApiService } from '../../services/categories.api.service';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
   selector: 'app-category',
@@ -14,15 +15,21 @@ export class CategoryComponent {
   @Input() name!: string;
   @Input() type!: string;
   @Input() id!: number;
-  @Output() categoryDeleted = new EventEmitter<number>();
 
-  constructor(private cs: CategoriesApiService) {}
+  constructor(
+    private cs: CategoriesApiService,
+    private css: CategoriesService,
+  ) {}
 
   onEdit() {
     console.log(1);
   }
 
   onDelete(id: number) {
+    this.css.handleOnDelete(id, {});
+  }
+
+  /*  onDelete(id: number) {
     this.cs.deleteCategory(id).subscribe({
       next: () => {
         this.categoryDeleted.emit(id);
@@ -33,5 +40,5 @@ export class CategoryComponent {
       },
     });
     console.log(id);
-  }
+  }*/
 }

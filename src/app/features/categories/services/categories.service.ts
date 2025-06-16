@@ -38,4 +38,21 @@ export class CategoriesService {
 
     this.categories$ = this.cs.getAllCategories();
   }
+
+  handleOnDelete(
+    id: number,
+    props: { onSuccess?: Function; onError?: Function },
+  ) {
+    this.cs.deleteCategory(id).subscribe({
+      next: () => {
+        props.onSuccess?.();
+      },
+      error: (error) => {
+        props.onError?.(error);
+      },
+      complete: () => {},
+    });
+
+    this.categories$ = this.cs.getAllCategories();
+  }
 }

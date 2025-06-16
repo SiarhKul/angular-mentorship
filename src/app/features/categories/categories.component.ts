@@ -8,7 +8,7 @@ import { AsyncPipe } from '@angular/common';
 import { CategoriesService } from './services/categories.service';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'app-cathandleOnDeleteegories',
   styleUrl: './categories.component.css',
   standalone: true,
   providers: [CategoriesApiService, CategoriesService],
@@ -16,7 +16,6 @@ import { CategoriesService } from './services/categories.service';
   template: ` <section class="categories-container">
     <app-categories-list
       [categories]="categories$ | async"
-      (categoryDeleted)="handleCategoryDeleted($event)"
       class="app-categories-list"
     />
     <app-categories-creator />
@@ -26,14 +25,7 @@ import { CategoriesService } from './services/categories.service';
 export class CategoriesComponent {
   categories$: Observable<Required<ICategory>[]>;
 
-  constructor(
-    private cs: CategoriesApiService,
-    private categoriesService: CategoriesService,
-  ) {
+  constructor(private categoriesService: CategoriesService) {
     this.categories$ = this.categoriesService.categories$;
-  }
-
-  protected handleCategoryDeleted(id: number) {
-    this.categories$ = this.cs.getAllCategories();
   }
 }
