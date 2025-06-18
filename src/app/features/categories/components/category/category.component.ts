@@ -16,29 +16,13 @@ export class CategoryComponent {
   @Input() type!: string;
   @Input() id!: number;
 
-  constructor(
-    private cs: CategoriesApiService,
-    private css: CategoriesService,
-  ) {}
+  constructor(private cs: CategoriesService) {}
 
   onEdit() {
     console.log(1);
   }
 
   onDelete(id: number) {
-    this.css.handleOnDelete(id, {});
+    this.cs.deleteCategory(id);
   }
-
-  /*  onDelete(id: number) {
-    this.cs.deleteCategory(id).subscribe({
-      next: () => {
-        this.categoryDeleted.emit(id);
-      },
-      error: (error) => {
-        //todo:Add toast
-        console.error('Error deleting category', error);
-      },
-    });
-    console.log(id);
-  }*/
 }

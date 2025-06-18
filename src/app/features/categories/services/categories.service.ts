@@ -29,7 +29,7 @@ export class CategoriesService {
     });
   }
 
-  handleOnSuccessSubmit(
+  saveCategory(
     category: ICategory,
     callbacks: {
       onSuccess?: Function;
@@ -58,9 +58,9 @@ export class CategoriesService {
       });
   }
 
-  handleOnDelete(
+  deleteCategory(
     id: number,
-    callbacks: { onSuccess?: Function; onError?: Function },
+    callbacks?: { onSuccess?: Function; onError?: Function },
   ) {
     this.apiService
       .deleteCategory(id)
@@ -68,10 +68,10 @@ export class CategoriesService {
       .subscribe({
         next: (categories) => {
           this.categoriesSignal.set(categories);
-          callbacks.onSuccess?.(categories);
+          callbacks?.onSuccess?.(categories);
         },
         error: (error) => {
-          callbacks.onError?.(error);
+          callbacks?.onError?.(error);
         },
       });
   }

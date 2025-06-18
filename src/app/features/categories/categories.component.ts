@@ -14,7 +14,7 @@ import { CategoriesService } from './services/categories.service';
   template: `
     <section class="categories-container">
       <app-categories-list
-        [categories]="categories$"
+        [categories]="categories"
         class="app-categories-list"
       />
       <app-categories-creator />
@@ -22,9 +22,9 @@ import { CategoriesService } from './services/categories.service';
   `,
 })
 export class CategoriesComponent {
-  categories$: WritableSignal<Required<ICategory>[] | null> | null = null;
+  categories: WritableSignal<Required<ICategory>[] | null> | null = null;
 
   constructor(private categoriesService: CategoriesService) {
-    this.categories$ = this.categoriesService.categoriesSignal;
+    this.categories = this.categoriesService.categoriesSignal;
   }
 }

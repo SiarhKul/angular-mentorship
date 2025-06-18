@@ -129,7 +129,7 @@ export class CategoriesCreator {
       .build();
 
     if (valid) {
-      this.categoriesService.handleOnSuccessSubmit(category, {
+      this.categoriesService.saveCategory(category, {
         onSuccess: () => {
           if (this.drawer) {
             this.drawer.closeDrawer();
