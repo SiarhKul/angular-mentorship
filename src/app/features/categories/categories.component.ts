@@ -8,7 +8,7 @@ import { AsyncPipe } from '@angular/common';
 import { CategoriesService } from './services/categories.service';
 
 @Component({
-  selector: 'app-cathandleOnDeleteegories',
+  selector: 'app-categories',
   styleUrl: './categories.component.css',
   standalone: true,
   providers: [CategoriesApiService, CategoriesService],
