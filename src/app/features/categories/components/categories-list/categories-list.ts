@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  WritableSignal,
+} from '@angular/core';
 import { CategoriesApiService } from '../../services/categories.api.service';
 import { ICategory } from '../../types/interfaces';
 import { NgForOf } from '@angular/common';
@@ -12,7 +18,7 @@ import { CategoryComponent } from '../category/category.component';
   imports: [NgForOf, CategoryComponent],
   template: `
     <div class="categories">
-      <div *ngFor="let category of categories">
+      <div *ngFor="let category of categories ? categories() : []">
         <app-category
           [name]="category.name"
           [type]="mappingIdToCategories[category.type]"
@@ -24,7 +30,8 @@ import { CategoryComponent } from '../category/category.component';
 })
 export class CategoriesListCtrl {
   mappingIdToCategories = _mappingIdToCategories;
-  @Input() categories!: Required<ICategory>[] | null;
+  @Input() categories!: WritableSignal<Required<ICategory>[] | null> | null;
+  @Output() categoryDeleted = new EventEmitter<number>();
 }
 
 const _mappingIdToCategories = CATEGORIES.reduce<Record<string, string>>(

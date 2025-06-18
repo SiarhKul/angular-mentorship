@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -109,6 +109,7 @@ export class CategoriesCreator {
 
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
+  categoryDeleted = new EventEmitter<void>();
 
   constructor(private categoriesService: CategoriesService) {}
 
