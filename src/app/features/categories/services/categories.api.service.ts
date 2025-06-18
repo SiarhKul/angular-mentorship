@@ -22,4 +22,9 @@ export class CategoriesApiService {
     const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}/${categoryId}`;
     return this.http.delete(url);
   }
+
+  updateCategory(category: ICategory) {
+    const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}/${category.id}`;
+    return this.http.put<Required<ICategory>>(url, category);
+  }
 }

@@ -76,6 +76,10 @@ export class CategoriesService {
       });
   }
 
+  updateCategory(category: Required<ICategory>, callbacks: {}) {
+    this.apiService.updateCategory(category);
+  }
+
   private setLoadingState(state: boolean) {
     this.loading = state;
     this.submitted = state;

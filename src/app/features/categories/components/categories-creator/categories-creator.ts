@@ -109,7 +109,6 @@ export class CategoriesCreator {
 
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
-  categoryDeleted = new EventEmitter<void>();
 
   constructor(private categoriesService: CategoriesService) {}
 
