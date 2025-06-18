@@ -58,16 +58,18 @@ export class CategoriesService {
     id: number,
     props: { onSuccess?: Function; onError?: Function },
   ) {
-    this.cs.deleteCategory(id).subscribe({
-      next: () => {
-        props.onSuccess?.();
-      },
-      error: (error) => {
-        props.onError?.(error);
-      },
-      complete: () => {},
-    });
-
-    // this.categories$ = this.cs.getAllCategories();
+    this.cs
+      .deleteCategory(id)
+      .pipe(switchMap(() => this.cs.getAllCategories()))
+      .subscribe({
+        next: (categories) => {
+          this.categoriesSignal.set(categories);
+          props.onSuccess?.(categories);
+        },
+        error: (error) => {
+          props.onError?.(error);
+        },
+        complete: () => {},
+      });
   }
 }
