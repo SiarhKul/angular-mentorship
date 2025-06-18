@@ -15,7 +15,6 @@ import { CategoriesService } from './services/categories.service';
     <section class="categories-container">
       <app-categories-list
         [categories]="categories$"
-        (categoryDeleted)="handleCategoryDeleted($event)"
         class="app-categories-list"
       />
       <app-categories-creator />
@@ -27,8 +26,5 @@ export class CategoriesComponent {
 
   constructor(private categoriesService: CategoriesService) {
     this.categories$ = this.categoriesService.categoriesSignal;
-    console.log('CategoriesComponent initialized', this.categories$());
   }
-
-  protected handleCategoryDeleted(id: any) {}
 }

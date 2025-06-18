@@ -18,7 +18,7 @@ import { CategoryComponent } from '../category/category.component';
   imports: [NgForOf, CategoryComponent],
   template: `
     <div class="categories">
-      <div *ngFor="let category of categories ? categories() : []">
+      <div *ngFor="let category of categories?.() || []">
         <app-category
           [name]="category.name"
           [type]="mappingIdToCategories[category.type]"
@@ -29,17 +29,9 @@ import { CategoryComponent } from '../category/category.component';
   `,
 })
 export class CategoriesListCtrl {
-  mappingIdToCategories = _mappingIdToCategories;
   @Input() categories!: WritableSignal<Required<ICategory>[] | null> | null;
-  @Output() categoryDeleted = new EventEmitter<number>();
+  mappingIdToCategories = CATEGORIES.reduce(
+    (acc, { id, category }) => ({ ...acc, [id]: category }),
+    {} as Record<string, string>,
+  );
 }
-
-const _mappingIdToCategories = CATEGORIES.reduce<Record<string, string>>(
-  (acc, currentValue) => {
-    return {
-      ...acc,
-      [currentValue.id]: currentValue.category,
-    };
-  },
-  {},
-);
