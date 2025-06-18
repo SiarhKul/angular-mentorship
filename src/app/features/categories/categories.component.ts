@@ -11,23 +11,22 @@ import { CategoriesService } from './services/categories.service';
   standalone: true,
   providers: [CategoriesApiService, CategoriesService],
   imports: [CategoriesCreator, CategoriesListCtrl],
-  template: ` <section class="categories-container">
-    <app-categories-list
-      [categories]="categories$"
-      (categoryDeleted)="handleCategoryDeleted($event)"
-      class="app-categories-list"
-    />
-    <app-categories-creator />
-  </section>`,
+  template: `
+    <section class="categories-container">
+      <app-categories-list
+        [categories]="categories$"
+        (categoryDeleted)="handleCategoryDeleted($event)"
+        class="app-categories-list"
+      />
+      <app-categories-creator />
+    </section>
+  `,
 })
 export class CategoriesComponent {
   categories$: WritableSignal<Required<ICategory>[] | null> | null = null;
 
-  constructor(
-    private cs: CategoriesApiService,
-    private categoriesService: CategoriesService,
-  ) {
-    this.categories$ = this.categoriesService.categSignal;
+  constructor(private categoriesService: CategoriesService) {
+    this.categories$ = this.categoriesService.categoriesSignal;
     console.log('CategoriesComponent initialized', this.categories$());
   }
 

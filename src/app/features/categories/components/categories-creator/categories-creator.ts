@@ -20,7 +20,7 @@ import { CategoriesService } from '../../services/categories.service';
 @Component({
   styleUrl: './categories-creator.css',
   selector: 'app-categories-creator',
-  providers: [CategoriesApiService, CategoriesService],
+  providers: [CategoriesApiService],
   imports: [
     ButtonComponent,
     DrawerComponent,

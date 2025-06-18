@@ -5,14 +5,25 @@ import { ICategory } from '../types/interfaces';
 
 @Injectable()
 export class CategoriesService {
-  categSignal = signal<Required<ICategory>[] | null>(null);
-  categories$: Observable<Required<ICategory>[]>;
+  categoriesSignal = signal<Required<ICategory>[] | null>(null);
   submitted = false;
   loading = false;
   error = '';
 
   constructor(private cs: CategoriesApiService) {
-    this.categories$ = this.cs.getAllCategories();
+    this.cs.getAllCategories().subscribe({
+      next: (categories) => {
+        console.log('Categories fetched successfully:', categories);
+        this.categoriesSignal.set(categories);
+      },
+      error: (error: unknown) => {
+        console.error('Error fetching categories:', error);
+        this.error = 'Error fetching categories';
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
 
   handleOnSuccessSubmit(
@@ -25,37 +36,22 @@ export class CategoriesService {
     this.cs
       .saveCategory(category)
       .pipe(switchMap(() => this.cs.getAllCategories()))
-      .subscribe((categories) => {
-        console.log('Categories fetched successfully:', categories);
-        this.categSignal.set(categories);
+      .subscribe({
+        next: (categories) => {
+          console.log('Categories fetched successfully:', categories);
+          this.categoriesSignal.set(categories);
+          props.onSuccess?.(categories);
+        },
+        error: (error: unknown) => {
+          props.onError?.(error);
+          this.error = 'Error creating category';
+          this.submitted = false;
+        },
+        complete: () => {
+          props.onComplete?.();
+          this.loading = false;
+        },
       });
-  }
-
-  handleOnSuccessSubmit1(
-    category: ICategory,
-    props: { onSuccess?: Function; onError?: Function; onComplete?: Function },
-  ) {
-    this.submitted = true;
-    this.loading = true;
-    this.error = '';
-    this.cs.saveCategory(category).subscribe({
-      next: (response) => {
-        props.onSuccess?.(response);
-        this.categories$ = this.cs.getAllCategories();
-      },
-      error: (error: unknown) => {
-        props.onError?.(error);
-        this.error = 'Error creating category';
-        this.submitted = false;
-      },
-      complete: () => {
-        props.onComplete?.();
-        this.loading = false;
-      },
-    });
-    //todo: use pipes for refetching.switchMap
-
-    // this.categories$ = this.cs.getAllCategories();
   }
 
   handleOnDelete(
@@ -72,6 +68,6 @@ export class CategoriesService {
       complete: () => {},
     });
 
-    this.categories$ = this.cs.getAllCategories();
+    // this.categories$ = this.cs.getAllCategories();
   }
 }
