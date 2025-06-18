@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { CategoriesApiService } from './categories.api.service';
-import { Observable, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { ICategory } from '../types/interfaces';
 
 @Injectable()
@@ -10,14 +10,17 @@ export class CategoriesService {
   loading = false;
   error = '';
 
-  constructor(private cs: CategoriesApiService) {
-    this.cs.getAllCategories().subscribe({
+  constructor(private apiService: CategoriesApiService) {
+    this.fetchCategories();
+  }
+
+  private fetchCategories() {
+    this.apiService.getAllCategories().subscribe({
       next: (categories) => {
-        console.log('Categories fetched successfully:', categories);
         this.categoriesSignal.set(categories);
+        this.error = '';
       },
-      error: (error: unknown) => {
-        console.error('Error fetching categories:', error);
+      error: () => {
         this.error = 'Error fetching categories';
       },
       complete: () => {
@@ -28,48 +31,54 @@ export class CategoriesService {
 
   handleOnSuccessSubmit(
     category: ICategory,
-    props: { onSuccess?: Function; onError?: Function; onComplete?: Function },
+    callbacks: {
+      onSuccess?: Function;
+      onError?: Function;
+      onComplete?: Function;
+    },
   ) {
-    this.submitted = true;
-    this.loading = true;
-    this.error = '';
-    this.cs
+    this.setLoadingState(true);
+    this.apiService
       .saveCategory(category)
-      .pipe(switchMap(() => this.cs.getAllCategories()))
+      .pipe(switchMap(() => this.apiService.getAllCategories()))
       .subscribe({
         next: (categories) => {
-          console.log('Categories fetched successfully:', categories);
           this.categoriesSignal.set(categories);
-          props.onSuccess?.(categories);
+          callbacks.onSuccess?.(categories);
         },
-        error: (error: unknown) => {
-          props.onError?.(error);
+        error: (error) => {
           this.error = 'Error creating category';
           this.submitted = false;
+          callbacks.onError?.(error);
         },
         complete: () => {
-          props.onComplete?.();
-          this.loading = false;
+          this.setLoadingState(false);
+          callbacks.onComplete?.();
         },
       });
   }
 
   handleOnDelete(
     id: number,
-    props: { onSuccess?: Function; onError?: Function },
+    callbacks: { onSuccess?: Function; onError?: Function },
   ) {
-    this.cs
+    this.apiService
       .deleteCategory(id)
-      .pipe(switchMap(() => this.cs.getAllCategories()))
+      .pipe(switchMap(() => this.apiService.getAllCategories()))
       .subscribe({
         next: (categories) => {
           this.categoriesSignal.set(categories);
-          props.onSuccess?.(categories);
+          callbacks.onSuccess?.(categories);
         },
         error: (error) => {
-          props.onError?.(error);
+          callbacks.onError?.(error);
         },
-        complete: () => {},
       });
+  }
+
+  private setLoadingState(state: boolean) {
+    this.loading = state;
+    this.submitted = state;
+    this.error = state ? '' : this.error;
   }
 }
