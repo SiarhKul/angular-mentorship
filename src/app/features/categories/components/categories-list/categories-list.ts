@@ -1,14 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  WritableSignal,
-} from '@angular/core';
+import { Component, Input, WritableSignal } from '@angular/core';
 import { CategoriesApiService } from '../../services/categories.api.service';
 import { ICategory } from '../../types/interfaces';
 import { NgForOf } from '@angular/common';
-import { CATEGORIES } from '../../../../shared/constants/dictionaries';
 import { CategoryComponent } from '../category/category.component';
 
 @Component({
@@ -20,9 +13,8 @@ import { CategoryComponent } from '../category/category.component';
     <div class="categories">
       <div *ngFor="let category of categories?.() || []">
         <app-category
-          [name]="category.name"
-          [type]="mappingIdToCategories[category.type]"
-          [id]="category.id"
+            [category]="category"
+        <!--            [type]="mappingIdToCategories[category.type]"-->
         />
       </div>
     </div>
@@ -30,8 +22,8 @@ import { CategoryComponent } from '../category/category.component';
 })
 export class CategoriesListCtrl {
   @Input() categories!: WritableSignal<Required<ICategory>[] | null> | null;
-  mappingIdToCategories = CATEGORIES.reduce(
-    (acc, { id, category }) => ({ ...acc, [id]: category }),
-    {} as Record<string, string>,
-  );
+  // mappingIdToCategories = CATEGORIES.reduce(
+  //   (acc, { id, category }) => ({ ...acc, [id]: category }),
+  //   {} as Record<string, string>,
+  // );
 }

@@ -5,11 +5,11 @@
   }"
   class="category"
 >
-  <span class="category__name">{{ name }}</span>
+  <span class="category__name">{{ category.name }}</span>
   <button (click)="onEdit()" mat-icon-button>
     <mat-icon>edit</mat-icon>
   </button>
-  <button (click)="onDelete(id)" mat-icon-button>
+  <button (click)="onDelete(category.id)" mat-icon-button>
     <mat-icon>delete</mat-icon>
   </button>
 </div>

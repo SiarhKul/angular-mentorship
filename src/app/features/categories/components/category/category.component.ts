@@ -2,8 +2,14 @@ import { Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { CategoriesApiService } from '../../services/categories.api.service';
 import { CategoriesService } from '../../services/categories.service';
+import { ICategory } from '../../types/interfaces';
+import { CATEGORIES } from '../../../../shared/constants/dictionaries';
+
+const mappingIdToCategories = CATEGORIES.reduce(
+  (acc, { id, category }) => ({ ...acc, [id]: category }),
+  {} as Record<string, string>,
+);
 
 @Component({
   selector: 'app-category',
@@ -12,13 +18,14 @@ import { CategoriesService } from '../../services/categories.service';
   imports: [NgClass, MatIcon, MatButtonModule],
 })
 export class CategoryComponent {
-  @Input() name!: string;
-  @Input() type!: string;
-  @Input() id!: number;
+  @Input() category!: Required<ICategory>;
+
+  type = mappingIdToCategories[this.category.type];
 
   constructor(private cs: CategoriesService) {}
 
   onEdit() {
+    this.cs.updateCategory(this.category);
     console.log(1);
   }
 
