@@ -20,7 +20,9 @@ const mappingIdToCategories = CATEGORIES.reduce(
 export class CategoryComponent {
   @Input() category!: Required<ICategory>;
 
-  type = mappingIdToCategories[this.category.type];
+  type = 'Income';
+
+  // type = mappingIdToCategories[this.category.type];
 
   constructor(private cs: CategoriesService) {}
 

@@ -12,16 +12,14 @@ import { CategoryComponent } from '../category/category.component';
   template: `
     <div class="categories">
       <div *ngFor="let category of categories?.() || []">
-        <app-category
-            [category]="category"
-        <!--            [type]="mappingIdToCategories[category.type]"-->
-        />
+        <app-category [category]="category" />
       </div>
     </div>
   `,
 })
 export class CategoriesListCtrl {
-  @Input() categories!: WritableSignal<Required<ICategory>[] | null> | null;
+  @Input()
+  categories!: WritableSignal<Required<ICategory>[] | null> | null;
   // mappingIdToCategories = CATEGORIES.reduce(
   //   (acc, { id, category }) => ({ ...acc, [id]: category }),
   //   {} as Record<string, string>,

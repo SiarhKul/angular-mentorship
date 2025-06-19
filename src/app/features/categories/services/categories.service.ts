@@ -6,6 +6,7 @@ import { ICategory } from '../types/interfaces';
 @Injectable()
 export class CategoriesService {
   categoriesSignal = signal<Required<ICategory>[] | null>(null);
+  isLoadingSignal = signal(false);
   submitted = false;
   loading = false;
   error = '';
@@ -22,7 +23,6 @@ export class CategoriesService {
       onComplete?: Function;
     },
   ) {
-    this.setLoadingState(true);
     this.apiService
       .saveCategory(category)
       .pipe(switchMap(() => this.apiService.getAllCategories()))
@@ -37,7 +37,6 @@ export class CategoriesService {
           callbacks.onError?.(error);
         },
         complete: () => {
-          this.setLoadingState(false);
           callbacks.onComplete?.();
         },
       });
@@ -66,16 +65,24 @@ export class CategoriesService {
   }
 
   private fetchCategories() {
+    this.loading = true;
+    this.submitted = true;
+    this.error = '';
+    this.isLoadingSignal.set(true);
     this.apiService.getAllCategories().subscribe({
       next: (categories) => {
+        console.log('111', categories);
         this.categoriesSignal.set(categories);
-        this.error = '';
       },
       error: () => {
+        console.log('Error creating category');
+        this.submitted = true;
         this.error = 'Error fetching categories';
       },
       complete: () => {
+        console.log('222');
         this.loading = false;
+        this.isLoadingSignal.set(false);
       },
     });
   }

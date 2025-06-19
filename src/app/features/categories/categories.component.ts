@@ -1,4 +1,4 @@
-import { Component, WritableSignal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { CategoriesCreator } from './components/categories-creator/categories-creator';
 import { CategoriesListCtrl } from './components/categories-list/categories-list';
 import { ICategory } from './types/interfaces';
@@ -13,18 +13,26 @@ import { CategoriesService } from './services/categories.service';
   imports: [CategoriesCreator, CategoriesListCtrl],
   template: `
     <section class="categories-container">
-      <app-categories-list
-        [categories]="categories"
-        class="app-categories-list"
-      />
+      @if (isLoadingSignal()) {
+        <div>Content is loading...</div>
+      } @else {
+        <app-categories-list
+          [categories]="categories"
+          class="app-categories-list"
+        />
+      }
+
       <app-categories-creator />
     </section>
   `,
 })
 export class CategoriesComponent {
   categories: WritableSignal<Required<ICategory>[] | null> | null = null;
+  isLoadingSignal: WritableSignal<boolean> = signal(false);
 
   constructor(private categoriesService: CategoriesService) {
     this.categories = this.categoriesService.categoriesSignal;
+    this.isLoadingSignal = this.categoriesService.isLoadingSignal;
+    console.log('222222222222222222', this.isLoadingSignal());
   }
 }
