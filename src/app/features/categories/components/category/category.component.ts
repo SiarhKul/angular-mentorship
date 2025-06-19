@@ -18,10 +18,12 @@ const mappingIdToCategories = CATEGORIES.reduce(
   imports: [NgClass, MatIcon, MatButtonModule],
 })
 export class CategoryComponent {
-  @Input() category!: Required<ICategory>;
+  @Input()
+  category!: Required<ICategory>;
 
+  //todo: Mentor:  how to avoid getting 'underfined'
   type = 'Income';
-
+  //
   // type = mappingIdToCategories[this.category.type];
 
   constructor(private cs: CategoriesService) {}

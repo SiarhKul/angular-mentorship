@@ -11,9 +11,11 @@ import { CategoryComponent } from '../category/category.component';
   imports: [NgForOf, CategoryComponent],
   template: `
     <div class="categories">
-      <div *ngFor="let category of categories?.() || []">
-        <app-category [category]="category" />
-      </div>
+      @if (categories !== null) {
+        <div *ngFor="let category of categories()">
+          <app-category [category]="category" />
+        </div>
+      }
     </div>
   `,
 })
