@@ -80,7 +80,7 @@ import { CategoriesService } from '../../services/categories.service';
           </button>
         </div>
         <div ngProjectAs="alternative__trigger">
-          <ng-content select="app-button" />
+          <ng-content select="alternative__trigger" />
         </div>
       </app-drawer>
     </div>

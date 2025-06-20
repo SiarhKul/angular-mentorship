@@ -6,9 +6,14 @@
   class="category"
 >
   <span class="category__name">{{ category.name }}</span>
-  <button (click)="onEdit()" mat-icon-button>
-    <mat-icon>edit</mat-icon>
-  </button>
+  <app-categories-creator>
+    <div ngProjectAs="alternative__trigger">
+      <button (click)="onEdit()" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </app-categories-creator>
+
   <button (click)="onDelete(category.id)" mat-icon-button>
     <mat-icon>delete</mat-icon>
   </button>

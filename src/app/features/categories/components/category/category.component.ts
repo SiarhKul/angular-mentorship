@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CategoriesService } from '../../services/categories.service';
 import { ICategory } from '../../types/interfaces';
 import { CATEGORIES } from '../../../../shared/constants/dictionaries';
+import { CategoriesCreator } from '../categories-creator/categories-creator';
 
 const mappingIdToCategories = CATEGORIES.reduce(
   (acc, { id, category }) => ({ ...acc, [id]: category }),
@@ -15,7 +16,7 @@ const mappingIdToCategories = CATEGORIES.reduce(
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrl: './category.component.css',
-  imports: [NgClass, MatIcon, MatButtonModule],
+  imports: [NgClass, MatIcon, MatButtonModule, CategoriesCreator],
 })
 export class CategoryComponent {
   @Input()

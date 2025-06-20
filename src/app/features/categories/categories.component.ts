@@ -24,14 +24,16 @@ import { ButtonComponent } from '../../shared/components/button/button.component
       }
 
       <app-categories-creator>
-        <app-button
-          [buttonContent]="'Add categories'"
-          [customStyles]="{
-            backgroundColor: 'var(--background-color-primary)',
-            color: 'black',
-          }"
-          [icon]="'savings'"
-        />
+        <div ngProjectAs="alternative__trigger">
+          <app-button
+            [buttonContent]="'Add categories'"
+            [customStyles]="{
+              backgroundColor: 'var(--background-color-primary)',
+              color: 'black',
+            }"
+            [icon]="'savings'"
+          />
+        </div>
       </app-categories-creator>
     </section>
   `,
