@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -35,10 +35,7 @@ import { CategoriesService } from '../../services/categories.service';
   ],
   template: `
     <div class="categories-management">
-      <app-drawer
-        [atternativeTrigger]="alternativeTrigger"
-        [textHeader]="'Create category'"
-      >
+      <app-drawer [textHeader]="'Create category'">
         <div ngProjectAs="drawer__content">
           <form
             #formRef="ngForm"
@@ -84,18 +81,17 @@ import { CategoriesService } from '../../services/categories.service';
             Save
           </button>
         </div>
+        <div ngProjectAs="alternative__trigger">
+          <app-button
+            [buttonContent]="'Add categories'"
+            [customStyles]="{
+              backgroundColor: 'var(--background-color-primary)',
+              color: 'black',
+            }"
+            [icon]="'savings'"
+          />
+        </div>
       </app-drawer>
-
-      <ng-template #alternativeTrigger>
-        <app-button
-          [buttonContent]="'Add categories'"
-          [customStyles]="{
-            backgroundColor: 'var(--background-color-primary)',
-            color: 'black',
-          }"
-          [icon]="'savings'"
-        />
-      </ng-template>
     </div>
   `,
 })

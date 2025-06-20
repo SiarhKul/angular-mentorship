@@ -1,19 +1,12 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { PlusButtonComponent } from '../plus-button/plus-button.component';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-drawer',
   styleUrls: ['./drawer.component.css'],
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    PlusButtonComponent,
-    NgClass,
-    NgTemplateOutlet,
-  ],
+  imports: [MatButtonModule, MatIconModule, NgClass],
   standalone: true,
   template: `
     <div class="drawer-container">
@@ -46,12 +39,7 @@ import { NgClass, NgTemplateOutlet } from '@angular/common';
       </div>
 
       <div (click)="toggleDrawer()">
-        <ng-container
-          [ngTemplateOutlet]="atternativeTrigger || defaultButton"
-        ></ng-container>
-        <ng-template #defaultButton>
-          <app-plus-button />
-        </ng-template>
+        <ng-content select="alternative__trigger" />
       </div>
     </div>
   `,
@@ -64,9 +52,6 @@ export class DrawerComponent {
 
   @Input()
   isCloseButtonVisible = true;
-
-  @Input()
-  atternativeTrigger!: TemplateRef<any>;
 
   toggleDrawer() {
     this.isOpen = !this.isOpen;
