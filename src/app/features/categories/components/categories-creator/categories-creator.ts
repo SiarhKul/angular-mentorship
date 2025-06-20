@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -86,21 +86,24 @@ import { CategoriesService } from '../../services/categories.service';
     </div>
   `,
 })
-export class CategoriesCreator {
+export class CategoriesCreator implements OnInit {
   categories = CATEGORIES;
   error = '';
   @Input()
-  initFormValues?: ICategory;
+  initFormValues?: Required<ICategory>;
 
   model: ICategory = {
-    name: this.initFormValues ? this.initFormValues.name : '',
-    type: this.initFormValues ? this.initFormValues.type : 1,
+    name: '',
+    type: 1,
   };
-
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
 
   constructor(private categoriesService: CategoriesService) {}
+
+  ngOnInit(): void {
+    this.initializeModel();
+  }
 
   isLoading() {
     return this.categoriesService.loading;
@@ -125,6 +128,15 @@ export class CategoriesCreator {
           }
         },
       });
+    }
+  }
+
+  private initializeModel(): void {
+    if (this.initFormValues) {
+      this.model = {
+        name: this.initFormValues.name,
+        type: this.initFormValues.type,
+      };
     }
   }
 }
