@@ -89,13 +89,24 @@ import { CategoriesService } from '../../services/categories.service';
 export class CategoriesCreator implements OnInit {
   categories = CATEGORIES;
   error = '';
-  @Input()
-  initFormValues?: Required<ICategory>;
 
   model: ICategory = {
     name: '',
     type: 1,
   };
+
+  @Input()
+  initFormValues?: Required<ICategory>;
+
+  @Input() submit!: (
+    category: ICategory,
+    callbacks: {
+      onSuccess?: Function;
+      onError?: Function;
+      onComplete?: Function;
+    },
+  ) => void;
+
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
 
@@ -121,7 +132,7 @@ export class CategoriesCreator implements OnInit {
       .build();
 
     if (valid) {
-      this.categoriesService.saveCategory(category, {
+      this.submit(category, {
         onSuccess: () => {
           if (this.drawer) {
             this.drawer.closeDrawer();

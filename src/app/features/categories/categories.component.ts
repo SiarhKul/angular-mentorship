@@ -23,7 +23,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
         />
       }
 
-      <app-categories-creator>
+      <app-categories-creator [submit]="this.createCategory()">
         <div ngProjectAs="alternative__trigger">
           <app-button
             [buttonContent]="'Add categories'"
@@ -46,5 +46,18 @@ export class CategoriesComponent {
     this.categories = this.categoriesService.categoriesSignal;
     this.isLoadingSignal = this.categoriesService.isLoadingSignal;
     console.log('222222222222222222', this.isLoadingSignal());
+  }
+
+  createCategory() {
+    return (
+      category: ICategory,
+      callbacks: {
+        onSuccess?: Function;
+        onError?: Function;
+        onComplete?: Function;
+      },
+    ) => {
+      this.categoriesService.saveCategory(category, callbacks);
+    };
   }
 }
