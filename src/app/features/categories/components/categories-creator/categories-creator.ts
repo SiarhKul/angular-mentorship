@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -22,7 +21,6 @@ import { CategoriesService } from '../../services/categories.service';
   selector: 'app-categories-creator',
   providers: [CategoriesApiService],
   imports: [
-    ButtonComponent,
     DrawerComponent,
     FormsModule,
     MatButton,
@@ -82,14 +80,7 @@ import { CategoriesService } from '../../services/categories.service';
           </button>
         </div>
         <div ngProjectAs="alternative__trigger">
-          <app-button
-            [buttonContent]="'Add categories'"
-            [customStyles]="{
-              backgroundColor: 'var(--background-color-primary)',
-              color: 'black',
-            }"
-            [icon]="'savings'"
-          />
+          <ng-content select="app-button" />
         </div>
       </app-drawer>
     </div>

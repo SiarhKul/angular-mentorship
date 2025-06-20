@@ -4,13 +4,14 @@ import { CategoriesListCtrl } from './components/categories-list/categories-list
 import { ICategory } from './types/interfaces';
 import { CategoriesApiService } from './services/categories.api.service';
 import { CategoriesService } from './services/categories.service';
+import { ButtonComponent } from '../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-categories',
   styleUrl: './categories.component.css',
   standalone: true,
   providers: [CategoriesApiService, CategoriesService],
-  imports: [CategoriesCreator, CategoriesListCtrl],
+  imports: [CategoriesCreator, CategoriesListCtrl, ButtonComponent],
   template: `
     <section class="categories-container">
       @if (isLoadingSignal()) {
@@ -22,7 +23,16 @@ import { CategoriesService } from './services/categories.service';
         />
       }
 
-      <app-categories-creator />
+      <app-categories-creator>
+        <app-button
+          [buttonContent]="'Add categories'"
+          [customStyles]="{
+            backgroundColor: 'var(--background-color-primary)',
+            color: 'black',
+          }"
+          [icon]="'savings'"
+        />
+      </app-categories-creator>
     </section>
   `,
 })
