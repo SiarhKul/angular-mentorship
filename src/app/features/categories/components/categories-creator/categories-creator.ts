@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -89,9 +89,12 @@ import { CategoriesService } from '../../services/categories.service';
 export class CategoriesCreator {
   categories = CATEGORIES;
   error = '';
+  @Input()
+  initFormValues?: ICategory;
+
   model: ICategory = {
-    name: '',
-    type: 1,
+    name: this.initFormValues ? this.initFormValues.name : '',
+    type: this.initFormValues ? this.initFormValues.type : 1,
   };
 
   @ViewChild(DrawerComponent)
