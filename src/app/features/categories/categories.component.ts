@@ -22,7 +22,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
           class="app-categories-list"
         />
       }
-      <app-categories-creator (submitEvent)="onSumbitEvent($event)">
+      <app-categories-creator [saveCategory]="saveCategory">
         <div ngProjectAs="alternative__trigger">
           <app-button
             [buttonContent]="'Add categories'"
@@ -46,20 +46,19 @@ export class CategoriesComponent {
     this.isLoadingSignal = this.categoriesService.isLoadingSignal;
   }
 
-  createCategory() {
-    return (
-      category: ICategory,
-      callbacks: {
-        onSuccess?: Function;
-        onError?: Function;
-        onComplete?: Function;
-      },
-    ) => {
-      this.categoriesService.saveCategory(category, callbacks);
-    };
-  }
+  saveCategory(
+    category: ICategory,
+    callbacks: {
+      onSuccess?: Function;
+      onError?: Function;
+      onComplete?: Function;
+    },
+  ) {
+    this.categoriesService.saveCategory(category, callbacks);
 
-  onSumbitEvent($event: any) {
-    console.log('Event from creator', $event);
+    console.log('Do some action', {
+      category,
+      callbacks,
+    });
   }
 }

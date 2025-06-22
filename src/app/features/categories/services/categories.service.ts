@@ -60,10 +60,6 @@ export class CategoriesService {
       });
   }
 
-  updateCategory(category: Required<ICategory>, callbacks?: {}) {
-    this.apiService.updateCategory(category);
-  }
-
   private fetchCategories() {
     this.loading = true;
     this.submitted = true;
@@ -71,7 +67,6 @@ export class CategoriesService {
     this.isLoadingSignal.set(true);
     this.apiService.getAllCategories().subscribe({
       next: (categories) => {
-        console.log('111', categories);
         this.categoriesSignal.set(categories);
       },
       error: () => {
@@ -80,16 +75,13 @@ export class CategoriesService {
         this.error = 'Error fetching categories';
       },
       complete: () => {
-        console.log('222');
         this.loading = false;
         this.isLoadingSignal.set(false);
       },
     });
   }
 
-  private setLoadingState(state: boolean) {
-    this.loading = state;
-    this.submitted = state;
-    this.error = state ? '' : this.error;
+  updateCategory(category: Required<ICategory>, callbacks?: {}) {
+    this.apiService.updateCategory(category);
   }
 }

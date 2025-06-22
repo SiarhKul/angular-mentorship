@@ -102,8 +102,8 @@ export class CategoriesCreator implements OnInit {
   @Input()
   initFormValues?: Required<ICategory>;
 
-  @Output()
-  submitEvent = new EventEmitter<any>();
+  @Input()
+  saveCategory?: any;
 
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
@@ -133,8 +133,13 @@ export class CategoriesCreator implements OnInit {
       .build();
 
     if (valid) {
-      // console.log('Form is valid', formRef);
-      this.submitEvent.emit(category);
+      this.saveCategory(category, {
+        onSuccess: () => {
+          if (this.drawer) {
+            this.drawer.closeDrawer();
+          }
+        },
+      });
     }
   }
 
