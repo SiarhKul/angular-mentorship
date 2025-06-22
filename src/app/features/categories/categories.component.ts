@@ -55,10 +55,5 @@ export class CategoriesComponent {
     },
   ) {
     this.categoriesService.saveCategory(category, callbacks);
-
-    console.log('Do some action', {
-      category,
-      callbacks,
-    });
   }
 }

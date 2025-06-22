@@ -1,5 +1,7 @@
+import { TUUID } from '../../../shared/types/types';
+
 export interface ICategory {
-  id?: number;
+  id?: TUUID;
   type: number;
   name: string;
 }

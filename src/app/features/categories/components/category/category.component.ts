@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,17 +26,20 @@ export class CategoryComponent {
 
   //todo: Mentor:  how to avoid getting 'underfined'
   type = 'Income';
-  //
   // type = mappingIdToCategories[this.category.type];
 
-  constructor(private cs: CategoriesService) {}
+  constructor(private categoryService: CategoriesService) {}
 
-  updateCategory() {
-    console.log(1);
-    this.cs.up();
-  }
+  updateCategory = (category: ICategory) => {
+    const enrichedCategory: Required<ICategory> = {
+      ...this.category,
+      ...category,
+    };
 
-  onDelete(id: number) {
-    this.cs.deleteCategory(id);
+    this.categoryService.updateCategory(enrichedCategory);
+  };
+
+  onDelete(id: string) {
+    this.categoryService.deleteCategory(id);
   }
 }

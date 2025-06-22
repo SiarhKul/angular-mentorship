@@ -43,7 +43,7 @@ export class CategoriesService {
   }
 
   deleteCategory(
-    id: number,
+    id: string,
     callbacks?: { onSuccess?: Function; onError?: Function },
   ) {
     this.apiService
@@ -67,6 +67,7 @@ export class CategoriesService {
     this.isLoadingSignal.set(true);
     this.apiService.getAllCategories().subscribe({
       next: (categories) => {
+        // console.log('Categories after deletion:', categories);
         this.categoriesSignal.set(categories);
       },
       error: () => {
@@ -81,12 +82,28 @@ export class CategoriesService {
     });
   }
 
-  updateCategory1(category: Required<ICategory>) {
-    console.log('2', category);
-
-    // this.apiService.updateCategory(category);
-  }
-  up() {
-    console.log('up');
+  updateCategory(
+    category: Required<ICategory>,
+    callbacks?: {
+      onSuccess?: Function;
+      onError?: Function;
+      onComplete?: Function;
+    },
+  ) {
+    this.apiService
+      .updateCategory(category)
+      .pipe(switchMap(() => this.apiService.getAllCategories()))
+      .subscribe({
+        next: (categories) => {
+          this.categoriesSignal.set(categories);
+          callbacks?.onSuccess?.(categories);
+        },
+        error: (error) => {
+          callbacks?.onError?.(error);
+        },
+        complete: () => {
+          callbacks?.onComplete?.();
+        },
+      });
   }
 }

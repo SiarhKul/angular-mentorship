@@ -1,7 +1,8 @@
 import { ICategory } from '../types/interfaces';
+import { TUUID } from '../../../shared/types/types';
 
 export class Category implements ICategory {
-  id?: number;
+  id?: TUUID;
   type!: number;
   name!: string;
 
@@ -11,7 +12,7 @@ export class Category implements ICategory {
     return new Category();
   }
 
-  setId(id: number) {
+  setId(id: TUUID) {
     this.id = id;
     return this;
   }
