@@ -30,13 +30,13 @@ export class CategoryComponent {
 
   constructor(private categoryService: CategoriesService) {}
 
-  updateCategory = (category: ICategory) => {
+  updateCategory = (category: ICategory, cbs: any) => {
     const enrichedCategory: Required<ICategory> = {
       ...category,
       id: this.category.id,
     };
 
-    this.categoryService.updateCategory(enrichedCategory);
+    this.categoryService.updateCategory(enrichedCategory, cbs);
   };
   onDelete(id: string) {
     this.categoryService.deleteCategory(id);

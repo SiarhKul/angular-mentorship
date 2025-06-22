@@ -67,7 +67,6 @@ export class CategoriesService {
     this.isLoadingSignal.set(true);
     this.apiService.getAllCategories().subscribe({
       next: (categories) => {
-        // console.log('Categories after deletion:', categories);
         this.categoriesSignal.set(categories);
       },
       error: () => {
@@ -84,7 +83,7 @@ export class CategoriesService {
 
   updateCategory(
     category: Required<ICategory>,
-    callbacks?: {
+    callbacks: {
       onSuccess?: Function;
       onError?: Function;
       onComplete?: Function;
@@ -96,13 +95,15 @@ export class CategoriesService {
       .subscribe({
         next: (categories) => {
           this.categoriesSignal.set(categories);
-          callbacks?.onSuccess?.(categories);
+          callbacks.onSuccess?.(categories);
         },
         error: (error) => {
-          callbacks?.onError?.(error);
+          this.error = 'Error creating category';
+          this.submitted = false;
+          callbacks.onError?.(error);
         },
         complete: () => {
-          callbacks?.onComplete?.();
+          callbacks.onComplete?.();
         },
       });
   }
