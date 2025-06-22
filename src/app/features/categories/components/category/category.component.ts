@@ -32,13 +32,12 @@ export class CategoryComponent {
 
   updateCategory = (category: ICategory) => {
     const enrichedCategory: Required<ICategory> = {
-      ...this.category,
       ...category,
+      id: this.category.id,
     };
 
     this.categoryService.updateCategory(enrichedCategory);
   };
-
   onDelete(id: string) {
     this.categoryService.deleteCategory(id);
   }

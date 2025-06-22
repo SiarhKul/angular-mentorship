@@ -74,40 +74,40 @@ router.delete("/:id", async (req, res) => {
     console.error("Error deleting category:", err);
     return res.status(500).json({ error: "Failed to delete category" });
   }
+});
 
-  router.put("/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const updatedCategory = req.body;
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = req.body;
 
-      const categoriesRow =
-        (await readFile("db.categories.json", "utf-8")) || "[]";
-      let categoriesDb = JSON.parse(categoriesRow);
+    const categoriesRow =
+      (await readFile("db.categories.json", "utf-8")) || "[]";
+    let categoriesDb = JSON.parse(categoriesRow);
 
-      const categoryIndex = categoriesDb.findIndex(
-        (category) => category.id === id,
-      );
+    const categoryIndex = categoriesDb.findIndex(
+      (category) => category.id === id,
+    );
 
-      if (categoryIndex === -1) {
-        return res.status(404).json({ error: "Category not found" });
-      }
-
-      categoriesDb[categoryIndex] = {
-        ...categoriesDb[categoryIndex],
-        ...updatedCategory,
-      };
-
-      await writeFile(
-        "db.categories.json",
-        JSON.stringify(categoriesDb, null, 2),
-      );
-
-      return res.status(200).json(categoriesDb[categoryIndex]);
-    } catch (err) {
-      console.error("Error updating category:", err);
-      return res.status(500).json({ error: "Failed to update category" });
+    if (categoryIndex === -1) {
+      return res.status(404).json({ error: "Category not found" });
     }
-  });
+
+    categoriesDb[categoryIndex] = {
+      ...categoriesDb[categoryIndex],
+      ...updatedCategory,
+    };
+
+    await writeFile(
+      "db.categories.json",
+      JSON.stringify(categoriesDb, null, 2),
+    );
+
+    return res.status(200).json(categoriesDb[categoryIndex]);
+  } catch (err) {
+    console.error("Error updating category:", err);
+    return res.status(500).json({ error: "Failed to update category" });
+  }
 });
 
 module.exports = router;
