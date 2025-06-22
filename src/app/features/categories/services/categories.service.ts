@@ -1,6 +1,5 @@
 import { Injectable, signal } from '@angular/core';
 import { CategoriesApiService } from './categories.api.service';
-import { switchMap } from 'rxjs';
 import { ICategory } from '../types/interfaces';
 
 @Injectable()
@@ -23,41 +22,35 @@ export class CategoriesService {
       onComplete?: Function;
     },
   ) {
-    this.apiService
-      .saveCategory(category)
-      .pipe(switchMap(() => this.apiService.getAllCategories()))
-      .subscribe({
-        next: (categories) => {
-          this.categoriesSignal.set(categories);
-          callbacks.onSuccess?.(categories);
-        },
-        error: (error) => {
-          this.error = 'Error creating category';
-          this.submitted = false;
-          callbacks.onError?.(error);
-        },
-        complete: () => {
-          callbacks.onComplete?.();
-        },
-      });
+    this.apiService.saveCategory(category).subscribe({
+      next: (categories) => {
+        this.fetchCategories();
+        callbacks.onSuccess?.(categories);
+      },
+      error: (error) => {
+        this.error = 'Error creating category';
+        this.submitted = false;
+        callbacks.onError?.(error);
+      },
+      complete: () => {
+        callbacks.onComplete?.();
+      },
+    });
   }
 
   deleteCategory(
     id: string,
     callbacks?: { onSuccess?: Function; onError?: Function },
   ) {
-    this.apiService
-      .deleteCategory(id)
-      .pipe(switchMap(() => this.apiService.getAllCategories()))
-      .subscribe({
-        next: (categories) => {
-          this.categoriesSignal.set(categories);
-          callbacks?.onSuccess?.(categories);
-        },
-        error: (error) => {
-          callbacks?.onError?.(error);
-        },
-      });
+    this.apiService.deleteCategory(id).subscribe({
+      next: (categories) => {
+        this.fetchCategories();
+        callbacks?.onSuccess?.(categories);
+      },
+      error: (error) => {
+        callbacks?.onError?.(error);
+      },
+    });
   }
 
   private fetchCategories() {
@@ -89,22 +82,20 @@ export class CategoriesService {
       onComplete?: Function;
     },
   ) {
-    this.apiService
-      .updateCategory(category)
-      .pipe(switchMap(() => this.apiService.getAllCategories()))
-      .subscribe({
-        next: (categories) => {
-          this.categoriesSignal.set(categories);
-          callbacks.onSuccess?.(categories);
-        },
-        error: (error) => {
-          this.error = 'Error creating category';
-          this.submitted = false;
-          callbacks.onError?.(error);
-        },
-        complete: () => {
-          callbacks.onComplete?.();
-        },
-      });
+    this.apiService.updateCategory(category).subscribe({
+      next: (categories) => {
+        console.log('Updated categories:', categories);
+        this.fetchCategories();
+        callbacks.onSuccess?.(categories);
+      },
+      error: (error) => {
+        this.error = 'Error creating category';
+        this.submitted = false;
+        callbacks.onError?.(error);
+      },
+      complete: () => {
+        callbacks.onComplete?.();
+      },
+    });
   }
 }
