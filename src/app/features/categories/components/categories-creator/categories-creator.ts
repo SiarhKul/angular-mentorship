@@ -102,8 +102,8 @@ export class CategoriesCreator implements OnInit {
   @Input()
   initFormValues?: Required<ICategory>;
 
-  @Input()
-  saveCategory?: any;
+  @Input({ required: true })
+  submitAction!: Function;
 
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
@@ -133,7 +133,7 @@ export class CategoriesCreator implements OnInit {
       .build();
 
     if (valid) {
-      this.saveCategory(category, {
+      this.submitAction(category, {
         onSuccess: () => {
           if (this.drawer) {
             this.drawer.closeDrawer();

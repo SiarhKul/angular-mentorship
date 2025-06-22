@@ -6,6 +6,7 @@ import { CategoriesService } from '../../services/categories.service';
 import { ICategory } from '../../types/interfaces';
 import { CATEGORIES } from '../../../../shared/constants/dictionaries';
 import { CategoriesCreator } from '../categories-creator/categories-creator';
+import { CategoriesApiService } from '../../services/categories.api.service';
 
 const mappingIdToCategories = CATEGORIES.reduce(
   (acc, { id, category }) => ({ ...acc, [id]: category }),
@@ -16,10 +17,11 @@ const mappingIdToCategories = CATEGORIES.reduce(
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrl: './category.component.css',
+  providers: [CategoriesApiService, CategoriesService],
   imports: [NgClass, MatIcon, MatButtonModule, CategoriesCreator],
 })
 export class CategoryComponent {
-  @Input()
+  @Input({ required: true })
   category!: Required<ICategory>;
 
   //todo: Mentor:  how to avoid getting 'underfined'
@@ -29,9 +31,9 @@ export class CategoryComponent {
 
   constructor(private cs: CategoriesService) {}
 
-  onEdit() {
-    this.cs.updateCategory(this.category);
+  updateCategory() {
     console.log(1);
+    this.cs.up();
   }
 
   onDelete(id: number) {

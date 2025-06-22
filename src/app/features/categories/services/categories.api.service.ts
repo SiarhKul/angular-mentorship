@@ -25,6 +25,7 @@ export class CategoriesApiService {
 
   updateCategory(category: ICategory) {
     const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}/${category.id}`;
+    console.log('fffffff');
     return this.http.put<Required<ICategory>>(url, category);
   }
 }

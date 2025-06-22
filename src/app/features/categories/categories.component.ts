@@ -22,7 +22,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
           class="app-categories-list"
         />
       }
-      <app-categories-creator [saveCategory]="saveCategory">
+      <app-categories-creator [submitAction]="saveCategory">
         <div ngProjectAs="alternative__trigger">
           <app-button
             [buttonContent]="'Add categories'"

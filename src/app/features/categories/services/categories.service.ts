@@ -81,7 +81,12 @@ export class CategoriesService {
     });
   }
 
-  updateCategory(category: Required<ICategory>, callbacks?: {}) {
-    this.apiService.updateCategory(category);
+  updateCategory1(category: Required<ICategory>) {
+    console.log('2', category);
+
+    // this.apiService.updateCategory(category);
+  }
+  up() {
+    console.log('up');
   }
 }
