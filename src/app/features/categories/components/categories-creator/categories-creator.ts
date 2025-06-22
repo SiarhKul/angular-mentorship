@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -35,11 +42,7 @@ import { CategoriesService } from '../../services/categories.service';
     <div class="categories-management">
       <app-drawer [textHeader]="'Create category'">
         <div ngProjectAs="drawer__content">
-          <form
-            #formRef="ngForm"
-            (ngSubmit)="onSubmit(formRef)"
-            id="create-category"
-          >
+          <form #formRef="ngForm" id="create-category">
             <mat-form-field appearance="outline" class="mat-form-field">
               <mat-label>Account Name</mat-label>
               <input
@@ -69,16 +72,18 @@ import { CategoriesService } from '../../services/categories.service';
           </form>
         </div>
 
-        <div ngProjectAs="footer__buttons">
+        <footer ngProjectAs="footer__buttons">
           <button
             [disabled]="isLoading()"
             form="create-category"
             mat-stroked-button
-            type="submit"
+            type="button"
+            (click)="onSubmit(formRef)"
           >
             Save
           </button>
-        </div>
+        </footer>
+
         <div ngProjectAs="alternative__trigger">
           <ng-content select="alternative__trigger" />
         </div>
@@ -88,7 +93,6 @@ import { CategoriesService } from '../../services/categories.service';
 })
 export class CategoriesCreator implements OnInit {
   categories = CATEGORIES;
-  error = '';
 
   model: ICategory = {
     name: '',
@@ -98,17 +102,14 @@ export class CategoriesCreator implements OnInit {
   @Input()
   initFormValues?: Required<ICategory>;
 
-  @Input() submit!: (
-    category: ICategory,
-    callbacks: {
-      onSuccess?: Function;
-      onError?: Function;
-      onComplete?: Function;
-    },
-  ) => void;
+  @Output()
+  submitEvent = new EventEmitter<any>();
 
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
+
+  @ViewChild('formRef')
+  formRef!: NgForm;
 
   constructor(private categoriesService: CategoriesService) {}
 
@@ -132,13 +133,8 @@ export class CategoriesCreator implements OnInit {
       .build();
 
     if (valid) {
-      this.submit(category, {
-        onSuccess: () => {
-          if (this.drawer) {
-            this.drawer.closeDrawer();
-          }
-        },
-      });
+      // console.log('Form is valid', formRef);
+      this.submitEvent.emit(category);
     }
   }
 
