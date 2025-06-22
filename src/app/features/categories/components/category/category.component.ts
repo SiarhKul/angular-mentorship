@@ -36,6 +36,8 @@ export class CategoryComponent {
       id: this.category.id,
     };
 
+    // this.category = enrichedCategory;
+
     this.categoryService.updateCategory(enrichedCategory, cbs);
   };
   onDelete(id: string) {
