@@ -7,7 +7,6 @@ export class CategoriesService {
   categoriesSignal = signal<Required<ICategory>[] | null>(null);
   isLoadingSignal = signal(false);
   submitted = false;
-  loading = false;
   error = '';
 
   constructor(private apiService: CategoriesApiService) {
@@ -78,7 +77,6 @@ export class CategoriesService {
   }
 
   private fetchCategories() {
-    this.loading = true;
     this.submitted = true;
     this.error = '';
     this.isLoadingSignal.set(true);
@@ -94,7 +92,6 @@ export class CategoriesService {
         this.error = 'Error fetching categories';
       },
       complete: () => {
-        this.loading = false;
         this.isLoadingSignal.set(false);
       },
     });
