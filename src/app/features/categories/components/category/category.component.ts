@@ -17,20 +17,20 @@ const mappingIdToCategories = CATEGORIES.reduce(
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrl: './category.component.css',
-  providers: [CategoriesApiService, CategoriesService],
+  providers: [CategoriesApiService],
   imports: [NgClass, MatIcon, MatButtonModule, CategoriesCreator],
 })
 export class CategoryComponent {
   @Input({ required: true })
   category!: Required<ICategory>;
 
-  //todo: Mentor:  how to avoid getting 'underfined'
+  //todo: Mentor:  how to avoid getting 'undefined'
   type = 'Income';
   // type = mappingIdToCategories[this.category.type];
 
   constructor(private categoryService: CategoriesService) {}
 
-  updateCategory = (category: ICategory, cbs: any) => {
+  updateCategory = (category: ICategory, cbs: Record<string, Function>) => {
     const enrichedCategory: Required<ICategory> = {
       ...category,
       id: this.category.id,

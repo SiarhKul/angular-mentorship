@@ -10,7 +10,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
   selector: 'app-categories',
   styleUrl: './categories.component.css',
   standalone: true,
-  providers: [CategoriesApiService, CategoriesService],
+  providers: [CategoriesApiService],
   imports: [CategoriesCreator, CategoriesListCtrl, ButtonComponent],
   template: `
     <section class="categories-container">

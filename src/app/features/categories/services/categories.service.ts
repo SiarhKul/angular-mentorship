@@ -2,7 +2,10 @@ import { Injectable, signal } from '@angular/core';
 import { CategoriesApiService } from './categories.api.service';
 import { ICategory } from '../types/interfaces';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+  useFactory: () => new CategoriesService(new CategoriesApiService()),
+})
 export class CategoriesService {
   categoriesSignal = signal<Required<ICategory>[] | null>(null);
   isLoadingSignal = signal(false);

@@ -118,7 +118,7 @@ export class CategoriesCreator implements OnInit {
   }
 
   isLoading() {
-    return this.categoriesService.loading;
+    return this.categoriesService.isLoadingSignal();
   }
 
   onSubmit(formRef: NgForm) {
