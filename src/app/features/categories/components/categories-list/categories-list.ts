@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, WritableSignal } from '@angular/core';
+import { Component, Input, WritableSignal } from '@angular/core';
 import { CategoriesApiService } from '../../services/categories.api.service';
 import { ICategory } from '../../types/interfaces';
 import { CategoryComponent } from '../category/category.component';
@@ -10,19 +10,13 @@ import { CategoryComponent } from '../category/category.component';
   imports: [CategoryComponent],
   template: `
     <div class="categories">
-      @if (categories !== null) {
-        @for (category of categories(); track category.id) {
-          <app-category [category]="category" />
-        }
+      @for (category of categories(); track category.id) {
+        <app-category [category]="category" />
       }
     </div>
   `,
 })
-export class CategoriesListCtrl implements OnInit {
-  ngOnInit(): void {
-    console.log('categories', this.categories);
-  }
-
+export class CategoriesListCtrl {
   @Input({ required: true })
   categories!: WritableSignal<Required<ICategory>[] | null>;
 }

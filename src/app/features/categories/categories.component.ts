@@ -14,14 +14,14 @@ import { ButtonComponent } from '../../shared/components/button/button.component
   imports: [CategoriesCreator, CategoriesListCtrl, ButtonComponent],
   template: `
     <section class="categories-container">
-      @if (isLoadingSignal() && categories == null) {
+      @if (isLoadingSignal()) {
         <div>Content is loading...</div>
       }
 
       @if (categories !== null && categories.length > 0) {
         <app-categories-list
-          [categories]="categories"
           class="app-categories-list"
+          [categories]="categories"
         />
       }
 
