@@ -14,7 +14,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
   imports: [CategoriesCreator, CategoriesListCtrl, ButtonComponent],
   template: `
     <section class="categories-container">
-      @if (isLoadingSignal()) {
+      @if (isLoadingSignal() && categories === null) {
         <div>Content is loading...</div>
       } @else {
         <app-categories-list

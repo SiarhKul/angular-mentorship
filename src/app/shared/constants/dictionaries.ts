@@ -1,4 +1,6 @@
+import { ECategories } from '../../features/categories/types/enums';
+
 export const CATEGORIES = [
-  { category: 'Income', id: 1 },
-  { category: 'Expanses', id: 2 },
+  { category: ECategories.INCOME, id: 1 },
+  { category: ECategories.EXPENSES, id: 2 },
 ];

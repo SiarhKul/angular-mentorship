@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { CategoriesApiService } from './categories.api.service';
 import { ICategory } from '../types/interfaces';
 import { switchMap } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
   useFactory: () => new CategoriesService(new CategoriesApiService()),
