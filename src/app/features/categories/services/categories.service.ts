@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { CategoriesApiService } from './categories.api.service';
 import { ICategory } from '../types/interfaces';
-
+import { switchMap } from 'rxjs';
 @Injectable({
   providedIn: 'root',
   useFactory: () => new CategoriesService(new CategoriesApiService()),
@@ -63,20 +63,23 @@ export class CategoriesService {
       onComplete?: Function;
     },
   ) {
-    this.apiService.updateCategory(category).subscribe({
-      next: (categories) => {
-        this.fetchCategories();
-        callbacks.onSuccess?.(categories);
-      },
-      error: (error) => {
-        this.error = 'Error creating category';
-        this.submitted = false;
-        callbacks.onError?.(error);
-      },
-      complete: () => {
-        callbacks.onComplete?.();
-      },
-    });
+    this.apiService
+      .updateCategory(category)
+      .pipe(switchMap(() => this.apiService.getAllCategories()))
+      .subscribe({
+        next: (categories) => {
+          this.categoriesSignal.set(categories);
+          callbacks.onSuccess?.(categories);
+        },
+        error: (error) => {
+          this.error = 'Error creating category';
+          this.submitted = false;
+          callbacks.onError?.(error);
+        },
+        complete: () => {
+          callbacks.onComplete?.();
+        },
+      });
   }
 
   private fetchCategories() {
