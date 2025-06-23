@@ -53,27 +53,6 @@ export class CategoriesService {
     });
   }
 
-  private fetchCategories() {
-    this.loading = true;
-    this.submitted = true;
-    this.error = '';
-    this.isLoadingSignal.set(true);
-    this.apiService.getAllCategories().subscribe({
-      next: (categories) => {
-        this.categoriesSignal.set(categories);
-      },
-      error: () => {
-        console.log('Error creating category');
-        this.submitted = true;
-        this.error = 'Error fetching categories';
-      },
-      complete: () => {
-        this.loading = false;
-        this.isLoadingSignal.set(false);
-      },
-    });
-  }
-
   updateCategory(
     category: Required<ICategory>,
     callbacks: {
@@ -84,7 +63,6 @@ export class CategoriesService {
   ) {
     this.apiService.updateCategory(category).subscribe({
       next: (categories) => {
-        console.log('Updated categories:', categories);
         this.fetchCategories();
         callbacks.onSuccess?.(categories);
       },
@@ -95,6 +73,29 @@ export class CategoriesService {
       },
       complete: () => {
         callbacks.onComplete?.();
+      },
+    });
+  }
+
+  private fetchCategories() {
+    this.loading = true;
+    this.submitted = true;
+    this.error = '';
+    this.isLoadingSignal.set(true);
+    this.apiService.getAllCategories().subscribe({
+      next: (categories) => {
+        console.log('Updated categories:', categories);
+
+        this.categoriesSignal.set(categories);
+      },
+      error: () => {
+        console.log('Error creating category');
+        this.submitted = true;
+        this.error = 'Error fetching categories';
+      },
+      complete: () => {
+        this.loading = false;
+        this.isLoadingSignal.set(false);
       },
     });
   }
