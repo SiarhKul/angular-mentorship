@@ -1,4 +1,4 @@
-import { Component, Input, WritableSignal } from '@angular/core';
+import { Component, Input, OnInit, WritableSignal } from '@angular/core';
 import { CategoriesApiService } from '../../services/categories.api.service';
 import { ICategory } from '../../types/interfaces';
 import { CategoryComponent } from '../category/category.component';
@@ -18,7 +18,11 @@ import { CategoryComponent } from '../category/category.component';
     </div>
   `,
 })
-export class CategoriesListCtrl {
-  @Input()
-  categories!: WritableSignal<Required<ICategory>[] | null> | null;
+export class CategoriesListCtrl implements OnInit {
+  ngOnInit(): void {
+    console.log('categories', this.categories);
+  }
+
+  @Input({ required: true })
+  categories!: WritableSignal<Required<ICategory>[] | null>;
 }

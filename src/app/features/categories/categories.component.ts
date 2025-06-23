@@ -14,14 +14,17 @@ import { ButtonComponent } from '../../shared/components/button/button.component
   imports: [CategoriesCreator, CategoriesListCtrl, ButtonComponent],
   template: `
     <section class="categories-container">
-      @if (isLoadingSignal() && categories === null) {
+      @if (isLoadingSignal() && categories == null) {
         <div>Content is loading...</div>
-      } @else {
+      }
+
+      @if (categories !== null && categories.length > 0) {
         <app-categories-list
           [categories]="categories"
           class="app-categories-list"
         />
       }
+
       <app-categories-creator [submitAction]="saveCategory">
         <div ngProjectAs="alternative__trigger">
           <app-button
