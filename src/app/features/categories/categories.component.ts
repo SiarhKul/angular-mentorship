@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-categories',
@@ -24,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatIconModule,
+    MatIcon,
   ],
   template: `
     <section class="categories-container">
@@ -43,6 +43,7 @@ import { MatIconModule } from '@angular/material/icon';
                 matIconButton
                 aria-label="Clear"
                 (click)="value = ''"
+                mat-icon-button
               >
                 <mat-icon>close</mat-icon>
               </button>
@@ -72,7 +73,7 @@ import { MatIconModule } from '@angular/material/icon';
   `,
 })
 export class CategoriesComponent {
-  value = 'Clear me';
+  value = '';
 
   categories: WritableSignal<Required<ICategory>[] | null> | null = null;
   isLoadingSignal: WritableSignal<boolean> = signal(false);
