@@ -2,41 +2,21 @@
   {
     "id": "e461088f-07f6-4b7c-86ec-5ead03cbfeb4",
     "type": 1,
-    "name": "tesg1"
+    "name": "Category1"
   },
   {
     "id": "a80c34ce-72be-4407-afff-7b21f9901133",
-    "type": 1,
-    "name": "tesg15"
-  },
-  {
-    "id": "ee25f5be-00bc-43f8-a564-ec88c327a740",
-    "type": 1,
-    "name": "15"
+    "type": 2,
+    "name": "Category2"
   },
   {
     "id": "341ab68b-d733-4197-ba2f-6d7127dcfa01",
     "type": 1,
-    "name": "15"
+    "name": "Category3"
   },
   {
-    "id": "d5a70642-3111-404c-ae9e-8f1352cf8edb",
-    "type": 1,
-    "name": "15"
-  },
-  {
-    "id": "75832307-0c6f-48f3-ae78-7e8349dc3e37",
-    "type": 1,
-    "name": "15"
-  },
-  {
-    "id": "85870ff7-166c-42f5-bd6e-0a7e6b2640cb",
-    "type": 1,
-    "name": "15"
-  },
-  {
-    "id": "7105d254-6d33-40e8-9770-c25f9726d147",
-    "type": 1,
-    "name": "15"
+    "id": "2fc3685f-13ba-4f72-9350-e073746b1c8b",
+    "type": 2,
+    "name": "1d"
   }
 ]
