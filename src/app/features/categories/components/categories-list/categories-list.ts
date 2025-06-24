@@ -1,4 +1,4 @@
-import { Component, Input, WritableSignal } from '@angular/core';
+import { Component, Input, OnInit, WritableSignal } from '@angular/core';
 import { CategoriesApiService } from '../../services/categories.api.service';
 import { ICategory } from '../../types/interfaces';
 import { CategoryComponent } from '../category/category.component';
