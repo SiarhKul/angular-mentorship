@@ -1,7 +1,14 @@
 .categories-container {
   display: flex;
+  gap: var(--spacing-md);
 }
 
 .app-categories-list {
   flex: 1;
+}
+
+.categories-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
