@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { SearchComponent } from '../../shared/components/search/search.component';
 
 @Component({
   selector: 'app-categories',
@@ -25,6 +26,7 @@ import { MatIcon } from '@angular/material/icon';
     FormsModule,
     MatButtonModule,
     MatIcon,
+    SearchComponent,
   ],
   template: `
     <section class="categories-container">
@@ -34,6 +36,8 @@ import { MatIcon } from '@angular/material/icon';
 
       @if (filteredCategories() !== null) {
         <section class="categories-section">
+          <app-search></app-search>
+
           <mat-form-field style="width: 50%">
             <mat-label>Search categories</mat-label>
             <input matInput type="text" [(ngModel)]="value" />
