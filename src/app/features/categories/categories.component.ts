@@ -1,11 +1,4 @@
-import {
-  Component,
-  computed,
-  OnChanges,
-  signal,
-  WritableSignal,
-  effect,
-} from '@angular/core';
+import { Component, computed, signal, WritableSignal } from '@angular/core';
 import { CategoriesCreator } from './components/categories-creator/categories-creator';
 import { CategoriesListCtrl } from './components/categories-list/categories-list';
 import { ICategory } from './types/interfaces';
@@ -44,7 +37,7 @@ import { MatIcon } from '@angular/material/icon';
           <mat-form-field style="width: 50%">
             <mat-label>Search categories</mat-label>
             <input matInput type="text" [(ngModel)]="value" />
-            @if (value) {
+            @if (value()) {
               <button
                 matSuffix
                 matIconButton
@@ -75,6 +68,8 @@ import { MatIcon } from '@angular/material/icon';
             [customStyles]="{
               backgroundColor: 'var(--background-color-primary)',
               color: 'black',
+              width: 'auto',
+              whiteSpace: 'nowrap',
             }"
             [icon]="'savings'"
           />
@@ -83,13 +78,14 @@ import { MatIcon } from '@angular/material/icon';
     </section>
   `,
 })
-export class CategoriesComponent implements OnChanges {
+export class CategoriesComponent {
+  isLoadingSignal: WritableSignal<boolean> = signal(false);
   value = signal('');
 
   categories: WritableSignal<Required<ICategory>[] | null> | null = null;
 
+  someMethod = () => {};
   filteredCategories = computed(() => {
-    console.log('filteredCategories', this.value);
     if (!this.categories) {
       return null;
     }
@@ -97,27 +93,17 @@ export class CategoriesComponent implements OnChanges {
     if (categoriesValue === null) {
       return null;
     }
-    return categoriesValue.filter((c) => {
+    let filter = categoriesValue.filter((c) => {
       return c.name
         .toLocaleLowerCase()
         .includes(this.value().toLocaleLowerCase());
     });
-  });
-
-  isLoadingSignal: WritableSignal<boolean> = signal(false);
-
-  private loggingEffect = effect(() => {
-    console.log(`The count is: ${this.value()}`);
+    return filter;
   });
 
   constructor(private categoriesService: CategoriesService) {
     this.categories = this.categoriesService.categoriesSignal;
     this.isLoadingSignal = this.categoriesService.isLoadingSignal;
-  }
-
-  ngOnChanges(changes: any): void {
-    console.log('value changed', this.value);
-    console.log('categories changed', this.filteredCategories);
   }
 
   saveCategory(

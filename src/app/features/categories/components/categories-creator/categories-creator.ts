@@ -1,9 +1,12 @@
 import {
+  AfterViewChecked,
   Component,
   EventEmitter,
   Input,
   OnInit,
   Output,
+  output,
+  model,
   ViewChild,
 } from '@angular/core';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
@@ -91,7 +94,7 @@ import { CategoriesService } from '../../services/categories.service';
     </div>
   `,
 })
-export class CategoriesCreator implements OnInit {
+export class CategoriesCreator {
   categories = CATEGORIES;
 
   model: ICategory = {
@@ -102,6 +105,7 @@ export class CategoriesCreator implements OnInit {
   @Input()
   initFormValues?: Required<ICategory>;
 
+  //todo: check Ts config
   @Input({ required: true })
   submitAction!: Function;
 
@@ -112,10 +116,6 @@ export class CategoriesCreator implements OnInit {
   formRef!: NgForm;
 
   constructor(private categoriesService: CategoriesService) {}
-
-  ngOnInit(): void {
-    this.initializeModel();
-  }
 
   isLoading() {
     return this.categoriesService.isLoadingSignal();

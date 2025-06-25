@@ -44,7 +44,6 @@ export class LoginComponent {
     private router: Router,
   ) {}
 
-  //todo: Mentor: Ask about takeUntilDestroyed
   async onSubmit() {
     this.submitted = true;
     this.loading = true;
