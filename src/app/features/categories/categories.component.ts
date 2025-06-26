@@ -25,7 +25,7 @@ import { SearchComponent } from '../../shared/components/search/search.component
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatIcon,
+    // MatIcon,
     SearchComponent,
   ],
   template: `
@@ -36,23 +36,23 @@ import { SearchComponent } from '../../shared/components/search/search.component
 
       @if (filteredCategories() !== null) {
         <section class="categories-section">
-          <app-search></app-search>
-
-          <mat-form-field style="width: 50%">
-            <mat-label>Search categories</mat-label>
-            <input matInput type="text" [(ngModel)]="value" />
-            @if (value()) {
-              <button
-                matSuffix
-                matIconButton
-                aria-label="Clear"
-                (click)="value.set('')"
-                mat-icon-button
-              >
-                <mat-icon>close</mat-icon>
-              </button>
-            }
-          </mat-form-field>
+          <app-search [(searchTerm)]="someMethod"></app-search>
+          <div>{{ this.someMethod }}</div>
+          <!--          <mat-form-field style="width: 50%">-->
+          <!--            <mat-label>Search categories</mat-label>-->
+          <!--            <input matInput type="text" [(ngModel)]="value" />-->
+          <!--            @if (value()) {-->
+          <!--              <button-->
+          <!--                matSuffix-->
+          <!--                matIconButton-->
+          <!--                aria-label="Clear"-->
+          <!--                (click)="value.set('')"-->
+          <!--                mat-icon-button-->
+          <!--              >-->
+          <!--                <mat-icon>close</mat-icon>-->
+          <!--              </button>-->
+          <!--            }-->
+          <!--          </mat-form-field>-->
 
           @if ((filteredCategories() || []).length === 0) {
             <div>No categories found matching your search.</div>
@@ -84,11 +84,11 @@ import { SearchComponent } from '../../shared/components/search/search.component
 })
 export class CategoriesComponent {
   isLoadingSignal: WritableSignal<boolean> = signal(false);
-  value = signal('');
+  // value = signal('');
 
   categories: WritableSignal<Required<ICategory>[] | null> | null = null;
 
-  someMethod = () => {};
+  someMethod = '';
   filteredCategories = computed(() => {
     if (!this.categories) {
       return null;
@@ -100,7 +100,7 @@ export class CategoriesComponent {
     let filter = categoriesValue.filter((c) => {
       return c.name
         .toLocaleLowerCase()
-        .includes(this.value().toLocaleLowerCase());
+        .includes(this.someMethod.toLocaleLowerCase());
     });
     return filter;
   });

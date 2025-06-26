@@ -1,6 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, model, signal } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import {
+  MatFormField,
+  MatInput,
+  MatLabel,
+  MatSuffix,
+} from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 
@@ -14,17 +19,18 @@ import { FormsModule } from '@angular/forms';
     MatInput,
     FormsModule,
     MatLabel,
+    MatSuffix,
   ],
   template: `
     <mat-form-field style="width: 50%">
       <mat-label>Search categories</mat-label>
-      <input matInput type="text" [(ngModel)]="value" />
-      @if (value()) {
+      <input matInput type="text" [(ngModel)]="searchTerm" />
+      @if (searchTerm()) {
         <button
           matSuffix
           matIconButton
           aria-label="Clear"
-          (click)="value.set('')"
+          (click)="searchTerm.set('')"
           mat-icon-button
         >
           <mat-icon>close</mat-icon>
@@ -34,5 +40,5 @@ import { FormsModule } from '@angular/forms';
   `,
 })
 export class SearchComponent {
-  value = signal('');
+  searchTerm = model<string>('');
 }
