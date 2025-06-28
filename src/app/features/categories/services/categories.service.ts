@@ -89,12 +89,9 @@ export class CategoriesService {
     this.isLoadingSignal.set(true);
     this.apiService.getAllCategories().subscribe({
       next: (categories) => {
-        console.log('Updated categories:', categories);
-
         this.categoriesSignal.set(categories);
       },
       error: () => {
-        console.log('Error creating category');
         this.submitted = true;
         this.error = 'Error fetching categories';
       },

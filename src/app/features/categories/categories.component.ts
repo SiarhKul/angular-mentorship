@@ -9,7 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
 import { SearchComponent } from '../../shared/components/search/search.component';
 
 @Component({
@@ -25,7 +24,6 @@ import { SearchComponent } from '../../shared/components/search/search.component
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    // MatIcon,
     SearchComponent,
   ],
   template: `
@@ -36,8 +34,8 @@ import { SearchComponent } from '../../shared/components/search/search.component
 
       @if (filteredCategories() !== null) {
         <section class="categories-section">
-          <app-search [(searchTerm)]="someMethod"></app-search>
-          <div>{{ this.someMethod }}</div>
+          <app-search [(searchTerm)]="searchTerm" />
+          <div>{{ this.searchTerm() }}</div>
           <!--          <mat-form-field style="width: 50%">-->
           <!--            <mat-label>Search categories</mat-label>-->
           <!--            <input matInput type="text" [(ngModel)]="value" />-->
@@ -84,11 +82,9 @@ import { SearchComponent } from '../../shared/components/search/search.component
 })
 export class CategoriesComponent {
   isLoadingSignal: WritableSignal<boolean> = signal(false);
-  // value = signal('');
-
   categories: WritableSignal<Required<ICategory>[] | null> | null = null;
+  searchTerm = signal<string>('');
 
-  someMethod = '';
   filteredCategories = computed(() => {
     if (!this.categories) {
       return null;
@@ -97,12 +93,11 @@ export class CategoriesComponent {
     if (categoriesValue === null) {
       return null;
     }
-    let filter = categoriesValue.filter((c) => {
+    return categoriesValue.filter((c) => {
       return c.name
         .toLocaleLowerCase()
-        .includes(this.someMethod.toLocaleLowerCase());
+        .includes(this.searchTerm().toLocaleLowerCase());
     });
-    return filter;
   });
 
   constructor(private categoriesService: CategoriesService) {

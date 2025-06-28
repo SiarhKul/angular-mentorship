@@ -1,4 +1,12 @@
-import { Component, model, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  Input,
+  model,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import {
   MatFormField,
@@ -8,6 +16,7 @@ import {
 } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { ICategory } from '../../../features/categories/types/interfaces';
 
 @Component({
   selector: 'app-search',
