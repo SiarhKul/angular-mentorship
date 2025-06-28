@@ -1,10 +1,4 @@
-import {
-  AfterViewChecked,
-  Component,
-  model,
-  ModelSignal,
-  signal,
-} from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CategoriesCreator } from './components/categories-creator/categories-creator';
 import { CategoriesListCtrl } from './components/categories-list/categories-list';
 import { ICategory } from './types/interfaces';
@@ -34,20 +28,23 @@ import { SearchComponent } from '../../shared/components/search/search.component
   ],
   template: `
     <section class="categories-container">
-      @if (isLoadingSignal() && categories() == null) {
+      @if (isLoadingSignal() && categoriesSignal() == null) {
         <div>Content is loading...</div>
       }
 
       <section class="categories-section">
-        @if (categories() !== null) {
-          <app-search [categories]="categories" [filtrCat]="filtrCat" />
+        @if (categoriesSignal() !== null) {
+          <app-search
+            [categoriesSignal]="categoriesSignal"
+            [filteredCategoriesSignal]="filteredCategoriesSignal"
+          />
         }
 
-        @if ((filtrCat() || []).length === 0) {
+        @if ((filteredCategoriesSignal() || []).length === 0) {
           <div>No categories found matching your search.</div>
         } @else {
           <app-categories-list
-            [categories]="filtrCat"
+            [categories]="filteredCategoriesSignal"
             class="app-categories-list"
           />
         }
@@ -70,18 +67,14 @@ import { SearchComponent } from '../../shared/components/search/search.component
     </section>
   `,
 })
-export class CategoriesComponent implements AfterViewChecked {
-  categories = signal<Required<ICategory>[] | null>(null);
-  filtrCat = signal<Required<ICategory>[] | null>(null);
+export class CategoriesComponent {
+  categoriesSignal = signal<Required<ICategory>[] | null>(null);
+  filteredCategoriesSignal = signal<Required<ICategory>[] | null>(null);
   isLoadingSignal = signal(true);
 
   constructor(private categoriesService: CategoriesService) {
-    this.categories = this.categoriesService.categoriesSignal;
+    this.categoriesSignal = this.categoriesService.categoriesSignal;
     this.isLoadingSignal = this.categoriesService.isLoadingSignal;
-  }
-
-  ngAfterViewChecked(): void {
-    console.log('ngAfterViewChecked', this.filtrCat());
   }
 
   saveCategory(

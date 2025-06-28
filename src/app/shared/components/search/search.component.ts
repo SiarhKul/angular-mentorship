@@ -41,23 +41,23 @@ export class SearchComponent {
   searchTerm = signal('');
 
   @Input()
-  categories!: WritableSignal<Required<ICategory>[] | null>;
+  categoriesSignal!: WritableSignal<Required<ICategory>[] | null>;
 
   @Input()
-  filtrCat!: WritableSignal<Required<ICategory>[] | null>;
+  filteredCategoriesSignal!: WritableSignal<Required<ICategory>[] | null>;
 
-  filtered = computed(() => {
-    const list = this.categories();
-    if (!list) return null;
+  filteredCategories = computed(() => {
+    const categories = this.categoriesSignal();
+    if (!categories) return null;
 
-    return list.filter((cat) =>
-      cat.name.toLowerCase().includes(this.searchTerm().toLowerCase()),
+    return categories.filter((c) =>
+      c.name.toLowerCase().includes(this.searchTerm().toLowerCase()),
     );
   });
 
   constructor() {
     effect(() => {
-      this.filtrCat.set(this.filtered());
+      this.filteredCategoriesSignal.set(this.filteredCategories());
     });
   }
 }
