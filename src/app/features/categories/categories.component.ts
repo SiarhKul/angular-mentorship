@@ -34,8 +34,11 @@ import { SearchComponent } from '../../shared/components/search/search.component
 
       @if (filteredCategories() !== null) {
         <section class="categories-section">
-          <app-search [(searchTerm)]="searchTerm" />
-          <div>{{ this.searchTerm() }}</div>
+          @if (categories !== null) {
+            <app-search [categories]="categories" [(filtrCat)]="filtrCat" />
+          }
+          <!--          <div>{{ this.searchTerm() }}</div>-->
+          <div>1{{ JSON.stringify(this.filtrCat()) }}</div>
           <!--          <mat-form-field style="width: 50%">-->
           <!--            <mat-label>Search categories</mat-label>-->
           <!--            <input matInput type="text" [(ngModel)]="value" />-->
@@ -84,6 +87,7 @@ export class CategoriesComponent {
   isLoadingSignal: WritableSignal<boolean> = signal(false);
   categories: WritableSignal<Required<ICategory>[] | null> | null = null;
   searchTerm = signal<string>('');
+  filtrCat = signal<Required<ICategory>[]>([]);
 
   filteredCategories = computed(() => {
     if (!this.categories) {
@@ -115,4 +119,6 @@ export class CategoriesComponent {
   ) {
     this.categoriesService.saveCategory(category, callbacks);
   }
+
+  protected readonly JSON = JSON;
 }

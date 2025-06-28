@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   Component,
   computed,
   effect,
@@ -48,6 +49,30 @@ import { ICategory } from '../../../features/categories/types/interfaces';
     </mat-form-field>
   `,
 })
-export class SearchComponent {
-  searchTerm = model<string>('');
+export class SearchComponent implements AfterViewChecked {
+  searchTerm = signal<string>('');
+  filtrCat = model<Required<ICategory>[]>();
+
+  @Input({ required: true })
+  categories!: WritableSignal<Required<ICategory>[] | null>;
+
+  filteredCategories = computed(() => {
+    const categoriesValue = this.categories();
+    if (categoriesValue === null) {
+      return null;
+    }
+    let filter = categoriesValue.filter((c) => {
+      return c.name
+        .toLocaleLowerCase()
+        .includes(this.searchTerm().toLocaleLowerCase());
+    });
+    console.log('filter', filter);
+
+    this.filtrCat.set(filter);
+
+    return filter;
+  });
+  ngAfterViewChecked() {
+    console.log(this.filtrCat());
+  }
 }
