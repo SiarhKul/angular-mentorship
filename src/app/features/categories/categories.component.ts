@@ -1,4 +1,10 @@
-import { Component, computed, signal, WritableSignal } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  model,
+  ModelSignal,
+  signal,
+} from '@angular/core';
 import { CategoriesCreator } from './components/categories-creator/categories-creator';
 import { CategoriesListCtrl } from './components/categories-list/categories-list';
 import { ICategory } from './types/interfaces';
@@ -28,43 +34,24 @@ import { SearchComponent } from '../../shared/components/search/search.component
   ],
   template: `
     <section class="categories-container">
-      @if (isLoadingSignal() && categories == null) {
+      @if (isLoadingSignal() && categories() == null) {
         <div>Content is loading...</div>
       }
 
-      @if (filteredCategories() !== null) {
-        <section class="categories-section">
-          @if (categories !== null) {
-            <app-search [categories]="categories" [(filtrCat)]="filtrCat" />
-          }
-          <!--          <div>{{ this.searchTerm() }}</div>-->
-          <div>1{{ JSON.stringify(this.filtrCat()) }}</div>
-          <!--          <mat-form-field style="width: 50%">-->
-          <!--            <mat-label>Search categories</mat-label>-->
-          <!--            <input matInput type="text" [(ngModel)]="value" />-->
-          <!--            @if (value()) {-->
-          <!--              <button-->
-          <!--                matSuffix-->
-          <!--                matIconButton-->
-          <!--                aria-label="Clear"-->
-          <!--                (click)="value.set('')"-->
-          <!--                mat-icon-button-->
-          <!--              >-->
-          <!--                <mat-icon>close</mat-icon>-->
-          <!--              </button>-->
-          <!--            }-->
-          <!--          </mat-form-field>-->
+      <section class="categories-section">
+        @if (categories() !== null) {
+          <app-search [categories]="categories" [filtrCat]="filtrCat" />
+        }
 
-          @if ((filteredCategories() || []).length === 0) {
-            <div>No categories found matching your search.</div>
-          } @else {
-            <app-categories-list
-              [categories]="filteredCategories"
-              class="app-categories-list"
-            />
-          }
-        </section>
-      }
+        @if ((filtrCat() || []).length === 0) {
+          <div>No categories found matching your search.</div>
+        } @else {
+          <app-categories-list
+            [categories]="filtrCat"
+            class="app-categories-list"
+          />
+        }
+      </section>
 
       <app-categories-creator [submitAction]="saveCategory">
         <div ngProjectAs="alternative__trigger">
@@ -83,30 +70,18 @@ import { SearchComponent } from '../../shared/components/search/search.component
     </section>
   `,
 })
-export class CategoriesComponent {
-  isLoadingSignal: WritableSignal<boolean> = signal(false);
-  categories: WritableSignal<Required<ICategory>[] | null> | null = null;
-  searchTerm = signal<string>('');
-  filtrCat = signal<Required<ICategory>[]>([]);
-
-  filteredCategories = computed(() => {
-    if (!this.categories) {
-      return null;
-    }
-    const categoriesValue = this.categories();
-    if (categoriesValue === null) {
-      return null;
-    }
-    return categoriesValue.filter((c) => {
-      return c.name
-        .toLocaleLowerCase()
-        .includes(this.searchTerm().toLocaleLowerCase());
-    });
-  });
+export class CategoriesComponent implements AfterViewChecked {
+  categories = signal<Required<ICategory>[] | null>(null);
+  filtrCat = signal<Required<ICategory>[] | null>(null);
+  isLoadingSignal = signal(true);
 
   constructor(private categoriesService: CategoriesService) {
     this.categories = this.categoriesService.categoriesSignal;
     this.isLoadingSignal = this.categoriesService.isLoadingSignal;
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('ngAfterViewChecked', this.filtrCat());
   }
 
   saveCategory(
@@ -119,6 +94,4 @@ export class CategoriesComponent {
   ) {
     this.categoriesService.saveCategory(category, callbacks);
   }
-
-  protected readonly JSON = JSON;
 }

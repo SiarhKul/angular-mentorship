@@ -1,14 +1,11 @@
 import {
-  AfterViewChecked,
   Component,
-  computed,
-  effect,
   Input,
-  model,
   signal,
   WritableSignal,
+  effect,
+  computed,
 } from '@angular/core';
-import { MatIconButton } from '@angular/material/button';
 import {
   MatFormField,
   MatInput,
@@ -22,15 +19,7 @@ import { ICategory } from '../../../features/categories/types/interfaces';
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    FormsModule,
-    MatLabel,
-    MatSuffix,
-  ],
+  imports: [MatFormField, MatIcon, MatInput, FormsModule, MatLabel, MatSuffix],
   template: `
     <mat-form-field style="width: 50%">
       <mat-label>Search categories</mat-label>
@@ -41,7 +30,6 @@ import { ICategory } from '../../../features/categories/types/interfaces';
           matIconButton
           aria-label="Clear"
           (click)="searchTerm.set('')"
-          mat-icon-button
         >
           <mat-icon>close</mat-icon>
         </button>
@@ -49,30 +37,27 @@ import { ICategory } from '../../../features/categories/types/interfaces';
     </mat-form-field>
   `,
 })
-export class SearchComponent implements AfterViewChecked {
-  searchTerm = signal<string>('');
-  filtrCat = model<Required<ICategory>[]>();
+export class SearchComponent {
+  searchTerm = signal('');
 
-  @Input({ required: true })
+  @Input()
   categories!: WritableSignal<Required<ICategory>[] | null>;
 
-  filteredCategories = computed(() => {
-    const categoriesValue = this.categories();
-    if (categoriesValue === null) {
-      return null;
-    }
-    let filter = categoriesValue.filter((c) => {
-      return c.name
-        .toLocaleLowerCase()
-        .includes(this.searchTerm().toLocaleLowerCase());
-    });
-    console.log('filter', filter);
+  @Input()
+  filtrCat!: WritableSignal<Required<ICategory>[] | null>;
 
-    this.filtrCat.set(filter);
+  filtered = computed(() => {
+    const list = this.categories();
+    if (!list) return null;
 
-    return filter;
+    return list.filter((cat) =>
+      cat.name.toLowerCase().includes(this.searchTerm().toLowerCase()),
+    );
   });
-  ngAfterViewChecked() {
-    console.log(this.filtrCat());
+
+  constructor() {
+    effect(() => {
+      this.filtrCat.set(this.filtered());
+    });
   }
 }
