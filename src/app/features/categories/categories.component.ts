@@ -50,23 +50,23 @@ import { SearchComponent } from '../../shared/components/search/search.component
         }
       </section>
 
-      <app-categories-creator [submitAction]="saveCategory">
-        <div ngProjectAs="alternative__trigger">
-          <div class="button-block">
-            <app-button
-              [buttonContent]="'Income'"
-              [icon]="'arrow_upward'"
-              [customStyles]="{
-                border: '1px solid var(--border-color-dark)',
-              }"
-            />
-            <app-button
-              [buttonContent]="'Expanses'"
-              [icon]="'arrow_downward'"
-              [customStyles]="{
-                border: '1px solid var(--border-color-dark)',
-              }"
-            />
+      <div class="button-block">
+        <app-button
+          [buttonContent]="'Income'"
+          [icon]="'arrow_upward'"
+          [customStyles]="{
+            border: '1px solid var(--border-color-dark)',
+          }"
+        />
+        <app-button
+          [buttonContent]="'Expanses'"
+          [icon]="'arrow_downward'"
+          [customStyles]="{
+            border: '1px solid var(--border-color-dark)',
+          }"
+        />
+        <app-categories-creator [submitAction]="saveCategory">
+          <div ngProjectAs="alternative__trigger">
             <app-button
               [buttonContent]="'Add categories'"
               [customStyles]="{
@@ -78,8 +78,8 @@ import { SearchComponent } from '../../shared/components/search/search.component
               [icon]="'savings'"
             />
           </div>
-        </div>
-      </app-categories-creator>
+        </app-categories-creator>
+      </div>
     </section>
   `,
 })
