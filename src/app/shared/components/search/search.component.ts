@@ -5,6 +5,8 @@ import {
   WritableSignal,
   effect,
   computed,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
 import {
   MatFormField,
@@ -16,6 +18,7 @@ import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { ICategory } from '../../../features/categories/types/interfaces';
 import { MatIconButton } from '@angular/material/button';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -32,13 +35,18 @@ import { MatIconButton } from '@angular/material/button';
   template: `
     <mat-form-field style="width: 50%">
       <mat-label>Search categories</mat-label>
-      <input matInput type="text" [(ngModel)]="searchTerm" />
+      <input
+        matInput
+        type="text"
+        [ngModel]="searchTerm()"
+        (ngModelChange)="onSearchChange($event)"
+      />
       @if (searchTerm()) {
         <button
           matSuffix
           mat-icon-button
           aria-label="Clear"
-          (click)="searchTerm.set('')"
+          (click)="clearSearch()"
         >
           <mat-icon>close</mat-icon>
         </button>
@@ -46,8 +54,10 @@ import { MatIconButton } from '@angular/material/button';
     </mat-form-field>
   `,
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit, OnDestroy {
   searchTerm = signal('');
+  private searchTerms$ = new Subject<string>();
+  private destroy$ = new Subject<void>();
 
   @Input()
   categoriesSignal!: WritableSignal<Required<ICategory>[] | null>;
@@ -68,5 +78,32 @@ export class SearchComponent {
     effect(() => {
       this.filteredCategoriesSignal.set(this.filteredCategories());
     });
+  }
+
+  ngOnInit(): void {
+    // Set up debounced search
+    this.searchTerms$
+      .pipe(
+        debounceTime(700), // Wait 300ms after the last event before emitting
+        distinctUntilChanged(), // Only emit if value is different from previous
+        takeUntil(this.destroy$),
+      )
+      .subscribe((term) => {
+        this.searchTerm.set(term);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  onSearchChange(term: string): void {
+    this.searchTerms$.next(term);
+  }
+
+  clearSearch(): void {
+    this.searchTerms$.next('');
+    this.searchTerm.set('');
   }
 }
