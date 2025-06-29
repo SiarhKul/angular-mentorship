@@ -15,11 +15,20 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { ICategory } from '../../../features/categories/types/interfaces';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [MatFormField, MatIcon, MatInput, FormsModule, MatLabel, MatSuffix],
+  imports: [
+    MatFormField,
+    MatIcon,
+    MatInput,
+    FormsModule,
+    MatLabel,
+    MatSuffix,
+    MatIconButton,
+  ],
   template: `
     <mat-form-field style="width: 50%">
       <mat-label>Search categories</mat-label>
@@ -27,7 +36,7 @@ import { ICategory } from '../../../features/categories/types/interfaces';
       @if (searchTerm()) {
         <button
           matSuffix
-          matIconButton
+          mat-icon-button
           aria-label="Clear"
           (click)="searchTerm.set('')"
         >
