@@ -52,16 +52,32 @@ import { SearchComponent } from '../../shared/components/search/search.component
 
       <app-categories-creator [submitAction]="saveCategory">
         <div ngProjectAs="alternative__trigger">
-          <app-button
-            [buttonContent]="'Add categories'"
-            [customStyles]="{
-              backgroundColor: 'var(--background-color-primary)',
-              color: 'black',
-              width: 'auto',
-              whiteSpace: 'nowrap',
-            }"
-            [icon]="'savings'"
-          />
+          <div class="button-block">
+            <app-button
+              [buttonContent]="'Income'"
+              [icon]="'arrow_upward'"
+              [customStyles]="{
+                border: '1px solid var(--border-color-dark)',
+              }"
+            />
+            <app-button
+              [buttonContent]="'Expanses'"
+              [icon]="'arrow_downward'"
+              [customStyles]="{
+                border: '1px solid var(--border-color-dark)',
+              }"
+            />
+            <app-button
+              [buttonContent]="'Add categories'"
+              [customStyles]="{
+                backgroundColor: 'var(--background-color-primary)',
+                color: 'black',
+                width: 'auto',
+                whiteSpace: 'nowrap',
+              }"
+              [icon]="'savings'"
+            />
+          </div>
         </div>
       </app-categories-creator>
     </section>

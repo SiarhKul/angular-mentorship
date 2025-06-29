@@ -81,13 +81,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Set up debounced search
     this.searchTerms$
-      .pipe(
-        debounceTime(700), // Wait 300ms after the last event before emitting
-        distinctUntilChanged(), // Only emit if value is different from previous
-        takeUntil(this.destroy$),
-      )
+      .pipe(debounceTime(700), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((term) => {
         this.searchTerm.set(term);
       });
