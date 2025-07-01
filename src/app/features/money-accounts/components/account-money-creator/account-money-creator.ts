@@ -14,6 +14,7 @@ import { DrawerComponent } from '../../../../shared/components/drawer/drawer.com
 import { AccountMoney } from '../../services/models/AccountMoney';
 import { AccountMoneyService } from '../../services/api/account-money.service';
 import { AccountMoneyCards } from '../account-money-cards/account-money-cards';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 
 @Component({
   standalone: true,
@@ -27,6 +28,7 @@ import { AccountMoneyCards } from '../account-money-cards/account-money-cards';
     MatInput,
     MatLabel,
     MatSelectModule,
+    ButtonComponent,
   ],
   providers: [AccountMoneyService],
   template: `
@@ -60,7 +62,6 @@ import { AccountMoneyCards } from '../account-money-cards/account-money-cards';
               min="0"
             />
           </mat-form-field>
-
           <mat-form-field>
             <mat-label>Select currency</mat-label>
             <mat-select [(ngModel)]="model.currency" name="currency">
@@ -83,6 +84,18 @@ import { AccountMoneyCards } from '../account-money-cards/account-money-cards';
         >
           Save
         </button>
+      </div>
+      <div ngProjectAs="alternative__trigger">
+        <app-button
+          [buttonContent]="'Add account'"
+          [customStyles]="{
+            backgroundColor: 'var(--background-color-primary)',
+            color: 'black',
+            width: 'auto',
+            whiteSpace: 'nowrap',
+          }"
+          [icon]="'add'"
+        />
       </div>
     </app-drawer>
   `,

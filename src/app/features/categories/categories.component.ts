@@ -11,7 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { SearchComponent } from '../../shared/components/search/search.component';
 import { ECategories } from './types/enums';
-import { CATEGORIES, CategoryMap } from '../../shared/constants/dictionaries';
+import { CategoryMap } from '../../shared/constants/dictionaries';
+import { IOnSubscriptionCallbacks } from '../../shared/types/interfaces';
 
 @Component({
   selector: 'app-categories',
@@ -106,14 +107,7 @@ export class CategoriesComponent {
     return this.categoriesService.changeSearchTerm(searchTerm);
   }
 
-  saveCategory(
-    category: ICategory,
-    callbacks: {
-      onSuccess?: Function;
-      onError?: Function;
-      onComplete?: Function;
-    },
-  ) {
+  saveCategory(category: ICategory, callbacks: IOnSubscriptionCallbacks) {
     this.categoriesService.saveCategory(category, callbacks);
   }
 }
