@@ -109,6 +109,7 @@ export class CategoriesService {
     this.apiService.getAllCategories().subscribe({
       next: (categories) => {
         this.categoriesSignal.set(categories);
+        this.filteredCategoriesSignal.set(categories);
       },
       error: () => {
         this.submitted = true;

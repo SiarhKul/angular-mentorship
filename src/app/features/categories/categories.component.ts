@@ -34,16 +34,14 @@ import { SearchComponent } from '../../shared/components/search/search.component
 
       <section class="categories-section">
         @if (categoriesSignal() !== null) {
-          <app-search
-            [changeSearchTerm]="this.categoriesService.changeSearchTerm"
-          />
+          <app-search [changeSearchTerm]="handleSearchTerm.bind(this)" />
         }
 
-        @if ((categoriesSignal() || []).length === 0) {
+        @if ((filteredCategoriesSignal() || []).length === 0) {
           <div>No categories found matching your search.</div>
         } @else {
           <app-categories-list
-            [categories]="categoriesSignal"
+            [categories]="filteredCategoriesSignal"
             class="app-categories-list"
           />
         }
@@ -89,7 +87,13 @@ export class CategoriesComponent {
 
   constructor(public categoriesService: CategoriesService) {
     this.categoriesSignal = this.categoriesService.categoriesSignal;
+    this.filteredCategoriesSignal =
+      this.categoriesService.filteredCategoriesSignal;
     this.isLoadingSignal = this.categoriesService.isLoadingSignal;
+  }
+
+  handleSearchTerm(searchTerm: string) {
+    return this.categoriesService.changeSearchTerm(searchTerm);
   }
 
   saveCategory(
