@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { SearchComponent } from '../../shared/components/search/search.component';
+import { ECategories } from './types/enums';
+import { CATEGORIES, CategoryMap } from '../../shared/constants/dictionaries';
 
 @Component({
   selector: 'app-categories',
@@ -49,6 +51,9 @@ import { SearchComponent } from '../../shared/components/search/search.component
 
       <div class="button-block">
         <app-button
+          (click)="
+            categoriesService.sortByType(CategoryMap.get(ECategories.INCOME)!)
+          "
           [buttonContent]="'Income'"
           [icon]="'arrow_upward'"
           [customStyles]="{
@@ -56,6 +61,9 @@ import { SearchComponent } from '../../shared/components/search/search.component
           }"
         />
         <app-button
+          (click)="
+            categoriesService.sortByType(CategoryMap.get(ECategories.EXPENSES)!)
+          "
           [buttonContent]="'Expanses'"
           [icon]="'arrow_downward'"
           [customStyles]="{
@@ -81,6 +89,8 @@ import { SearchComponent } from '../../shared/components/search/search.component
   `,
 })
 export class CategoriesComponent {
+  protected readonly CategoryMap = CategoryMap;
+  protected readonly ECategories = ECategories;
   categoriesSignal = signal<Required<ICategory>[] | null>(null);
   filteredCategoriesSignal = signal<Required<ICategory>[] | null>(null);
   isLoadingSignal = signal(true);

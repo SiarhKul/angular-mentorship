@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { CategoriesApiService } from './categories.api.service';
 import { ICategory } from '../types/interfaces';
 import { switchMap } from 'rxjs';
+import { IOnSubscriptionCallbacks } from '../../../shared/types/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -18,14 +19,7 @@ export class CategoriesService {
     this.fetchCategories();
   }
 
-  saveCategory(
-    category: ICategory,
-    callbacks: {
-      onSuccess?: Function;
-      onError?: Function;
-      onComplete?: Function;
-    },
-  ) {
+  saveCategory(category: ICategory, callbacks: IOnSubscriptionCallbacks) {
     this.apiService.saveCategory(category).subscribe({
       next: (categories) => {
         this.fetchCategories();
@@ -42,10 +36,7 @@ export class CategoriesService {
     });
   }
 
-  deleteCategory(
-    id: string,
-    callbacks?: { onSuccess?: Function; onError?: Function },
-  ) {
+  deleteCategory(id: string, callbacks?: IOnSubscriptionCallbacks) {
     this.apiService.deleteCategory(id).subscribe({
       next: (categories) => {
         this.fetchCategories();
@@ -58,8 +49,6 @@ export class CategoriesService {
   }
 
   changeSearchTerm(searchTerm: string) {
-    console.log('searchTerm', searchTerm);
-
     const categories = this.categoriesSignal();
     if (!categories) return null;
 
@@ -71,17 +60,23 @@ export class CategoriesService {
       filter = categories;
     }
     this.filteredCategoriesSignal.set(filter);
-    console.log('Filtered', filter);
     return filter;
+  }
+
+  sortByType(type: number) {
+    const categories = this.categoriesSignal();
+
+    const filtered =
+      categories && categories.length > 0
+        ? categories.filter((c) => c.type === type)
+        : categories;
+
+    this.filteredCategoriesSignal.set(filtered);
   }
 
   updateCategory(
     category: Required<ICategory>,
-    callbacks: {
-      onSuccess?: Function;
-      onError?: Function;
-      onComplete?: Function;
-    },
+    callbacks: IOnSubscriptionCallbacks,
   ) {
     this.apiService
       .updateCategory(category)
