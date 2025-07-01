@@ -35,16 +35,15 @@ import { SearchComponent } from '../../shared/components/search/search.component
       <section class="categories-section">
         @if (categoriesSignal() !== null) {
           <app-search
-            [categoriesSignal]="categoriesSignal"
-            [filteredCategoriesSignal]="filteredCategoriesSignal"
+            [changeSearchTerm]="this.categoriesService.changeSearchTerm"
           />
         }
 
-        @if ((filteredCategoriesSignal() || []).length === 0) {
+        @if ((categoriesSignal() || []).length === 0) {
           <div>No categories found matching your search.</div>
         } @else {
           <app-categories-list
-            [categories]="filteredCategoriesSignal"
+            [categories]="categoriesSignal"
             class="app-categories-list"
           />
         }
@@ -88,7 +87,7 @@ export class CategoriesComponent {
   filteredCategoriesSignal = signal<Required<ICategory>[] | null>(null);
   isLoadingSignal = signal(true);
 
-  constructor(private categoriesService: CategoriesService) {
+  constructor(public categoriesService: CategoriesService) {
     this.categoriesSignal = this.categoriesService.categoriesSignal;
     this.isLoadingSignal = this.categoriesService.isLoadingSignal;
   }

@@ -10,6 +10,7 @@ import { switchMap } from 'rxjs';
 export class CategoriesService {
   categoriesSignal = signal<Required<ICategory>[] | null>(null);
   isLoadingSignal = signal(false);
+  filteredCategoriesSignal = signal<Required<ICategory>[] | null>(null);
   submitted = false;
   error = '';
 
@@ -54,6 +55,24 @@ export class CategoriesService {
         callbacks?.onError?.(error);
       },
     });
+  }
+
+  changeSearchTerm(searchTerm: string) {
+    console.log('searchTerm', searchTerm);
+
+    const categories = this.categoriesSignal();
+    if (!categories) return null;
+
+    let filter = categories.filter((c) =>
+      c.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+
+    if (searchTerm === '') {
+      filter = categories;
+    }
+    this.filteredCategoriesSignal.set(filter);
+    console.log('Filtered', filter);
+    return filter;
   }
 
   updateCategory(

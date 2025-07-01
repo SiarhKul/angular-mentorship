@@ -7,6 +7,8 @@ import {
   computed,
   OnInit,
   OnDestroy,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import {
   MatFormField,
@@ -54,30 +56,20 @@ import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
     </mat-form-field>
   `,
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements OnInit, OnDestroy, OnChanges {
   searchTerm = signal('');
   private searchTerms$ = new Subject<string>();
   private destroy$ = new Subject<void>();
 
   @Input()
-  categoriesSignal!: WritableSignal<Required<ICategory>[] | null>;
+  changeSearchTerm!: (searchTerm: string) => null | Required<ICategory>[];
 
-  @Input()
-  filteredCategoriesSignal!: WritableSignal<Required<ICategory>[] | null>;
-
-  filteredCategories = computed(() => {
-    const categories = this.categoriesSignal();
-    if (!categories) return null;
-
-    return categories.filter((c) =>
-      c.name.toLowerCase().includes(this.searchTerm().toLowerCase()),
-    );
-  });
-
-  constructor() {
-    effect(() => {
-      this.filteredCategoriesSignal.set(this.filteredCategories());
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('1111', this.searchTerm());
+    if (changes['searchTerm']) {
+      console.log('fffffffff', this.searchTerm());
+      this.changeSearchTerm(this.searchTerm());
+    }
   }
 
   ngOnInit(): void {
