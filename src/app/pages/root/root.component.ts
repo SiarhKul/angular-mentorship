@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MoneyAccounts } from '../../features/money-accounts/money-accounts';
 import { AccountMoneyService } from '../../features/money-accounts/services/api/account-money.service';
+import { LayoutPage } from '../../shared/components/layout-page/layout-page.component';
 
 @Component({
   selector: 'app-categories',
-  imports: [MoneyAccounts],
+  imports: [MoneyAccounts, LayoutPage],
   templateUrl: './root.component.html',
   providers: [AccountMoneyService],
 })

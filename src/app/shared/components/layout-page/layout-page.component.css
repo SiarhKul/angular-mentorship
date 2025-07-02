@@ -1,0 +1,7 @@
+.layout-page {
+  display: flex;
+}
+
+.layout-page__second-element {
+  /*flex:1;*/
+}
