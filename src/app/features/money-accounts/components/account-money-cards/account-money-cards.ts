@@ -5,7 +5,7 @@ import {
   SimpleChanges,
   WritableSignal,
 } from '@angular/core';
-import { AccountMoneyService } from '../../services/api/account-money.service';
+import { AccountMoneyServiceApi } from '../../services/api/account-money-service-api.service';
 import { AccountMoney } from '../../services/models/AccountMoney';
 import { NgClass } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,7 +21,7 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
   standalone: true,
   styleUrls: ['account-money-cards.css'],
   imports: [NgClass],
-  providers: [AccountMoneyService],
+  providers: [AccountMoneyServiceApi],
   template: `
     @if (moneyAccounts; as accounts) {
       <ul class="account-money-cards">

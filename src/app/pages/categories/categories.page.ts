@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AccountMoneyService } from '../../features/money-accounts/services/api/account-money.service';
+import { AccountMoneyServiceApi } from '../../features/money-accounts/services/api/account-money-service-api.service';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -18,6 +18,6 @@ import { CategoriesComponent } from '../../features/categories/categories.compon
   ],
   templateUrl: './categories.page.html',
   styleUrl: './categories.page.css',
-  providers: [AccountMoneyService],
+  providers: [AccountMoneyServiceApi],
 })
 export class CategoriesPage {}

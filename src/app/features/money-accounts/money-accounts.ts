@@ -3,7 +3,7 @@ import { AccountMoneyCards } from './components/account-money-cards/account-mone
 import { AccountMoneyCreator } from './components/account-money-creator/account-money-creator';
 import { AccountMoney } from './services/models/AccountMoney';
 import { Observable } from 'rxjs';
-import { AccountMoneyService } from './services/api/account-money.service';
+import { AccountMoneyServiceApi } from './services/api/account-money-service-api.service';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { RoutePaths } from '../../shared/constants/route-pathes';
@@ -28,7 +28,7 @@ export class MoneyAccounts {
   selectedMoneyAccountIdSignal = signal<number | null>(null);
 
   constructor(
-    private ams: AccountMoneyService,
+    private ams: AccountMoneyServiceApi,
     private router: Router,
   ) {
     this.moneyAccounts$ = this.ams.getMoneyAccounts();

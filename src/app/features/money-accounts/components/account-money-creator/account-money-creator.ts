@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { AccountMoney } from '../../services/models/AccountMoney';
-import { AccountMoneyService } from '../../services/api/account-money.service';
+import { AccountMoneyServiceApi } from '../../services/api/account-money-service-api.service';
 import { AccountMoneyCards } from '../account-money-cards/account-money-cards';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 
@@ -30,7 +30,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
     MatSelectModule,
     ButtonComponent,
   ],
-  providers: [AccountMoneyService],
+  providers: [AccountMoneyServiceApi],
   template: `
     <app-drawer [textHeader]="'Create money account'">
       <div ngProjectAs="drawer__content">
@@ -118,7 +118,7 @@ export class AccountMoneyCreator {
   @ViewChild('createMoneyAccountRef')
   createMoneyAccountRef!: NgForm;
 
-  constructor(private ams: AccountMoneyService) {}
+  constructor(private ams: AccountMoneyServiceApi) {}
 
   onSubmit() {
     this.submitted = true;

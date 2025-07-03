@@ -5,7 +5,7 @@ import { ACCOUNT_MONEY_ENDPOINT } from '../../../../shared/constants/endpoints';
 import { API_URLS } from '../../../../shared/constants/api-url';
 
 @Injectable()
-export class AccountMoneyService {
+export class AccountMoneyServiceApi {
   constructor(private http: HttpClient) {}
 
   create(moneyAccount: AccountMoney) {
