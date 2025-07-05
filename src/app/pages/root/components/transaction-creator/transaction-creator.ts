@@ -65,7 +65,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
               matInput
               name="date"
               required
-              type="datetime-local"
+              type="date"
             />
             <mat-error>Date is required</mat-error>
           </mat-form-field>
@@ -141,20 +141,15 @@ export class TransactionCreatorComponent {
   model = {
     title: '',
     amount: 0,
-    date: new Date(),
+    date: new Date().toISOString().split('T')[0],
     payee: '',
     description: '',
   };
 
   hideSingleSelectionIndicator = signal(false);
-  hideMultipleSelectionIndicator = signal(false);
 
   toggleSingleSelectionIndicator() {
     this.hideSingleSelectionIndicator.update((value) => !value);
-  }
-
-  toggleMultipleSelectionIndicator() {
-    this.hideMultipleSelectionIndicator.update((value) => !value);
   }
 
   onSubmit(formRef: NgForm) {
@@ -163,6 +158,6 @@ export class TransactionCreatorComponent {
       valid,
     } = formRef;
 
-    console.log('111111', value);
+    console.log('111111', { ...value });
   }
 }
