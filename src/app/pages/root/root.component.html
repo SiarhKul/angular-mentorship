@@ -4,15 +4,6 @@
   </div>
   <div slot="middle">Middle content goes here</div>
   <div slot="right">
-    <app-button
-      [buttonContent]="'Add transaction'"
-      [customStyles]="{
-        backgroundColor: 'var(--background-color-primary-dark)',
-        color: 'black',
-        width: 'auto',
-        whiteSpace: 'nowrap',
-      }"
-      [icon]="'add'"
-    />
+    <app-transaction-creator />
   </div>
 </app-layout-page>
