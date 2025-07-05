@@ -6,11 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout-page.component.css'],
   template: `
     <div class="layout-page">
-      <ng-content select="[slot=left]" />
-      <div class="layout-page__second-element">
+      <div class="layout-page__left">
+        <ng-content select="[slot=left]" />
+      </div>
+      <div class="layout-page__middle">
         <ng-content select="[slot=middle]" />
       </div>
-      <ng-content select="[slot=right]" />
+      <div class="layout-page__right">
+        <ng-content select="[slot=right]" />
+      </div>
     </div>
   `,
 })

@@ -2,6 +2,6 @@
   display: flex;
 }
 
-.layout-page__second-element {
-  /*flex:1;*/
+.layout-page__middle {
+  flex: 1;
 }

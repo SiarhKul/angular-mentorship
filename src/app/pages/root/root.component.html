@@ -1,6 +1,18 @@
 <app-layout-page>
-  <money-accounts slot="left" />
-
-  <div slot="middle">11111</div>
-  <div slot="right">22222</div>
+  <div slot="left">
+    <money-accounts />
+  </div>
+  <div slot="middle">Middle content goes here</div>
+  <div slot="right">
+    <app-button
+      [buttonContent]="'Add transaction'"
+      [customStyles]="{
+        backgroundColor: 'var(--background-color-primary-dark)',
+        color: 'black',
+        width: 'auto',
+        whiteSpace: 'nowrap',
+      }"
+      [icon]="'add'"
+    />
+  </div>
 </app-layout-page>
