@@ -7,6 +7,7 @@ import { AccountMoneyServiceApi } from './services/api/account-money-service-api
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { RoutePaths } from '../../shared/constants/route-pathes';
+import { RootService } from '../../pages/root/root.service';
 
 @Component({
   selector: 'money-accounts',
@@ -30,8 +31,10 @@ export class MoneyAccounts {
   constructor(
     private ams: AccountMoneyServiceApi,
     private router: Router,
+    private rootService: RootService,
   ) {
-    this.moneyAccounts$ = this.ams.getMoneyAccounts();
+    this.moneyAccounts$ = this.rootService.getMoneyAccounts();
+    // this.moneyAccounts$ = this.ams.getMoneyAccounts();
   }
 
   async createSuccessfully(moneyAccount: number | null) {
