@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AccountMoney } from '../../features/money-accounts/services/models/AccountMoney';
 import { RoutePaths } from '../../shared/constants/route-pathes';
+import { HttpClient } from '@angular/common/http';
 
+//todo: Mentor: Why is @Injectable used here?
 @Injectable({
   providedIn: 'root',
-  useFactory: (api: AccountMoneyServiceApi, router: Router) =>
-    new RootService(api, router),
-  deps: [AccountMoneyServiceApi, Router],
+  useFactory: (http: HttpClient, router: Router) =>
+    new RootService(new AccountMoneyServiceApi(http), router),
+  deps: [HttpClient, Router],
 })
 export class RootService {
   moneyAccounts$: Observable<Required<AccountMoney>[]> | null = null;

@@ -3,10 +3,7 @@ import { AccountMoneyCards } from './components/account-money-cards/account-mone
 import { AccountMoneyCreator } from './components/account-money-creator/account-money-creator';
 import { AccountMoney } from './services/models/AccountMoney';
 import { Observable } from 'rxjs';
-import { AccountMoneyServiceApi } from './services/api/account-money-service-api.service';
 import { AsyncPipe } from '@angular/common';
-import { Router } from '@angular/router';
-import { RoutePaths } from '../../shared/constants/route-pathes';
 import { RootService } from '../../pages/root/root.service';
 
 @Component({
@@ -28,28 +25,11 @@ export class MoneyAccounts {
   moneyAccounts$: Observable<Required<AccountMoney>[]> | null = null;
   selectedMoneyAccountIdSignal = signal<number | null>(null);
 
-  constructor(
-    private ams: AccountMoneyServiceApi,
-    private router: Router,
-    private rootService: RootService,
-  ) {
+  constructor(private rootService: RootService) {
     this.moneyAccounts$ = this.rootService.getMoneyAccounts();
-    // this.moneyAccounts$ = this.ams.getMoneyAccounts();
   }
 
   async createSuccessfully(moneyAccount: number | null) {
-    if (moneyAccount === null) {
-      return;
-    }
-
-    this.moneyAccounts$ = this.ams.getMoneyAccounts();
-
-    this.selectedMoneyAccountIdSignal.set(moneyAccount);
-
-    await this.router.navigate([`/${RoutePaths.ROOT}`], {
-      queryParams: {
-        moneyAccountId: moneyAccount,
-      },
-    });
+    await this.rootService.createSuccessfully(moneyAccount);
   }
 }

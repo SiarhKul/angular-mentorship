@@ -4,7 +4,10 @@ import { AccountMoney } from '../models/AccountMoney';
 import { ACCOUNT_MONEY_ENDPOINT } from '../../../../shared/constants/endpoints';
 import { API_URLS } from '../../../../shared/constants/api-url';
 
-@Injectable()
+//todo: Mentor: Why is @Injectable used here?
+@Injectable({
+  providedIn: 'root',
+})
 export class AccountMoneyServiceApi {
   constructor(private http: HttpClient) {}
 

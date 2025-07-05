@@ -43,7 +43,7 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
                 {{ CURRENCIES_DICTIONARY[account.currency] }}
               </span>
             </div>
-            <span cmoneyAccountslass="card-sum">{{ account.initSum }}</span>
+            <span class="card-sum">{{ account.initSum }}</span>
             {{ account.currency }}
           </li>
         }

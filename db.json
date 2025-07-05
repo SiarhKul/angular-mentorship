@@ -34,5 +34,11 @@
     "typeCard": "test1",
     "initSum": 177,
     "id": 1749843510060
+  },
+  {
+    "currency": "euro",
+    "typeCard": "t14",
+    "initSum": 45,
+    "id": 1751703920574
   }
 ]
