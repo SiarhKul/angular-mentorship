@@ -2,16 +2,14 @@ import { Component, signal } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { MatButton } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CATEGORIES } from '../../../../shared/constants/dictionaries';
-import { ICategory } from '../../../../features/categories/types/interfaces';
 import {
   MatError,
   MatFormField,
   MatInput,
   MatLabel,
 } from '@angular/material/input';
-import { MatOption, MatSelect } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
@@ -53,7 +51,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             <input
               [(ngModel)]="model.amount"
               matInput
-              name="title"
+              name="amount"
               required
               type="number"
             />
@@ -77,7 +75,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             <input
               [(ngModel)]="model.payee"
               matInput
-              name="title"
+              name="payee"
               required
               type="text"
             />
@@ -89,7 +87,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             <input
               [(ngModel)]="model.description"
               matInput
-              name="title"
+              name="description"
               required
               type="text"
             />
@@ -99,7 +97,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       </div>
 
       <footer ngProjectAs="footer__buttons">
-        <button form="create-category" mat-stroked-button type="button">
+        <button
+          (click)="onSubmit(formRef)"
+          form="transaction-category"
+          mat-stroked-button
+          type="button"
+        >
           Save
         </button>
       </footer>
@@ -152,5 +155,14 @@ export class TransactionCreatorComponent {
 
   toggleMultipleSelectionIndicator() {
     this.hideMultipleSelectionIndicator.update((value) => !value);
+  }
+
+  onSubmit(formRef: NgForm) {
+    const {
+      form: { value },
+      valid,
+    } = formRef;
+
+    console.log('111111', value);
   }
 }
