@@ -12,6 +12,7 @@ import {
 } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-creator',
@@ -29,8 +30,20 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
               name="category"
               [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
             >
-              <mat-button-toggle value="income">Income</mat-button-toggle>
-              <mat-button-toggle value="expenses">Expenses</mat-button-toggle>
+              <mat-button-toggle
+                [style]="{
+                  'background-color': 'var(--background-color-allow)',
+                }"
+                value="income"
+                >Income</mat-button-toggle
+              >
+              <mat-button-toggle
+                [style]="{
+                  'background-color': 'var(--background-color-not-allow)',
+                }"
+                value="expenses"
+                >Expenses</mat-button-toggle
+              >
             </mat-button-toggle-group>
           </section>
 
