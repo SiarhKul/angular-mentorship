@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { writeFile, readFile } = require("node:fs/promises");
 const crypto = require("node:crypto");
-const { read } = require("node:fs");
 
 router.post("/", async (req, res) => {
   try {

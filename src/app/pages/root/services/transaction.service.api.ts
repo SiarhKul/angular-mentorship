@@ -14,13 +14,18 @@ export class TransactionServiceApi {
     const url =
       `${API_URLS.baseUrl}${TRANSACTION_ENDPOINT.transactions}` as const;
 
-    // this.http.post('/transactions', transaction);
-
-    this.http.get<any>(url, transaction).subscribe({
-      next: (data: any) => {
-        console.log('Transaction created successfully:', data);
-      },
+    console.log('11', {
+      url,
+      transaction,
     });
-    console.log(transaction);
+
+    this.http.post(url, { test1: 'test' });
+
+    // this.http.get<any>(url, transaction).subscribe({
+    //   next: (data: any) => {
+    //     console.log('Transaction created successfully:', data);
+    //   },
+    // });
+    // console.log(transaction);
   }
 }
