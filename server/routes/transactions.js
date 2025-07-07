@@ -3,29 +3,50 @@ const router = express.Router();
 const { writeFile, readFile } = require("node:fs/promises");
 const crypto = require("node:crypto");
 
+const TRANSACTIONS_FILE_PATH = "db.transactions.json";
+
+async function readTransactions() {
+  try {
+    const data = await readFile(TRANSACTIONS_FILE_PATH, "utf-8");
+    return JSON.parse(data || "[]");
+  } catch (error) {
+    throw new Error("Failed to read transactions database");
+  }
+}
+
+async function saveTransactions(transactions) {
+  try {
+    await writeFile(
+      TRANSACTIONS_FILE_PATH,
+      JSON.stringify(transactions, null, 2),
+    );
+  } catch (error) {
+    throw new Error("Failed to save transactions to database");
+  }
+}
+
+async function createTransaction(transactionData) {
+  const id = crypto.randomUUID();
+  const newTransaction = { id, ...transactionData };
+
+  try {
+    const transactions = await readTransactions();
+    transactions.push(newTransaction);
+    await saveTransactions(transactions);
+    return newTransaction;
+  } catch (error) {
+    throw new Error(`Failed to create transaction: ${error.message}`);
+  }
+}
+
 router.post("/", async (req, res) => {
   try {
-    const id = crypto.randomUUID();
-    const newTransaction = { id, ...req.body };
-
-    const transactionsDb = JSON.parse(
-      (await readFile("db.transactions.json", "utf-8")) || "[]",
-    );
-
-    transactionsDb.push(newTransaction);
-
-    console.log("Existing transactions loaded:", transactionsDb);
-
-    await writeFile(
-      "db.transactions.json",
-      JSON.stringify(transactionsDb, null, 2),
-    );
-
+    const newTransaction = await createTransaction(req.body);
     console.log("New transaction added:", newTransaction);
     res.json(newTransaction);
-  } catch (err) {
-    console.error("Error writing to db.transactions.json:", err);
-    return res.status(500).json({ error: "Failed to write/read transaction" });
+  } catch (error) {
+    console.error("Transaction error:", error);
+    res.status(500).json({ error: error.message });
   }
 });
 

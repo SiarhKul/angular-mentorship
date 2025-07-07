@@ -16,5 +16,14 @@
     "date": "2025-07-07",
     "payee": "af",
     "description": "ff"
+  },
+  {
+    "id": "a636bf43-b9fd-47cc-a02b-2464288eb918",
+    "category": "Expenses",
+    "title": "d",
+    "amount": 0,
+    "date": "2025-07-07",
+    "payee": "af",
+    "description": "ff"
   }
 ]
