@@ -23,16 +23,16 @@ export class RootService {
   selectedMoneyAccountIdSignal = signal<number | null>(null);
 
   constructor(
-    private apiService: AccountMoneyServiceApi,
+    private accountMoneyServiceApi: AccountMoneyServiceApi,
     private transactionServiceApi: TransactionServiceApi,
     private router: Router,
   ) {}
 
   getMoneyAccounts() {
-    return this.apiService.getMoneyAccounts();
+    return this.accountMoneyServiceApi.getMoneyAccounts();
   }
 
-  async createTransaction(transaction: any) {
+  async createTransactionAsync(transaction: any) {
     this.transactionServiceApi.createTransaction(transaction);
   }
 
@@ -41,7 +41,7 @@ export class RootService {
       return;
     }
 
-    this.moneyAccounts$ = this.apiService.getMoneyAccounts();
+    this.moneyAccounts$ = this.accountMoneyServiceApi.getMoneyAccounts();
 
     this.selectedMoneyAccountIdSignal.set(moneyAccount);
 

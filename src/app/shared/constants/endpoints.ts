@@ -9,3 +9,7 @@ export const ACCOUNT_MONEY_ENDPOINT = {
 export const CATEGORY_ENDPOINT = {
   categories: '/categories',
 } as const;
+
+export const TRANSACTION_ENDPOINT = {
+  transactions: '/transactions',
+} as const;

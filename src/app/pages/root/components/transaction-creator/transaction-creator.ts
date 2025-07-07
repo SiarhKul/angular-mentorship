@@ -176,6 +176,6 @@ export class TransactionCreatorComponent {
       valid,
     } = formRef;
 
-    await this.rootService.createTransaction(value);
+    await this.rootService.createTransactionAsync(value);
   }
 }
