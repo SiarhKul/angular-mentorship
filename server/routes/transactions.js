@@ -8,9 +8,21 @@ router.post("/", async (req, res) => {
     const id = crypto.randomUUID();
     const newTransaction = { id, ...req.body };
 
-    const transactionsRow =
-      (await readFile("db.transactions.json", "utf-8")) || "[]";
-    console.log("Existing transactions loaded:", transactionsRow);
+    const transactionsDb = JSON.parse(
+      (await readFile("db.transactions.json", "utf-8")) || "[]",
+    );
+
+    transactionsDb.push(newTransaction);
+
+    console.log("Existing transactions loaded:", transactionsDb);
+
+    await writeFile(
+      "db.transactions.json",
+      JSON.stringify(transactionsDb, null, 2),
+    );
+
+    console.log("New transaction added:", newTransaction);
+    res.json(newTransaction);
   } catch (err) {
     console.error("Error writing to db.transactions.json:", err);
     return res.status(500).json({ error: "Failed to write/read transaction" });
