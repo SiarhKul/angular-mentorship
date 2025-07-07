@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { AccountMoneyServiceApi } from '../../features/money-accounts/services/api/account-money-service-api.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { AccountMoney } from '../../features/money-accounts/services/models/AccountMoney';
 import { RoutePaths } from '../../shared/constants/route-pathes';
 import { HttpClient } from '@angular/common/http';
@@ -12,9 +12,8 @@ import { TransactionServiceApi } from './services/transaction.service.api';
   providedIn: 'root',
   useFactory: (http: HttpClient, router: Router) => {
     const amsApi = new AccountMoneyServiceApi(http);
-    const tApi = new TransactionServiceApi(http);
-
-    return new RootService(amsApi, tApi, router);
+    const tsApi = new TransactionServiceApi(http);
+    return new RootService(amsApi, tsApi, router);
   },
   deps: [HttpClient, Router],
 })
@@ -33,7 +32,9 @@ export class RootService {
   }
 
   async createTransactionAsync(transaction: any) {
-    this.transactionServiceApi.createTransaction(transaction);
+    return firstValueFrom(
+      this.transactionServiceApi.createTransaction(transaction),
+    );
   }
 
   async createSuccessfully(moneyAccount: number | null) {
