@@ -13,6 +13,7 @@ import {
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgStyle } from '@angular/common';
+import { ECategories } from '../../../../features/categories/types/enums';
 
 @Component({
   selector: 'app-transaction-creator',
@@ -29,19 +30,20 @@ import { NgStyle } from '@angular/common';
             <mat-button-toggle-group
               name="category"
               [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
+              [(ngModel)]="model.category"
             >
               <mat-button-toggle
                 [style]="{
                   'background-color': 'var(--background-color-allow)',
                 }"
-                value="income"
+                [value]="categories.INCOME"
                 >Income</mat-button-toggle
               >
               <mat-button-toggle
                 [style]="{
                   'background-color': 'var(--background-color-not-allow)',
                 }"
-                value="expenses"
+                [value]="categories.EXPENSES"
                 >Expenses</mat-button-toggle
               >
             </mat-button-toggle-group>
@@ -149,7 +151,7 @@ import { NgStyle } from '@angular/common';
   ],
 })
 export class TransactionCreatorComponent {
-  categories = CATEGORIES;
+  categories = ECategories;
 
   model = {
     title: '',
@@ -157,6 +159,7 @@ export class TransactionCreatorComponent {
     date: new Date().toISOString().split('T')[0],
     payee: '',
     description: '',
+    category: ECategories.EXPENSES,
   };
 
   hideSingleSelectionIndicator = signal(false);
