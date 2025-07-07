@@ -14,6 +14,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgStyle } from '@angular/common';
 import { ECategories } from '../../../../features/categories/types/enums';
+import { RootService } from '../../root.service';
 
 @Component({
   selector: 'app-transaction-creator',
@@ -29,7 +30,6 @@ import { ECategories } from '../../../../features/categories/types/enums';
           <section>
             <mat-button-toggle-group
               name="category"
-              [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
               [(ngModel)]="model.category"
             >
               <mat-button-toggle
@@ -162,18 +162,20 @@ export class TransactionCreatorComponent {
     category: ECategories.EXPENSES,
   };
 
-  hideSingleSelectionIndicator = signal(false);
+  // hideSingleSelectionIndicator = signal(false);
 
-  toggleSingleSelectionIndicator() {
-    this.hideSingleSelectionIndicator.update((value) => !value);
-  }
+  // toggleSingleSelectionIndicator() {
+  //   this.hideSingleSelectionIndicator.update((value) => !value);
+  // }
 
-  onSubmit(formRef: NgForm) {
+  constructor(private rootService: RootService) {}
+
+  async onSubmit(formRef: NgForm) {
     const {
       form: { value },
       valid,
     } = formRef;
 
-    console.log('111111', { ...value });
+    await this.rootService.createTransaction(value);
   }
 }
