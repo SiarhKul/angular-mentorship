@@ -1,29 +1,11 @@
 [
   {
-    "id": "dbbc535f-3da0-412c-8b65-2ec36619817e",
+    "id": "d4d8bec9-e0a1-4b0c-8e5e-f43c6752446d",
     "category": "Expenses",
-    "title": "d",
+    "title": "dd",
     "amount": 0,
-    "date": "2025-07-07",
-    "payee": "af",
-    "description": "ff"
-  },
-  {
-    "id": "eb1a181d-43ff-4e54-8595-e1ba3da6afa2",
-    "category": "Expenses",
-    "title": "d",
-    "amount": 0,
-    "date": "2025-07-07",
-    "payee": "af",
-    "description": "ff"
-  },
-  {
-    "id": "a636bf43-b9fd-47cc-a02b-2464288eb918",
-    "category": "Expenses",
-    "title": "d",
-    "amount": 0,
-    "date": "2025-07-07",
-    "payee": "af",
-    "description": "ff"
+    "date": "2025-07-08",
+    "payee": "d",
+    "description": "cf"
   }
 ]
