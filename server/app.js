@@ -4,12 +4,12 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const loginRouter = require("./routes/login");
-const moneyAccountRouter = require("./routes/money-account");
-const categoriesRouter = require("./routes/categories");
-const transactionsRouter = require("./routes/transactions");
+const indexRouter = require("./interfaces/index");
+const usersRouter = require("./interfaces/users");
+const loginRouter = require("./interfaces/login");
+const moneyAccountRouter = require("./interfaces/money-account");
+const categoriesRouter = require("./interfaces/categories");
+const transactionsRouter = require("./interfaces/transactions");
 
 const app = express();
 
