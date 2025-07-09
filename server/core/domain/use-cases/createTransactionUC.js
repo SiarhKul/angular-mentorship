@@ -18,6 +18,16 @@ async function createTransaction(transactionData) {
   }
 }
 
+async function getAllTransactions() {
+  try {
+    const transactions = await readFromFile(TRANSACTIONS_FILE_PATH);
+    return transactions;
+  } catch (error) {
+    throw new Error(`Failed to retrieve transactions: ${error.message}`);
+  }
+}
+
 module.exports = {
   createTransaction,
+  getAllTransactions,
 };

@@ -18,4 +18,10 @@ export class TransactionServiceApi {
 
     return this.http.post<any>(url, transaction);
   }
+
+  getTransactions() {
+    const url =
+      `${API_URLS.baseUrl}${TRANSACTION_ENDPOINT.transactions}` as const;
+    return this.http.get<Transaction[]>(url);
+  }
 }

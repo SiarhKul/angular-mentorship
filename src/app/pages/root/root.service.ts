@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { AccountMoneyServiceApi } from '../../features/money-accounts/services/api/account-money-service-api.service';
 import { Router } from '@angular/router';
 import { Observable, firstValueFrom } from 'rxjs';
@@ -20,15 +20,29 @@ import { TransactionServiceApi } from './services/transaction.service.api';
 export class RootService {
   moneyAccounts$: Observable<Required<AccountMoney>[]> | null = null;
   selectedMoneyAccountIdSignal = signal<number | null>(null);
+  transactionsSignal = signal<any>([]);
 
   constructor(
     private accountMoneyServiceApi: AccountMoneyServiceApi,
     private transactionServiceApi: TransactionServiceApi,
     private router: Router,
-  ) {}
+  ) {
+    this.fetchTransactions();
+  }
 
   getMoneyAccounts() {
     return this.accountMoneyServiceApi.getMoneyAccounts();
+  }
+
+  fetchTransactions() {
+    this.transactionServiceApi.getTransactions().subscribe({
+      next: (transactions) => {
+        this.transactionsSignal.set(transactions);
+      },
+      error: (error) => {
+        console.error('Error fetching transactions:', error);
+      },
+    });
   }
 
   async createTransactionAsync(transaction: any) {

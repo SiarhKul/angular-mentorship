@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   createTransaction,
+  getAllTransactions,
 } = require("../core/domain/use-cases/createTransactionUC.js");
 
 router.post("/", async (req, res) => {
@@ -16,10 +17,13 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (_req, res) => {
-  console.log("Received request to get all transactions");
-  res
-    .status(200)
-    .json({ message: "This is a placeholder for the transactions endpoint." });
+  try {
+    const transactions = await getAllTransactions();
+    res.status(200).json(transactions);
+  } catch (error) {
+    console.error("Error retrieving transactions:", error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 module.exports = router;
