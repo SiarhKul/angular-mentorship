@@ -1,9 +1,9 @@
 <div class="card">
-  <div class="category-box">{{ category }}</div>
+  <div class="category-box">{{ title }}</div>
 
   <div class="content">
     <div class="title-row">
-      <div class="title">{{ title }}</div>
+      <div class="title">{{ description }}</div>
       <div class="amount" [class]="{ negative: amount < 0 }">
         {{ amount | currency: "USD" : true }}
       </div>

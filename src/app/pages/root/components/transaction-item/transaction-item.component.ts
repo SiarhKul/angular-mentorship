@@ -13,4 +13,5 @@ export class TransactionItemComponent {
   @Input() date = '';
   @Input() category = '';
   @Input() payee = '';
+  @Input() description = '';
 }

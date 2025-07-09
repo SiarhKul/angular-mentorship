@@ -15,6 +15,7 @@ import { TransactionItemComponent } from '../transaction-item/transaction-item.c
           [date]="tx.date"
           [category]="tx.category"
           [payee]="tx.payee"
+          [description]="tx.description"
         >
         </app-transaction-item>
       }

@@ -16,5 +16,14 @@
     "date": "2025-07-08",
     "payee": "4",
     "description": "4"
+  },
+  {
+    "id": "e21d91d4-a293-4754-bd57-d6be81693cb6",
+    "category": "Expenses",
+    "title": "Title",
+    "amount": 0,
+    "date": "2025-07-09",
+    "payee": "Payee",
+    "description": "Description"
   }
 ]
