@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="category-box">{{ category }}</div>
+
+  <div class="content">
+    <div class="title-row">
+      <div class="title">{{ title }}</div>
+      <div class="amount" [class]="{ negative: amount < 0 }">
+        {{ amount | currency: "USD" : true }}
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="icon-circle">
+        <span class="arrow">↑</span>
+      </div>
+      <span>{{ category }}</span>
+      <span class="dot">•</span>
+      <span>{{ date }}</span>
+      <span class="dot">•</span>
+      <span>{{ payee }}</span>
+    </div>
+  </div>
+</div>
