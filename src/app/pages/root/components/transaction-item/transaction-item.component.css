@@ -55,18 +55,19 @@
 }
 
 .income-text {
-  color: #4caf50;
+  color: var(--green-400);
 }
+
 .expense-text {
-  color: #d24d2b;
+  color: var(--red-400);
 }
 
-.income {
-  background: #4caf50;
+.income-bg {
+  background: var(--green-400);
 }
 
-.expense {
-  background: #d24d2b;
+.expense-bg {
+  background: var(--red-400);
 }
 
 .dot {
