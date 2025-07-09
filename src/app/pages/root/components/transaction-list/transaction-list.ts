@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RootService } from '../../root.service';
 import { TransactionItemComponent } from '../transaction-item/transaction-item.component';
+import { ECategories } from '../../../../features/categories/types/enums';
 
 @Component({
   standalone: true,
@@ -16,6 +17,7 @@ import { TransactionItemComponent } from '../transaction-item/transaction-item.c
           [category]="tx.category"
           [payee]="tx.payee"
           [description]="tx.description"
+          [isIncome]="tx.category === ECategories.INCOME"
         >
         </app-transaction-item>
       }
@@ -28,4 +30,6 @@ export class TransactionList {
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
   }
+
+  protected readonly ECategories = ECategories;
 }
