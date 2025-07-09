@@ -30,7 +30,6 @@
 }
 
 .amount {
-  color: #d24d2b;
   font-weight: bold;
 }
 
@@ -42,7 +41,6 @@
 }
 
 .icon-circle {
-  background: #d24d2b;
   color: white;
   border-radius: 50%;
   width: 32px;
@@ -52,22 +50,6 @@
   justify-content: center;
   font-weight: bold;
   margin-right: 6px;
-}
-
-.income-text {
-  color: var(--green-400);
-}
-
-.expense-text {
-  color: var(--red-400);
-}
-
-.income-bg {
-  background: var(--green-400);
-}
-
-.expense-bg {
-  background: var(--red-400);
 }
 
 .dot {
