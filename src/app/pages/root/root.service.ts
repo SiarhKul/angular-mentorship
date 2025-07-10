@@ -7,6 +7,7 @@ import { RoutePaths } from '../../shared/constants/route-pathes';
 import { HttpClient } from '@angular/common/http';
 import { TransactionServiceApi } from './services/transaction.service.api';
 import { IOnSubscriptionCallbacks } from '../../shared/types/interfaces';
+import { ITransaction } from './types/interfaces';
 
 //todo: Mentor: Why is @Injectable used here?
 @Injectable({
@@ -47,7 +48,7 @@ export class RootService {
   }
 
   async createTransactionAsync(
-    transaction: any,
+    transaction: ITransaction,
     { onSuccess }: IOnSubscriptionCallbacks,
   ) {
     this.transactionServiceApi

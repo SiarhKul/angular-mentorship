@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgStyle } from '@angular/common';
 import { ECategories } from '../../../../features/categories/types/enums';
 import { RootService } from '../../root.service';
+import { ITransaction } from '../../types/interfaces';
 
 @Component({
   selector: 'app-transaction-creator',
@@ -76,7 +77,7 @@ import { RootService } from '../../root.service';
           <mat-form-field appearance="outline">
             <mat-label>Date</mat-label>
             <input
-              [(ngModel)]="model.date"
+              [(ngModel)]="model.date.toISOString().split('T')[0]"
               matInput
               name="date"
               required
@@ -156,10 +157,10 @@ export class TransactionCreatorComponent {
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
 
-  model = {
+  model: ITransaction = {
     title: '',
     amount: 0,
-    date: new Date().toISOString().split('T')[0],
+    date: new Date(),
     payee: '',
     description: '',
     category: ECategories.EXPENSES,

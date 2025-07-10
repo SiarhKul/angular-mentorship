@@ -9,93 +9,12 @@
     "description": "cf"
   },
   {
-    "id": "9b6ba0b1-b720-4a84-bc00-cd2b2c544a03",
-    "category": "Income",
-    "title": "f",
-    "amount": 0,
-    "date": "2025-07-08",
-    "payee": "4",
-    "description": "4"
-  },
-  {
-    "id": "e21d91d4-a293-4754-bd57-d6be81693cb6",
+    "id": "f2707c56-2ef0-4803-ac09-e8c29a13b37a",
     "category": "Expenses",
-    "title": "Title",
-    "amount": 0,
-    "date": "2025-07-09",
-    "payee": "Payee",
-    "description": "Description"
-  },
-  {
-    "id": "c1ed0934-63fa-436e-a472-fca17bb86d04",
-    "category": "Expenses",
-    "title": "test1",
-    "amount": 33,
-    "date": "2025-07-10",
-    "payee": "44",
-    "description": "444"
-  },
-  {
-    "id": "3fa8d102-741e-4b88-aa18-e79424f819f8",
-    "category": "Expenses",
-    "title": "4",
+    "title": "r",
     "amount": 0,
     "date": "2025-07-10",
-    "payee": "4",
-    "description": "4"
-  },
-  {
-    "id": "014c2872-2007-4ac9-b426-4adfaeebc671",
-    "category": "Income",
-    "title": "test",
-    "amount": 44,
-    "date": "2025-07-10",
-    "payee": "44",
-    "description": "44"
-  },
-  {
-    "id": "6c769cfd-2d48-4122-bf08-e982a40fdf54",
-    "category": "Expenses",
-    "title": "444",
-    "amount": 44,
-    "date": "2025-07-10",
-    "payee": "444",
-    "description": "4444"
-  },
-  {
-    "id": "1ac880d1-91dc-4e93-af08-2f5c6e6079f6",
-    "category": "Expenses",
-    "title": "44",
-    "amount": 0,
-    "date": "2025-07-10",
-    "payee": "44",
-    "description": "44"
-  },
-  {
-    "id": "88069e98-df02-4843-9819-22af399b0c30",
-    "category": "Income",
-    "title": "td",
-    "amount": 0,
-    "date": "2025-07-10",
-    "payee": "fff",
-    "description": "ff"
-  },
-  {
-    "id": "7391ae1e-ba46-4eb5-aa01-3ce77d669b30",
-    "category": "Expenses",
-    "title": "4",
-    "amount": 0,
-    "date": "2025-07-10",
-    "payee": "ff",
-    "description": "d"
-  },
-  {
-    "id": "842979ab-caab-43ff-bf32-f2ff79c025be",
-    "category": "Expenses",
-    "title": "444",
-    "amount": 0,
-    "date": "2025-07-10",
-    "payee": "ff",
-    "description": "d"
+    "payee": "r",
+    "description": "e"
   }
 ]
