@@ -30,9 +30,7 @@ import { NgClass } from '@angular/common';
         </div>
 
         <section class="drawer__button-block">
-          <div (click)="closeDrawer()">
-            <ng-content select="footer__buttons" />
-          </div>
+          <ng-content select="footer__buttons" />
 
           @if (isCloseButtonVisible) {
             <button (click)="closeDrawer()" mat-button>Cancel</button>

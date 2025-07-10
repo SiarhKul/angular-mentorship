@@ -6,6 +6,7 @@ import { AccountMoney } from '../../features/money-accounts/services/models/Acco
 import { RoutePaths } from '../../shared/constants/route-pathes';
 import { HttpClient } from '@angular/common/http';
 import { TransactionServiceApi } from './services/transaction.service.api';
+import { IOnSubscriptionCallbacks } from '../../shared/types/interfaces';
 
 //todo: Mentor: Why is @Injectable used here?
 @Injectable({
@@ -45,7 +46,10 @@ export class RootService {
     });
   }
 
-  async createTransactionAsync(transaction: any) {
+  async createTransactionAsync(
+    transaction: any,
+    { onSuccess }: IOnSubscriptionCallbacks,
+  ) {
     this.transactionServiceApi
       .createTransaction(transaction)
       .pipe(
@@ -56,6 +60,7 @@ export class RootService {
       .subscribe({
         next: (transactions) => {
           this.transactionsSignal.set(transactions);
+          onSuccess?.();
         },
         error: (error) => {
           console.error('Error creating transaction:', error);

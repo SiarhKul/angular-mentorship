@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { MatButton } from '@angular/material/button';
@@ -124,6 +124,7 @@ import { RootService } from '../../root.service';
 
       <div ngProjectAs="alternative__trigger">
         <app-button
+          [icon]="'add'"
           [buttonContent]="'Create transaction'"
           [customStyles]="{
             backgroundColor: 'var(--background-color-primary-dark)',
@@ -131,7 +132,6 @@ import { RootService } from '../../root.service';
             width: 'auto',
             whiteSpace: 'nowrap',
           }"
-          [icon]="'add'"
         />
       </div>
     </app-drawer>
@@ -153,6 +153,9 @@ import { RootService } from '../../root.service';
 export class TransactionCreatorComponent {
   categories = ECategories;
 
+  @ViewChild(DrawerComponent)
+  drawer!: DrawerComponent;
+
   model = {
     title: '',
     amount: 0,
@@ -170,6 +173,8 @@ export class TransactionCreatorComponent {
       valid,
     } = formRef;
 
-    await this.rootService.createTransactionAsync(value);
+    await this.rootService.createTransactionAsync(value, {
+      onSuccess: this.drawer.closeDrawer.bind(this.drawer),
+    });
   }
 }
