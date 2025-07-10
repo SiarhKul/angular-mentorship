@@ -27,6 +27,7 @@ import { ECategories } from '../../../../features/categories/types/enums';
 })
 export class TransactionList {
   transactionsSignal = signal<any>([]);
+
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
   }

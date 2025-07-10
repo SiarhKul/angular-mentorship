@@ -162,12 +162,6 @@ export class TransactionCreatorComponent {
     category: ECategories.EXPENSES,
   };
 
-  // hideSingleSelectionIndicator = signal(false);
-
-  // toggleSingleSelectionIndicator() {
-  //   this.hideSingleSelectionIndicator.update((value) => !value);
-  // }
-
   constructor(private rootService: RootService) {}
 
   async onSubmit(formRef: NgForm) {

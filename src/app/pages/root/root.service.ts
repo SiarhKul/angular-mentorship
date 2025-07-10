@@ -1,7 +1,7 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { AccountMoneyServiceApi } from '../../features/money-accounts/services/api/account-money-service-api.service';
 import { Router } from '@angular/router';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { AccountMoney } from '../../features/money-accounts/services/models/AccountMoney';
 import { RoutePaths } from '../../shared/constants/route-pathes';
 import { HttpClient } from '@angular/common/http';
@@ -46,9 +46,21 @@ export class RootService {
   }
 
   async createTransactionAsync(transaction: any) {
-    return firstValueFrom(
-      this.transactionServiceApi.createTransaction(transaction),
-    );
+    this.transactionServiceApi
+      .createTransaction(transaction)
+      .pipe(
+        switchMap(() => {
+          return this.transactionServiceApi.getTransactions();
+        }),
+      )
+      .subscribe({
+        next: (transactions) => {
+          this.transactionsSignal.set(transactions);
+        },
+        error: (error) => {
+          console.error('Error creating transaction:', error);
+        },
+      });
   }
 
   async createSuccessfully(moneyAccount: number | null) {

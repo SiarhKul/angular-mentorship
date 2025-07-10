@@ -125,3 +125,9 @@ body {
 .expense-bg {
   background: var(--red-400);
 }
+
+.trancate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
