@@ -174,8 +174,15 @@ export class TransactionCreatorComponent {
       valid,
     } = formRef;
 
-    await this.rootService.createTransactionAsync(value, {
-      onSuccess: this.drawer.closeDrawer.bind(this.drawer),
-    });
+    console.log('aaaa', formRef);
+
+    if (valid) {
+      await this.rootService.createTransactionAsync(value, {
+        onSuccess: () => {
+          this.drawer.closeDrawer();
+          formRef.resetForm();
+        },
+      });
+    }
   }
 }
