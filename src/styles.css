@@ -21,6 +21,7 @@
   --background-color-primary-dark: var(--sky-500);
   --background-color-allow: var(--green-400);
   --background-color-not-allow: var(--red-400);
+  --background-color-overlay: rgba(0, 0, 0, 0.5);
 
   /* UI colors */
   --border-color: #e9ecef;

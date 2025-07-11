@@ -1,0 +1,103 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color-overlay);
+  z-index: 999;
+}
+
+.modal__content {
+  z-index: 1000;
+  position: fixed;
+  width: 600px;
+  height: 500px;
+  border: 2px solid var(--primary-color);
+  padding: var(--spacing-md);
+  background: var(--background-color-light);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  border-radius: var(--border-radius-sm);
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: var(--spacing-md);
+  color: var(--text-color);
+  transition: color var(--transition-speed);
+}
+
+.actions button:hover {
+  color: var(--primary-color-dark);
+}
+
+.body-type {
+  display: flex;
+  align-items: center;
+  margin-top: var(--spacing-sm);
+  color: var(--text-color);
+  font-weight: var(--font-weight-bold);
+}
+
+.body-type .icon {
+  color: var(--background-color-not-allow);
+  font-size: 20px;
+  margin-right: var(--spacing-sm);
+}
+
+h3 {
+  margin: var(--spacing-sm) 0;
+  font-weight: var(--font-weight-bold);
+}
+
+.category-buttons {
+  display: flex;
+  gap: var(--gap-sm);
+  margin: var(--spacing-sm) 0;
+}
+
+.category-buttons .outlined {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 2px solid var(--border-color-dark);
+  border-radius: var(--border-radius-sm);
+  background: none;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
+  transition: border-color var(--transition-speed);
+}
+
+.category-buttons .outlined:hover {
+  border-color: var(--primary-color);
+}
+
+.amount {
+  color: var(--background-color-not-allow);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: right;
+  margin-bottom: var(--spacing-sm);
+}
+
+.details div {
+  margin: var(--spacing-xs) 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+}
