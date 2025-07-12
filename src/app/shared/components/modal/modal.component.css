@@ -32,6 +32,14 @@
   align-items: center;
 }
 
+.modal__footer {
+  display: flex;
+
+  & .button--cancel {
+    margin-left: auto;
+  }
+}
+
 .actions button {
   background: none;
   border: none;

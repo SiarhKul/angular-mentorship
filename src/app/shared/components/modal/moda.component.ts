@@ -62,7 +62,11 @@ import { CategoryTypeComponent } from '../category-type/category-type.component'
               </div>
             </div>
           </div>
-          <div class="modal__footer"></div>
+          <div class="modal__footer">
+            <button class="button--cancel" (click)="toggleModal()" mat-button>
+              Cancel
+            </button>
+          </div>
         </div>
         <div class="modal__overlay" (click)="toggleModal()"></div>
       </div>
