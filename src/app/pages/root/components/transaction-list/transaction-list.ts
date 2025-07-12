@@ -24,17 +24,16 @@ import { ModalComponent } from '../../../../shared/components/modal/moda.compone
           </app-transaction-item>
         }
       </div>
-      <app-modal></app-modal>
+      <!--      <app-modal></app-modal>-->
     </div>
   `,
   imports: [TransactionItemComponent, ModalComponent],
 })
 export class TransactionList {
   transactionsSignal = signal<any>([]);
+  protected readonly ECategories = ECategories;
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
   }
-
-  protected readonly ECategories = ECategories;
 }

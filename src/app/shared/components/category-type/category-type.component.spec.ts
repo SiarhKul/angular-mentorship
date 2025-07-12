@@ -1,0 +1,22 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { CategoryTypeComponent } from './category-type.component';
+
+describe('CategyryTypeComponent', () => {
+  let component: CategoryTypeComponent;
+  let fixture: ComponentFixture<CategoryTypeComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [CategoryTypeComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(CategoryTypeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

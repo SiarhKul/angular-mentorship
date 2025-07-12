@@ -4,22 +4,17 @@
   <div class="content">
     <div class="title-row">
       <div class="title">{{ description }}</div>
-      <div class="amount" [class]="isIncome ? 'income-text' : 'expense-text'">
+      <div [class]="isIncome ? 'income-text' : 'expense-text'" class="amount">
         {{ amount | currency: "USD" : true }}
       </div>
     </div>
 
     <div class="meta">
       @if (isIncome) {
-        <div class="icon-circle income-bg">
-          <mat-icon>arrow_upward</mat-icon>
-        </div>
+        <app-category-type [icon]="'arrow_upward'" />
       } @else {
-        <div class="icon-circle expense-bg">
-          <mat-icon>arrow_downward</mat-icon>
-        </div>
+        <app-category-type [icon]="'arrow_downward'" />
       }
-
       <span>{{ category }}</span>
       <span class="dot">•</span>
       <span>{{ date }}</span>
