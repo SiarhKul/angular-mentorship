@@ -1,18 +1,27 @@
 import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-modal',
   styleUrls: ['./modal.component.css'],
+  imports: [CurrencyPipe, MatButtonModule, MatIconModule, MatIcon],
   template: `
     <div class="modal">
       <div class="modal__content">
         <div class="modal__header">
           <h2>Transaction Information</h2>
           <div class="actions">
-            <button title="Edit">✏️</button>
-            <button title="Delete">🗑️</button>
-            <button title="Close">❌</button>
+            <button mat-icon-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>close</mat-icon>
+            </button>
           </div>
         </div>
 
@@ -50,7 +59,6 @@ import { CurrencyPipe } from '@angular/common';
       <div class="modal__overlay"></div>
     </div>
   `,
-  imports: [CurrencyPipe],
 })
 export class ModalComponent {
   transaction = {
