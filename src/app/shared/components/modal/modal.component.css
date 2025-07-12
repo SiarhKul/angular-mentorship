@@ -37,7 +37,6 @@
 
 .modal__body {
   flex-grow: 1;
-  background: #6c757d;
   display: flex;
   flex-direction: column;
   gap: var(--gap-sm);

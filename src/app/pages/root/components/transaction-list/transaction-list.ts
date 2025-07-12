@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { RootService } from '../../root.service';
 import { TransactionItemComponent } from '../transaction-item/transaction-item.component';
 import { ECategories } from '../../../../features/categories/types/enums';
 import { ModalComponent } from '../../../../shared/components/modal/moda.component';
+import { ITransaction } from '../../types/interfaces';
 
 @Component({
   standalone: true,
@@ -20,6 +21,7 @@ import { ModalComponent } from '../../../../shared/components/modal/moda.compone
             [payee]="tx.payee"
             [description]="tx.description"
             [isIncome]="tx.category === ECategories.INCOME"
+            (click)="showTransaction(tx)"
           >
           </app-transaction-item>
         }
@@ -31,9 +33,15 @@ import { ModalComponent } from '../../../../shared/components/modal/moda.compone
 })
 export class TransactionList {
   transactionsSignal = signal<any>([]);
+  @ViewChild(ModalComponent)
+  modalComponent!: ModalComponent;
   protected readonly ECategories = ECategories;
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
+  }
+
+  showTransaction(tx: Required<ITransaction>) {
+    this.modalComponent.showTransaction(tx);
   }
 }

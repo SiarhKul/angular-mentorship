@@ -5,6 +5,11 @@
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.card:hover {
+  background: var(--background-color-dark);
 }
 
 .category-box {

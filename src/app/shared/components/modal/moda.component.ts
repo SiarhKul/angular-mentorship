@@ -3,6 +3,8 @@ import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { CategoryTypeComponent } from '../category-type/category-type.component';
+import { ITransaction } from '../../../pages/root/types/interfaces';
+import { ECategories } from '../../../features/categories/types/enums';
 
 @Component({
   selector: 'app-modal',
@@ -33,35 +35,45 @@ import { CategoryTypeComponent } from '../category-type/category-type.component'
             </div>
           </div>
 
-          <div class="modal__body">
-            <div class="body-type">
-              <app-category-type [isIncome]="isIncome" />
-              <span>{{ transaction.type }}</span>
-            </div>
-
-            <h3>{{ transaction.descriptionShort }}</h3>
-
-            <div class="category-buttons">
-              <button class="outlined">{{ transaction.subcategory }}</button>
-              <button class="outlined">{{ transaction.category }}</button>
-            </div>
-
-            <div class="amount">
-              {{ transaction.amount | currency: transaction.currency : true }}
-            </div>
-
-            <div class="details">
-              <div>
-                <strong>Payment Date:</strong> {{ transaction.paymentDate }}
+          @if (transactionSignal() !== null) {
+            <div class="modal__body">
+              <div class="body-type">
+                <app-category-type [isIncome]="isIncome" />
+                <!--                            <span>{{ transactionSignal()!.type }}</span>-->
               </div>
-              <hr />
-              <div><strong>Payee:</strong> {{ transaction.payee }}</div>
-              <hr />
-              <div>
-                <strong>Description:</strong> {{ transaction.descriptionFull }}
+
+              <h3>{{ transactionSignal()!.description }}</h3>
+
+              <div class="category-buttons">
+                <button class="outlined">
+                  {{ transactionSignal()!.description }}
+                </button>
+                <button class="outlined">
+                  {{ transactionSignal()!.category }}
+                </button>
+              </div>
+
+              <div class="amount">
+                {{ transaction.amount | currency: transaction.currency : true }}
+              </div>
+
+              <div class="details">
+                <div>
+                  <strong>Payment Date:</strong> {{ transactionSignal()!.date }}
+                </div>
+                <hr />
+                <div>
+                  <strong>Payee:</strong> {{ transactionSignal()!.payee }}
+                </div>
+                <hr />
+                <div>
+                  <strong>Description:</strong>
+                  {{ transactionSignal()!.description }}
+                </div>
               </div>
             </div>
-          </div>
+          }
+
           <div class="modal__footer">
             <button class="button--cancel" (click)="toggleModal()" mat-button>
               Cancel
@@ -88,9 +100,16 @@ export class ModalComponent {
   };
   isIncome = true;
 
-  isOpenSignal = signal(true);
+  transactionSignal = signal<Required<ITransaction | null>>(null);
+  isOpenSignal = signal(false);
 
   toggleModal() {
     this.isOpenSignal.set(!this.isOpenSignal());
+  }
+
+  showTransaction(tx: Required<ITransaction>) {
+    this.transactionSignal.set(tx);
+    this.isOpenSignal.set(true);
+    this.isIncome = tx.category === ECategories.INCOME;
   }
 }
