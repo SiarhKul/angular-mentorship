@@ -24,12 +24,23 @@
   background: var(--background-color-light);
   box-shadow: 0 4px 8px var(--shadow-color);
   border-radius: var(--border-radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
 }
 
 .modal__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.modal__body {
+  flex-grow: 1;
+  background: #6c757d;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
 }
 
 .modal__footer {
