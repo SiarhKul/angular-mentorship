@@ -2,11 +2,18 @@ import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { CategoryTypeComponent } from '../category-type/category-type.component';
 
 @Component({
   selector: 'app-modal',
   styleUrls: ['./modal.component.css'],
-  imports: [CurrencyPipe, MatButtonModule, MatIconModule, MatIcon],
+  imports: [
+    CurrencyPipe,
+    MatButtonModule,
+    MatIconModule,
+    MatIcon,
+    CategoryTypeComponent,
+  ],
   template: `
     <div class="modal">
       <div class="modal__content">
@@ -27,7 +34,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 
         <div class="modal__body">
           <div class="body-type">
-            <span class="icon">⬆️</span>
+            <app-category-type [isIncome]="true" />
             <span>{{ transaction.type }}</span>
           </div>
 

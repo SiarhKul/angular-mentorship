@@ -1,6 +1,3 @@
-<div
-  [class]="icon === 'arrow_upward' ? 'income-bg' : 'expense-bg'"
-  class="icon-circle"
->
-  <mat-icon>{{ icon }}</mat-icon>
+<div [class]="isIncome ? 'income-bg' : 'expense-bg'" class="icon-circle">
+  <mat-icon>{{ isIncome ? "arrow_upward" : "arrow_downward" }}</mat-icon>
 </div>

@@ -9,4 +9,5 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class CategoryTypeComponent {
   @Input() icon: 'arrow_upward' | 'arrow_downward' = 'arrow_upward';
+  @Input() isIncome = true;
 }

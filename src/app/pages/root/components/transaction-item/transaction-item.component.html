@@ -10,11 +10,8 @@
     </div>
 
     <div class="meta">
-      @if (isIncome) {
-        <app-category-type [icon]="'arrow_upward'" />
-      } @else {
-        <app-category-type [icon]="'arrow_downward'" />
-      }
+      <app-category-type [isIncome]="isIncome" />
+
       <span>{{ category }}</span>
       <span class="dot">•</span>
       <span>{{ date }}</span>
