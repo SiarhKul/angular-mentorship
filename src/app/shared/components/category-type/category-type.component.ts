@@ -8,6 +8,5 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './category-type.component.css',
 })
 export class CategoryTypeComponent {
-  @Input() icon: 'arrow_upward' | 'arrow_downward' = 'arrow_upward';
   @Input() isIncome = true;
 }
