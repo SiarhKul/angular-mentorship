@@ -39,6 +39,14 @@ import { ECategories } from '../../../features/categories/types/enums';
             <div class="modal__body">
               <div class="body-type">
                 <app-category-type [isIncome]="isIncome" />
+                <button class="outlined">
+                  {{ transactionSignal()!.category }}
+                </button>
+                <span class="amount">
+                  {{
+                    transaction.amount | currency: transaction.currency : true
+                  }}
+                </span>
                 <!--                            <span>{{ transactionSignal()!.type }}</span>-->
               </div>
 
@@ -51,10 +59,6 @@ import { ECategories } from '../../../features/categories/types/enums';
                 <button class="outlined">
                   {{ transactionSignal()!.category }}
                 </button>
-              </div>
-
-              <div class="amount">
-                {{ transaction.amount | currency: transaction.currency : true }}
               </div>
 
               <div class="details">

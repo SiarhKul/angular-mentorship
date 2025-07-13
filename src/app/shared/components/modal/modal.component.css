@@ -66,9 +66,25 @@
 .body-type {
   display: flex;
   align-items: center;
-  margin-top: var(--spacing-sm);
   color: var(--text-color);
   font-weight: var(--font-weight-bold);
+  & .outlined {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 2px solid var(--border-color-dark);
+    border-radius: var(--border-radius-sm);
+    background: none;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color);
+    transition: border-color var(--transition-speed);
+  }
+
+  & .amount {
+    color: var(--background-color-not-allow);
+    font-size: 24px;
+    font-weight: bold;
+    text-align: right;
+    margin-left: auto;
+  }
 }
 
 .body-type .icon {
@@ -100,14 +116,6 @@ h3 {
 
 .category-buttons .outlined:hover {
   border-color: var(--primary-color);
-}
-
-.amount {
-  color: var(--background-color-not-allow);
-  font-size: 24px;
-  font-weight: bold;
-  text-align: right;
-  margin-bottom: var(--spacing-sm);
 }
 
 .details div {
