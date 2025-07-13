@@ -37,28 +37,24 @@ import { ECategories } from '../../../features/categories/types/enums';
 
           @if (transactionSignal() !== null) {
             <div class="modal__body">
-              <div class="body-type">
+              <div class="transactions-type">
                 <app-category-type [isIncome]="isIncome" />
-                <button class="outlined">
+                <h3>
                   {{ transactionSignal()!.category }}
-                </button>
+                </h3>
                 <span class="amount">
                   {{
                     transaction.amount | currency: transaction.currency : true
                   }}
                 </span>
-                <!--                            <span>{{ transactionSignal()!.type }}</span>-->
               </div>
 
-              <h3>{{ transactionSignal()!.description }}</h3>
+              <h3>{{ transactionSignal()!.title }}</h3>
 
               <div class="category-buttons">
-                <button class="outlined">
-                  {{ transactionSignal()!.description }}
-                </button>
-                <button class="outlined">
-                  {{ transactionSignal()!.category }}
-                </button>
+                <span class="outlined">
+                  {{ transactionSignal()!.title }}
+                </span>
               </div>
 
               <div class="details">
