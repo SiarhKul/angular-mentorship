@@ -16,6 +16,7 @@ import { NgStyle } from '@angular/common';
 import { ECategories } from '../../../../features/categories/types/enums';
 import { RootService } from '../../root.service';
 import { ITransaction } from '../../types/interfaces';
+import { AsyncSelectorComponent } from '../../../../shared/components/async-selector/async-selector.component';
 
 @Component({
   selector: 'app-transaction-creator',
@@ -61,6 +62,8 @@ import { ITransaction } from '../../types/interfaces';
             />
             <mat-error> Title is required</mat-error>
           </mat-form-field>
+
+          <app-async-selector />
 
           <mat-form-field appearance="outline">
             <mat-label>Amount</mat-label>
@@ -149,6 +152,7 @@ import { ITransaction } from '../../types/interfaces';
     MatError,
     MatButtonToggleModule,
     MatCheckboxModule,
+    AsyncSelectorComponent,
   ],
 })
 export class TransactionCreatorComponent {
