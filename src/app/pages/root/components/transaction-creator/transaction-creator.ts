@@ -63,7 +63,7 @@ import { AsyncSelectorComponent } from '../../../../shared/components/async-sele
             <mat-error> Title is required</mat-error>
           </mat-form-field>
 
-          <app-async-selector />
+          <app-async-selector [inlineStyles]="{ width: '100%' }" />
 
           <mat-form-field appearance="outline">
             <mat-label>Amount</mat-label>

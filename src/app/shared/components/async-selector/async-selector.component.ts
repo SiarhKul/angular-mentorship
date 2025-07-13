@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { API_URLS } from '../../constants/api-url';
 import { CATEGORY_ENDPOINT } from '../../constants/endpoints';
 import { ICategory } from '../../../features/categories/types/interfaces';
+import { TUUID } from '../../types/types';
 
 @Component({
   standalone: true,
@@ -46,7 +47,7 @@ export class AsyncSelectorComponent implements OnInit {
   @Input()
   inlineStyles: Partial<CSSStyleDeclaration> = {};
   formControl = new FormControl('');
-  values: any = [];
+  values: { name: string; id: TUUID | number | string }[] = [];
 
   constructor(private http: HttpClient) {}
 
