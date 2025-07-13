@@ -4,6 +4,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgStyle } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { API_URLS } from '../../constants/api-url';
+import { CATEGORY_ENDPOINT } from '../../constants/endpoints';
+import { ICategory } from '../../../features/categories/types/interfaces';
 
 @Component({
   standalone: true,
@@ -18,19 +21,22 @@ import { HttpClient } from '@angular/common/http';
   ],
   template: `
     <mat-form-field [ngStyle]="inlineStyles" appearance="outline">
-      <mat-label>Toppings</mat-label>
-      <mat-select [formControl]="toppings" multiple>
+      <mat-label>Categories</mat-label>
+      <mat-select [formControl]="formControl" multiple>
         <mat-select-trigger>
-          {{ toppings.value?.[0] || '' }}
-          @if ((toppings.value?.length || 0) > 1) {
+          {{ formControl.value?.[0] || '' }}
+          @if ((formControl.value?.length || 0) > 1) {
             <span class="example-additional-selection">
-              (+{{ (toppings.value?.length || 0) - 1 }}
-              {{ toppings.value?.length === 2 ? 'other' : 'others' }})
+              (+{{ (formControl.value?.length || 0) - 1 }}
+              {{ formControl.value?.length === 2 ? 'other' : 'others' }})
             </span>
           }
         </mat-select-trigger>
-        @for (topping of toppingList; track topping) {
-          <mat-option [value]="topping">{{ topping }}</mat-option>
+
+        @for (value of values; track $index) {
+          <mat-option [value]="value.name">
+            {{ value.name }}
+          </mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -39,22 +45,23 @@ import { HttpClient } from '@angular/common/http';
 export class AsyncSelectorComponent implements OnInit {
   @Input()
   inlineStyles: Partial<CSSStyleDeclaration> = {};
-  toppings = new FormControl('');
-  toppingList: string[] = [
-    'Extra cheese',
-    'Mushroom',
-    'Onion',
-    'Pepperoni',
-    'Sausage',
-    'Tomato',
-  ];
+  formControl = new FormControl('');
+  values: any = [];
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<string[]>('https://example.com/toppings').subscribe({
-      next: (toppings) => (this.toppingList = toppings),
-      error: (err) => console.error('Ошибка загрузки топпингов:', err),
+    this.getAllCategories().subscribe({
+      next: (category) => {
+        this.values = category;
+      },
+      error: (err) =>
+        console.error('The error occurred while fetching data', err),
     });
+  }
+
+  getAllCategories() {
+    const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`;
+    return this.http.get<Required<ICategory>[]>(url);
   }
 }
