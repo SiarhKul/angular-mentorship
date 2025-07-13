@@ -5,7 +5,12 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgStyle } from '@angular/common';
@@ -47,16 +52,35 @@ import { TUUID } from '../../types/types';
         }
       </mat-select>
     </mat-form-field>
-    <pre>{{ formControl.value }}</pre>
   `,
 })
-export class AsyncSelectorComponent implements OnInit {
+export class AsyncSelectorComponent implements OnInit, ControlValueAccessor {
   @Input()
   inlineStyles: Partial<CSSStyleDeclaration> = {};
   formControl = new FormControl('');
   values: { name: string; id: TUUID | number | string }[] = [];
 
   constructor(private http: HttpClient) {}
+
+  writeValue(value: any): void {
+    this.formControl.setValue(value);
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.formControl.disable();
+    } else {
+      this.formControl.enable();
+    }
+  }
 
   ngOnInit(): void {
     this.getAllCategories().subscribe({
@@ -66,10 +90,18 @@ export class AsyncSelectorComponent implements OnInit {
       error: (err) =>
         console.error('The error occurred while fetching data', err),
     });
+
+    this.formControl.valueChanges.subscribe((value) => {
+      this.onChange(value);
+    });
   }
 
   getAllCategories() {
     const url = `${API_URLS.baseUrl}${CATEGORY_ENDPOINT.categories}`;
     return this.http.get<Required<ICategory>[]>(url);
   }
+
+  private onChange: any = () => {};
+
+  private onTouched: any = () => {};
 }

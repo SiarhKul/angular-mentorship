@@ -30,7 +30,7 @@
     "id": "9556c32e-3f58-43da-b35f-bb36dedcdd98",
     "category": "Income",
     "title": "Freelance Project",
-    "amount": 1200.0,
+    "amount": 1200,
     "date": "2025-07-10",
     "payee": "Tech Solutions Ltd.",
     "description": "Website development payment"
@@ -52,5 +52,15 @@
     "date": "2025-07-10",
     "payee": "City Bus",
     "description": "Commute to work"
+  },
+  {
+    "id": "6b0638cc-c7ec-41cd-b366-245bebe3697b",
+    "category": "Expenses",
+    "title": "44",
+    "categories": [],
+    "amount": 44,
+    "date": "2025-07-13",
+    "payee": "44",
+    "description": "444"
   }
 ]
