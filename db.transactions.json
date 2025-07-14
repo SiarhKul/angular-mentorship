@@ -62,5 +62,25 @@
     "date": "2025-07-13",
     "payee": "44",
     "description": "444"
+  },
+  {
+    "id": "94c09e9e-dfa9-4ad7-9ebc-ec0667481513",
+    "category": "Expenses",
+    "title": "1",
+    "categories": [],
+    "amount": 1,
+    "date": "2025-07-14",
+    "payee": "1",
+    "description": "1"
+  },
+  {
+    "id": "192e6765-43c4-4d4f-bff0-9d09e56e7dbb",
+    "category": "Expenses",
+    "title": "1",
+    "categories": ["Category2", "Category3"],
+    "amount": 0,
+    "date": "2025-07-14",
+    "payee": "14",
+    "description": "4"
   }
 ]

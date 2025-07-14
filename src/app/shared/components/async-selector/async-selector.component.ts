@@ -1,14 +1,9 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   FormsModule,
+  NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -30,6 +25,13 @@ import { TUUID } from '../../types/types';
     FormsModule,
     ReactiveFormsModule,
     NgStyle,
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: AsyncSelectorComponent,
+      multi: true,
+    },
   ],
   template: `
     <mat-form-field [ngStyle]="inlineStyles" appearance="outline">
@@ -57,13 +59,13 @@ import { TUUID } from '../../types/types';
 export class AsyncSelectorComponent implements OnInit, ControlValueAccessor {
   @Input()
   inlineStyles: Partial<CSSStyleDeclaration> = {};
-  formControl = new FormControl('');
+  formControl = new FormControl<string[]>([]);
   values: { name: string; id: TUUID | number | string }[] = [];
 
   constructor(private http: HttpClient) {}
 
-  writeValue(value: any): void {
-    this.formControl.setValue(value);
+  writeValue(value: string[] | null): void {
+    this.formControl.setValue(value || []);
   }
 
   registerOnChange(fn: any): void {
