@@ -4,7 +4,7 @@ import { TUUID } from '../../../shared/types/types';
 export interface ITransaction {
   amount: number;
   category: ECategories;
-  categories?: string[];
+  categories: string[];
   date: Date;
   description: string;
   id?: TUUID;

@@ -1,5 +1,15 @@
 [
   {
+    "id": "192e6765-43c4-4d4f-bff0-9d09e56e7dbb",
+    "category": "Expenses",
+    "title": "1",
+    "categories": ["Category2", "Category3"],
+    "amount": 0,
+    "date": "2025-07-14",
+    "payee": "14",
+    "description": "4"
+  },
+  {
     "id": "d4d8bec9-e0a1-4b0c-8e5e-f43c6752446d",
     "category": "Expenses",
     "title": "Groceries",
@@ -72,15 +82,5 @@
     "date": "2025-07-14",
     "payee": "1",
     "description": "1"
-  },
-  {
-    "id": "192e6765-43c4-4d4f-bff0-9d09e56e7dbb",
-    "category": "Expenses",
-    "title": "1",
-    "categories": ["Category2", "Category3"],
-    "amount": 0,
-    "date": "2025-07-14",
-    "payee": "14",
-    "description": "4"
   }
 ]

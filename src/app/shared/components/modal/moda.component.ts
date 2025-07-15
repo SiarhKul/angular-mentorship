@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, JsonPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { CategoryTypeComponent } from '../category-type/category-type.component';
@@ -15,6 +15,7 @@ import { ECategories } from '../../../features/categories/types/enums';
     MatIconModule,
     MatIcon,
     CategoryTypeComponent,
+    JsonPipe,
   ],
   template: `
     @if (isOpenSignal()) {
@@ -44,17 +45,25 @@ import { ECategories } from '../../../features/categories/types/enums';
                 </h3>
                 <span class="amount">
                   {{
-                    transaction.amount | currency: transaction.currency : true
+                    transactionSignal()!.amount
+                      | currency: transaction.currency : true
                   }}
                 </span>
               </div>
 
               <h3>{{ transactionSignal()!.title }}</h3>
 
-              <div class="category-buttons">
-                <span class="outlined">
-                  {{ transactionSignal()!.title }}
-                </span>
+              <div class="categories">
+                @for (
+                  category of transactionSignal()!.categories;
+                  track $index
+                ) {
+                  <div class="category-buttons">
+                    <span class="outlined">
+                      {{ category }}
+                    </span>
+                  </div>
+                }
               </div>
 
               <div class="details">
@@ -87,16 +96,7 @@ import { ECategories } from '../../../features/categories/types/enums';
 })
 export class ModalComponent {
   transaction = {
-    type: 'Expenses',
-    category: 'Rent',
-    subcategory: 'Home',
-    descriptionShort: 'Flat rent for March',
-    amount: -650.0,
     currency: '$',
-    paymentDate: '28.02.2022',
-    payee: 'John Smith',
-    descriptionFull:
-      'Payment for flat in Samrocka street 25. Don’t forget to send a receipt.',
   };
   isIncome = true;
 

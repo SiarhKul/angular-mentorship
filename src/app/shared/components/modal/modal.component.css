@@ -68,6 +68,7 @@
   align-items: center;
   color: var(--text-color);
   font-weight: var(--font-weight-bold);
+
   & .outlined {
     padding: var(--spacing-xs) var(--spacing-sm);
     border: 2px solid var(--border-color-dark);
@@ -98,10 +99,16 @@ h3 {
   font-weight: var(--font-weight-bold);
 }
 
-.category-buttons {
+.categories {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--gap-sm);
-  margin: var(--spacing-sm) 0;
+
+  & .category-buttons {
+    display: flex;
+    gap: var(--gap-sm);
+    margin: var(--spacing-sm) 0;
+  }
 }
 
 .category-buttons .outlined {
