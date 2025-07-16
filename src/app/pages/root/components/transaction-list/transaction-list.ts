@@ -43,9 +43,10 @@ import { TUUID } from '../../../../shared/types/types';
 })
 export class TransactionList {
   transactionsSignal = signal<any>([]);
+
   @ViewChild(ModalComponent)
   modalComponent!: ModalComponent;
-  protected readonly ECategories = ECategories;
+  ECategories = ECategories;
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
