@@ -26,4 +26,17 @@ router.get("/", async (_req, res) => {
   }
 });
 
+router.delete("/:id", async (_req, res) => {
+  console.log("Received request to delete transaction");
+  const { id } = req.params;
+
+  try {
+    const transactions = await getAllTransactions();
+    res.status(200).json(transactions);
+  } catch (error) {
+    console.error("Error retrieving transactions:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
