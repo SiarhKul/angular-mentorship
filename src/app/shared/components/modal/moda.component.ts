@@ -23,12 +23,7 @@ import { ECategories } from '../../../features/categories/types/enums';
           <div class="modal__header">
             <h2>Transaction Information</h2>
             <div class="actions">
-              <button mat-icon-button>
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button>
-                <mat-icon>delete</mat-icon>
-              </button>
+              <ng-content></ng-content>
               <button mat-icon-button (click)="toggleModal()">
                 <mat-icon>close</mat-icon>
               </button>

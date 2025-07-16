@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { TransactionServiceApi } from './services/transaction.service.api';
 import { IOnSubscriptionCallbacks } from '../../shared/types/interfaces';
 import { ITransaction } from './types/interfaces';
+import { TUUID } from '../../shared/types/types';
 
 //todo: Mentor: Why is @Injectable used here?
 @Injectable({
@@ -83,5 +84,9 @@ export class RootService {
         moneyAccountId: moneyAccount,
       },
     });
+  }
+
+  deleteTransaction(id: TUUID) {
+    this.transactionServiceApi.delete(id);
   }
 }

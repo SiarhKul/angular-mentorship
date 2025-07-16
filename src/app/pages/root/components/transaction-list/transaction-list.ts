@@ -4,6 +4,9 @@ import { TransactionItemComponent } from '../transaction-item/transaction-item.c
 import { ECategories } from '../../../../features/categories/types/enums';
 import { ModalComponent } from '../../../../shared/components/modal/moda.component';
 import { ITransaction } from '../../types/interfaces';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { TUUID } from '../../../../shared/types/types';
 
 @Component({
   standalone: true,
@@ -26,10 +29,17 @@ import { ITransaction } from '../../types/interfaces';
           </app-transaction-item>
         }
       </div>
-      <app-modal></app-modal>
+      <app-modal>
+        <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </app-modal>
     </div>
   `,
-  imports: [TransactionItemComponent, ModalComponent],
+  imports: [TransactionItemComponent, ModalComponent, MatIconButton, MatIcon],
 })
 export class TransactionList {
   transactionsSignal = signal<any>([]);
@@ -39,6 +49,10 @@ export class TransactionList {
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
+  }
+
+  deleteTransaction(id: TUUID) {
+    this.rootService.deleteTransaction(id);
   }
 
   showTransaction(tx: Required<ITransaction>) {
