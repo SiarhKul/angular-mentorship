@@ -12,6 +12,7 @@ import { TUUID } from '../../../../shared/types/types';
   standalone: true,
   selector: 'app-transaction-list',
   styleUrl: './transaction-list.css',
+  imports: [TransactionItemComponent, ModalComponent, MatIconButton, MatIcon],
   template: `
     <div>
       <div class="transaction-list">
@@ -33,27 +34,29 @@ import { TUUID } from '../../../../shared/types/types';
         <button mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="deleteTransaction()">
           <mat-icon>delete</mat-icon>
         </button>
       </app-modal>
     </div>
   `,
-  imports: [TransactionItemComponent, ModalComponent, MatIconButton, MatIcon],
 })
 export class TransactionList {
   transactionsSignal = signal<any>([]);
 
+  ECategories = ECategories;
   @ViewChild(ModalComponent)
   modalComponent!: ModalComponent;
-  ECategories = ECategories;
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
   }
 
-  deleteTransaction(id: TUUID) {
-    this.rootService.deleteTransaction(id);
+  deleteTransaction() {
+    const currentTransaction = this.modalComponent.transactionSignal();
+    if (currentTransaction) {
+      this.rootService.deleteTransaction(currentTransaction.id);
+    }
   }
 
   showTransaction(tx: Required<ITransaction>) {
