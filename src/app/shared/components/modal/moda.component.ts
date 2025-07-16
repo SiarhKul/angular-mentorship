@@ -15,7 +15,6 @@ import { ECategories } from '../../../features/categories/types/enums';
     MatIconModule,
     MatIcon,
     CategoryTypeComponent,
-    JsonPipe,
   ],
   template: `
     @if (isOpenSignal()) {
