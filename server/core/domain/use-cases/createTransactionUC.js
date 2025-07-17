@@ -1,7 +1,7 @@
 const crypto = require("node:crypto");
 
 const { readFromFile, saveToFile } = require("../../../shared/fs.helpers");
-
+const TransactionRepository = require("../../../infrastructure/database/transaction.repository");
 const TRANSACTIONS_FILE_PATH = "db.transactions.json";
 
 async function createTransaction(transactionData) {
@@ -29,6 +29,7 @@ async function getAllTransactions() {
 
 async function deleteTransaction(id) {
   try {
+    TransactionRepository.deleteTransaction(id);
     console.log("Deleting transaction with ID:", id);
   } catch (error) {
     throw new Error(`Failed to delete transaction: ${error.message}`);
@@ -38,4 +39,5 @@ async function deleteTransaction(id) {
 module.exports = {
   createTransaction,
   getAllTransactions,
+  deleteTransaction,
 };

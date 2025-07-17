@@ -3,7 +3,11 @@ const router = express.Router();
 const {
   createTransaction,
   getAllTransactions,
+  deleteTransaction,
 } = require("../core/domain/use-cases/createTransactionUC.js");
+const {
+  log,
+} = require("@angular-devkit/build-angular/src/builders/ssr-dev-server/index.js");
 
 router.post("/", async (req, res) => {
   try {
@@ -26,12 +30,10 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.delete("/:id", async (_req, res) => {
-  console.log("Received request to delete transaction");
-  const { id } = req.params;
-
+router.delete("/:id", async (req, res) => {
   try {
-    const transactions = await getAllTransactions();
+    const transactions = await deleteTransaction(id);
+
     res.status(200).json(transactions);
   } catch (error) {
     console.error("Error retrieving transactions:", error);

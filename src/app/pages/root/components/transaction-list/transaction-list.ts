@@ -6,7 +6,6 @@ import { ModalComponent } from '../../../../shared/components/modal/moda.compone
 import { ITransaction } from '../../types/interfaces';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { TUUID } from '../../../../shared/types/types';
 
 @Component({
   standalone: true,
@@ -56,6 +55,7 @@ export class TransactionList {
     const currentTransaction = this.modalComponent.transactionSignal();
     if (currentTransaction) {
       this.rootService.deleteTransaction(currentTransaction.id);
+      this.modalComponent.toggleModal();
     }
   }
 
