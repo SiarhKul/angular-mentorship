@@ -12,11 +12,6 @@ export class TransactionServiceApi {
     const url =
       `${API_URLS.baseUrl}${TRANSACTION_ENDPOINT.transactions}` as const;
 
-    console.log('11', {
-      url,
-      transaction,
-    });
-
     return this.http.post<any>(url, transaction);
   }
 
@@ -28,5 +23,8 @@ export class TransactionServiceApi {
 
   delete(id: TUUID) {
     console.log('delete transaction', id);
+    const url =
+      `${API_URLS.baseUrl}${TRANSACTION_ENDPOINT.transactions}/${id}` as const;
+    return this.http.delete<Transaction[]>(url);
   }
 }
