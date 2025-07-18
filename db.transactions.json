@@ -62,15 +62,5 @@
     "date": "2025-07-10",
     "payee": "City Bus",
     "description": "Commute to work"
-  },
-  {
-    "id": "6b0638cc-c7ec-41cd-b366-245bebe3697b",
-    "category": "Expenses",
-    "title": "44",
-    "categories": [],
-    "amount": 44,
-    "date": "2025-07-13",
-    "payee": "44",
-    "description": "444"
   }
 ]

@@ -38,7 +38,7 @@ export class RootService {
   }
 
   fetchTransactions() {
-    this.transactionServiceApi.getTransactions().subscribe({
+    return this.transactionServiceApi.getTransactions().subscribe({
       next: (transactions) => {
         this.transactionsSignal.set(transactions);
       },
@@ -87,13 +87,16 @@ export class RootService {
   }
 
   deleteTransaction(id: TUUID) {
-    this.transactionServiceApi.delete(id).subscribe({
-      next: (transactions) => {
-        // this.transactionsSignal.set(transactions);
-      },
-      error: (error) => {
-        console.error('Error deleting transaction:', error);
-      },
-    });
+    this.transactionServiceApi
+      .delete(id)
+      .pipe(switchMap(() => this.transactionServiceApi.getTransactions()))
+      .subscribe({
+        next: (transactions) => {
+          this.transactionsSignal.set(transactions);
+        },
+        error: (error) => {
+          console.error('Error deleting transaction:', error);
+        },
+      });
   }
 }

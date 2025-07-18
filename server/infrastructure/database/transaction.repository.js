@@ -4,13 +4,11 @@ const FilePath = require("../../shared/file-path");
 class TransactionRepository {
   static deleteTransaction = async (id) => {
     console.log("Repository", id);
-    const transactions = await readFromFile(FilePath.TRANSLATIONS);
+    const transactionsDb = await readFromFile(FilePath.TRANSLATIONS);
 
-    const tr = transactions.filter((t) => t.id !== id);
+    const transactionsFiltered = transactionsDb.filter((t) => t.id !== id);
 
-    saveToFile(FilePath.TRANSLATIONS, tr);
-
-    console.log(tr);
+    saveToFile(FilePath.TRANSLATIONS, transactionsFiltered);
   };
 }
 
