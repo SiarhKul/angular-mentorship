@@ -30,7 +30,6 @@ async function getAllTransactions() {
 async function deleteTransaction(id) {
   try {
     TransactionRepository.deleteTransaction(id);
-    console.log("Deleting transaction with ID:", id);
   } catch (error) {
     throw new Error(`Failed to delete transaction: ${error.message}`);
   }

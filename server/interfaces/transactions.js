@@ -31,8 +31,10 @@ router.get("/", async (_req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
+  console.log("id is:", req.params.id);
+
   try {
-    const transactions = await deleteTransaction(id);
+    const transactions = await deleteTransaction(req.params.id);
 
     res.status(200).json(transactions);
   } catch (error) {
