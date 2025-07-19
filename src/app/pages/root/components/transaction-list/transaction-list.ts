@@ -6,12 +6,19 @@ import { ModalComponent } from '../../../../shared/components/modal/moda.compone
 import { ITransaction } from '../../types/interfaces';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { SnakeBarComponent } from '../../../../shared/components/snake-bar/snake-bar.component';
 
 @Component({
   standalone: true,
   selector: 'app-transaction-list',
   styleUrl: './transaction-list.css',
-  imports: [TransactionItemComponent, ModalComponent, MatIconButton, MatIcon],
+  imports: [
+    TransactionItemComponent,
+    ModalComponent,
+    MatIconButton,
+    MatIcon,
+    SnakeBarComponent,
+  ],
   template: `
     <div>
       <div class="transaction-list">
@@ -37,6 +44,7 @@ import { MatIcon } from '@angular/material/icon';
           <mat-icon>delete</mat-icon>
         </button>
       </app-modal>
+      <app-snake-bar />
     </div>
   `,
 })
@@ -44,8 +52,12 @@ export class TransactionList {
   transactionsSignal = signal<any>([]);
 
   ECategories = ECategories;
+
   @ViewChild(ModalComponent)
   modalComponent!: ModalComponent;
+
+  @ViewChild(SnakeBarComponent)
+  snakeBarComponent!: SnakeBarComponent;
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
@@ -54,8 +66,9 @@ export class TransactionList {
   deleteTransaction() {
     const currentTransaction = this.modalComponent.transactionSignal();
     if (currentTransaction) {
-      this.rootService.deleteTransaction(currentTransaction.id);
-      this.modalComponent.toggleModal();
+      // this.rootService.deleteTransaction(currentTransaction.id);
+      // this.modalComponent.toggleModal();
+      this.snakeBarComponent.openSnackBar('Transaction deleted successfully');
     }
   }
 

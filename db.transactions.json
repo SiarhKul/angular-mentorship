@@ -19,15 +19,6 @@
     "description": "Weekly grocery shopping"
   },
   {
-    "id": "f2707c56-2ef0-4803-ac09-e8c29a13b37a",
-    "category": "Expenses",
-    "title": "Electricity Bill",
-    "amount": 87.45,
-    "date": "2025-07-10",
-    "payee": "PowerGrid Co.",
-    "description": "June electricity usage"
-  },
-  {
     "id": "7fa08518-0761-4cd8-a190-eb71011deb8a",
     "category": "Expenses",
     "title": "Restaurant",
@@ -44,23 +35,5 @@
     "date": "2025-07-10",
     "payee": "Tech Solutions Ltd.",
     "description": "Website development payment"
-  },
-  {
-    "id": "a673c149-ce29-4181-805d-2646da908bfe",
-    "category": "Expenses",
-    "title": "Internet Bill",
-    "amount": 35.99,
-    "date": "2025-07-10",
-    "payee": "ISP Unlimited",
-    "description": "Monthly internet subscription"
-  },
-  {
-    "id": "1f690813-b5f7-43f9-95b7-0af4806aa0a3",
-    "category": "Expenses",
-    "title": "Transport",
-    "amount": 12.75,
-    "date": "2025-07-10",
-    "payee": "City Bus",
-    "description": "Commute to work"
   }
 ]
