@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { AccountMoneyServiceApi } from '../../features/money-accounts/services/api/account-money-service-api.service';
 import { Router } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, Subscription, switchMap } from 'rxjs';
 import { AccountMoney } from '../../features/money-accounts/services/models/AccountMoney';
 import { RoutePaths } from '../../shared/constants/route-pathes';
 import { HttpClient } from '@angular/common/http';
@@ -9,16 +9,21 @@ import { TransactionServiceApi } from './services/transaction.service.api';
 import { IOnSubscriptionCallbacks } from '../../shared/types/interfaces';
 import { ITransaction } from './types/interfaces';
 import { TUUID } from '../../shared/types/types';
+import { SnakeBarComponent } from '../../shared/components/snake-bar/snake-bar.component';
 
 //todo: Mentor: Why is @Injectable used here?
 @Injectable({
   providedIn: 'root',
-  useFactory: (http: HttpClient, router: Router) => {
+  useFactory: (
+    http: HttpClient,
+    router: Router,
+    snakeBarComponent: SnakeBarComponent,
+  ) => {
     const amsApi = new AccountMoneyServiceApi(http);
     const tsApi = new TransactionServiceApi(http);
-    return new RootService(amsApi, tsApi, router);
+    return new RootService(amsApi, tsApi, router, snakeBarComponent);
   },
-  deps: [HttpClient, Router],
+  deps: [HttpClient, Router, SnakeBarComponent],
 })
 export class RootService {
   moneyAccounts$: Observable<Required<AccountMoney>[]> | null = null;
@@ -29,6 +34,7 @@ export class RootService {
     private accountMoneyServiceApi: AccountMoneyServiceApi,
     private transactionServiceApi: TransactionServiceApi,
     private router: Router,
+    private snakeBarComponent: SnakeBarComponent,
   ) {
     this.fetchTransactions();
   }
@@ -86,16 +92,20 @@ export class RootService {
     });
   }
 
-  deleteTransaction(id: TUUID) {
-    this.transactionServiceApi
+  deleteTransaction(id: TUUID): Subscription | null {
+    return this.transactionServiceApi
       .delete(id)
       .pipe(switchMap(() => this.transactionServiceApi.getTransactions()))
       .subscribe({
         next: (transactions) => {
           this.transactionsSignal.set(transactions);
+          this.snakeBarComponent.openSnackBar(
+            'Transaction deleted successfully',
+          );
         },
         error: (error) => {
           console.error('Error deleting transaction:', error);
+          this.snakeBarComponent.openSnackBar('Error deleting transaction');
         },
       });
   }

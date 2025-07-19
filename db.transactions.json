@@ -10,24 +10,6 @@
     "description": "4"
   },
   {
-    "id": "d4d8bec9-e0a1-4b0c-8e5e-f43c6752446d",
-    "category": "Expenses",
-    "title": "Groceries",
-    "amount": 54.32,
-    "date": "2025-07-08",
-    "payee": "Supermarket ABC",
-    "description": "Weekly grocery shopping"
-  },
-  {
-    "id": "7fa08518-0761-4cd8-a190-eb71011deb8a",
-    "category": "Expenses",
-    "title": "Restaurant",
-    "amount": 28.9,
-    "date": "2025-07-10",
-    "payee": "Pasta Place",
-    "description": "Dinner with friends"
-  },
-  {
     "id": "9556c32e-3f58-43da-b35f-bb36dedcdd98",
     "category": "Income",
     "title": "Freelance Project",

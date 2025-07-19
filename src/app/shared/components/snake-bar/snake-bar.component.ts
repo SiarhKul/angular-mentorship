@@ -6,13 +6,15 @@ import {
   MatSnackBarLabel,
   MatSnackBarRef,
   MAT_SNACK_BAR_DATA,
+  MatSnackBarModule,
 } from '@angular/material/snack-bar';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-snake-bar',
   templateUrl: './snake-bar.component.html',
   standalone: true,
+  imports: [MatSnackBarModule],
 })
 export class SnakeBarComponent {
   durationInSeconds = 5;
