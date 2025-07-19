@@ -30,7 +30,7 @@ import { MatIcon } from '@angular/material/icon';
         }
       </div>
       <app-modal>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="updateTransaction()">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="deleteTransaction()">
@@ -50,6 +50,16 @@ export class TransactionList {
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
+  }
+
+  updateTransaction() {
+    const currentTransaction = this.modalComponent.transactionSignal();
+    if (currentTransaction) {
+      this.rootService.updateTransaction(
+        currentTransaction.id,
+        currentTransaction,
+      );
+    }
   }
 
   deleteTransaction() {

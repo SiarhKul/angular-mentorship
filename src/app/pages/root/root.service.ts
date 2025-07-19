@@ -35,6 +35,10 @@ export class RootService {
     this.fetchTransactions();
   }
 
+  updateTransaction(transactionId: TUUID, transaction: Required<ITransaction>) {
+    this.transactionServiceApi.update(transactionId, transaction);
+  }
+
   getMoneyAccounts() {
     return this.accountMoneyServiceApi.getMoneyAccounts();
   }
