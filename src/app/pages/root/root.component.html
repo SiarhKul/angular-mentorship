@@ -6,6 +6,18 @@
     <app-transaction-list />
   </div>
   <div slot="right">
-    <app-transaction-creator />
+    <app-transaction-creator>
+      <app-button
+        [buttonContent]="'Create transaction'"
+        [customStyles]="{
+          backgroundColor: 'var(--background-color-primary-dark)',
+          color: 'black',
+          width: 'auto',
+          whiteSpace: 'nowrap',
+        }"
+        [icon]="'add'"
+        ngProjectAs="alternative__trigger"
+      />
+    </app-transaction-creator>
   </div>
 </app-layout-page>

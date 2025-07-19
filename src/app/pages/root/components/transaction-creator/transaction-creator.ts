@@ -131,16 +131,7 @@ import { AsyncSelectorComponent } from '../../../../shared/components/async-sele
       </footer>
 
       <div ngProjectAs="alternative__trigger">
-        <app-button
-          [icon]="'add'"
-          [buttonContent]="'Create transaction'"
-          [customStyles]="{
-            backgroundColor: 'var(--background-color-primary-dark)',
-            color: 'black',
-            width: 'auto',
-            whiteSpace: 'nowrap',
-          }"
-        />
+        <ng-content select="alternative__trigger" />
       </div>
     </app-drawer>
   `,
@@ -148,7 +139,6 @@ import { AsyncSelectorComponent } from '../../../../shared/components/async-sele
   imports: [
     DrawerComponent,
     MatButton,
-    ButtonComponent,
     FormsModule,
     MatFormField,
     MatInput,
@@ -182,8 +172,6 @@ export class TransactionCreatorComponent {
       form: { value },
       valid,
     } = formRef;
-
-    console.log('aaaa', formRef);
 
     if (valid) {
       await this.rootService.createTransactionAsync(value, {

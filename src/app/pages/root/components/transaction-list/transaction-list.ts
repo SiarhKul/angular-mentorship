@@ -6,12 +6,19 @@ import { ModalComponent } from '../../../../shared/components/modal/moda.compone
 import { ITransaction } from '../../types/interfaces';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { TransactionCreatorComponent } from '../transaction-creator/transaction-creator';
 
 @Component({
   standalone: true,
   selector: 'app-transaction-list',
   styleUrl: './transaction-list.css',
-  imports: [TransactionItemComponent, ModalComponent, MatIconButton, MatIcon],
+  imports: [
+    TransactionItemComponent,
+    ModalComponent,
+    MatIconButton,
+    MatIcon,
+    TransactionCreatorComponent,
+  ],
   template: `
     <div>
       <div class="transaction-list">
@@ -30,9 +37,16 @@ import { MatIcon } from '@angular/material/icon';
         }
       </div>
       <app-modal>
-        <button mat-icon-button (click)="updateTransaction()">
-          <mat-icon>edit</mat-icon>
-        </button>
+        <app-transaction-creator>
+          <button
+            ngProjectAs="alternative__trigger"
+            mat-icon-button
+            (click)="updateTransaction()"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </app-transaction-creator>
+
         <button mat-icon-button (click)="deleteTransaction()">
           <mat-icon>delete</mat-icon>
         </button>
@@ -51,6 +65,8 @@ export class TransactionList {
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
   }
+
+  openDrawer() {}
 
   updateTransaction() {
     const currentTransaction = this.modalComponent.transactionSignal();
