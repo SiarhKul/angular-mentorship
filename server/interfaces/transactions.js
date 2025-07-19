@@ -41,4 +41,12 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  try {
+    console.log(id);
+    res.status(200).json([]);
+  } catch (error) {}
+});
+
 module.exports = router;

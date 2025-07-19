@@ -11,6 +11,8 @@ import { ITransaction } from './types/interfaces';
 import { TUUID } from '../../shared/types/types';
 import { SnakeBarComponent } from '../../shared/components/snake-bar/snake-bar.component';
 
+class Transaction {}
+
 //todo: Mentor: Why is @Injectable used here?
 @Injectable({
   providedIn: 'root',
@@ -36,7 +38,18 @@ export class RootService {
   }
 
   updateTransaction(transactionId: TUUID, transaction: Required<ITransaction>) {
-    this.transactionServiceApi.update(transactionId, transaction);
+    this.transactionServiceApi
+      .update(transactionId, transaction)
+      .pipe(switchMap(() => this.transactionServiceApi.getTransactions()))
+      .subscribe({
+        next: (transactions: Required<Transaction>) => {
+          this.transactionsSignal.set(transactions);
+          this.snakeBarComponent.openSnackBar(
+            'Transaction deleted successfully',
+          );
+        },
+        error: (error: Error) => {},
+      });
   }
 
   getMoneyAccounts() {

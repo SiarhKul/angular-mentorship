@@ -10,6 +10,8 @@ class TransactionRepository {
 
     saveToFile(FilePath.TRANSLATIONS, transactionsFiltered);
   };
+
+  static async update(transaction) {}
 }
 
 module.exports = TransactionRepository;
