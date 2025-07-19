@@ -14,14 +14,10 @@ import { SnakeBarComponent } from '../../shared/components/snake-bar/snake-bar.c
 //todo: Mentor: Why is @Injectable used here?
 @Injectable({
   providedIn: 'root',
-  useFactory: (
-    http: HttpClient,
-    router: Router,
-    snakeBarComponent: SnakeBarComponent,
-  ) => {
+  useFactory: (http: HttpClient, router: Router) => {
     const amsApi = new AccountMoneyServiceApi(http);
     const tsApi = new TransactionServiceApi(http);
-    return new RootService(amsApi, tsApi, router, snakeBarComponent);
+    return new RootService(amsApi, tsApi, router);
   },
   deps: [HttpClient, Router, SnakeBarComponent],
 })
@@ -29,12 +25,12 @@ export class RootService {
   moneyAccounts$: Observable<Required<AccountMoney>[]> | null = null;
   selectedMoneyAccountIdSignal = signal<number | null>(null);
   transactionsSignal = signal<any>([]);
+  snakeBarComponent = new SnakeBarComponent();
 
   constructor(
     private accountMoneyServiceApi: AccountMoneyServiceApi,
     private transactionServiceApi: TransactionServiceApi,
     private router: Router,
-    private snakeBarComponent: SnakeBarComponent,
   ) {
     this.fetchTransactions();
   }

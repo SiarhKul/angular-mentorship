@@ -17,5 +17,14 @@
     "date": "2025-07-10",
     "payee": "Tech Solutions Ltd.",
     "description": "Website development payment"
+  },
+  {
+    "id": "9556c32e-3f58-43da-b35f-bb36dedcdd93",
+    "category": "Income",
+    "title": "Freelance Project",
+    "amount": 1200,
+    "date": "2025-07-10",
+    "payee": "Tech Solutions Ltd.",
+    "description": "Website development payment"
   }
 ]
