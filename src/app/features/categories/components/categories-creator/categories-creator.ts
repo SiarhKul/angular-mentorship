@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -84,7 +84,7 @@ import { CategoriesService } from '../../services/categories.service';
     </div>
   `,
 })
-export class CategoriesCreator {
+export class CategoriesCreator implements OnInit {
   categories = CATEGORIES;
 
   model: ICategory = {
@@ -106,6 +106,10 @@ export class CategoriesCreator {
   formRef!: NgForm;
 
   constructor(private categoriesService: CategoriesService) {}
+
+  ngOnInit(): void {
+    this.initializeModel();
+  }
 
   isLoading() {
     return this.categoriesService.isLoadingSignal();

@@ -170,7 +170,7 @@ export class TransactionCreatorComponent {
     categories: [],
   };
   @Input()
-  initFormValues: Required<ITransaction | null> = null;
+  initFormValues: Required<ITransaction | null> | undefined;
 
   constructor(private rootService: RootService) {}
 
@@ -187,6 +187,14 @@ export class TransactionCreatorComponent {
           formRef.resetForm();
         },
       });
+    }
+  }
+
+  private initializeModel(): void {
+    if (this.initFormValues) {
+      this.model = {
+        ...this.initFormValues,
+      };
     }
   }
 }
