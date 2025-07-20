@@ -87,7 +87,6 @@ export class AsyncSelectorComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit(): void {
-    // Initialize form control with default value
     this.formControl.setValue(this.defaultValue);
 
     this.getAllCategories().subscribe({
