@@ -1,10 +1,10 @@
-import { Component, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { RootService } from '../../root.service';
 import { TransactionItemComponent } from '../transaction-item/transaction-item.component';
 import { ECategories } from '../../../../features/categories/types/enums';
 import { ModalComponent } from '../../../../shared/components/modal/moda.component';
 import { ITransaction } from '../../types/interfaces';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TransactionCreatorComponent } from '../transaction-creator/transaction-creator';
 
@@ -18,6 +18,7 @@ import { TransactionCreatorComponent } from '../transaction-creator/transaction-
     MatIconButton,
     MatIcon,
     TransactionCreatorComponent,
+    MatButtonModule,
   ],
   template: `
     <div>
@@ -37,20 +38,22 @@ import { TransactionCreatorComponent } from '../transaction-creator/transaction-
         }
       </div>
       <app-modal>
-        <app-transaction-creator>
-          <button
-            ngProjectAs="alternative__trigger"
-            mat-icon-button
-            (click)="updateTransaction()"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-        </app-transaction-creator>
+        <button mat-icon-button (click)="openDrawer()">
+          <mat-icon>edit</mat-icon>
+        </button>
 
         <button mat-icon-button (click)="deleteTransaction()">
           <mat-icon>delete</mat-icon>
         </button>
       </app-modal>
+      <app-transaction-creator>
+        <button mat-button>Basic</button>
+        <div
+          #updateTrigger
+          ngProjectAs="alternative__trigger"
+          (click)="updateTransaction()"
+        ></div>
+      </app-transaction-creator>
     </div>
   `,
 })
@@ -62,11 +65,17 @@ export class TransactionList {
   @ViewChild(ModalComponent)
   modalComponent!: ModalComponent;
 
+  @ViewChild('updateTrigger', { read: ElementRef })
+  updateTrigger!: ElementRef;
+
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
   }
 
-  openDrawer() {}
+  openDrawer() {
+    this.updateTrigger.nativeElement.click();
+    console.log(this.updateTrigger);
+  }
 
   updateTransaction() {
     const currentTransaction = this.modalComponent.transactionSignal();

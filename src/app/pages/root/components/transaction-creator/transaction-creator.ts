@@ -167,6 +167,10 @@ export class TransactionCreatorComponent {
 
   constructor(private rootService: RootService) {}
 
+  showDrawer() {
+    this.drawer.toggleDrawer();
+  }
+
   async onSubmit(formRef: NgForm) {
     const {
       form: { value },
