@@ -47,15 +47,17 @@ import { TransactionCreatorComponent } from '../transaction-creator/transaction-
         </button>
       </app-modal>
 
-      <app-transaction-creator
-        [initFormValues]="modalComponent?.transactionSignal()"
-      >
-        <div
-          #updateTrigger
-          ngProjectAs="alternative__trigger"
-          (click)="updateTransaction()"
-        ></div>
-      </app-transaction-creator>
+      @if (modalComponent) {
+        <app-transaction-creator
+          [initFormValues]="modalComponent.transactionSignal()"
+        >
+          <div
+            #updateTrigger
+            ngProjectAs="alternative__trigger"
+            (click)="updateTransaction()"
+          ></div>
+        </app-transaction-creator>
+      }
     </div>
   `,
 })
