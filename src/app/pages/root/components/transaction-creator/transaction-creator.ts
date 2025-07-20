@@ -1,4 +1,10 @@
-import { Component, signal, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { MatButton } from '@angular/material/button';
@@ -154,7 +160,6 @@ export class TransactionCreatorComponent {
 
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
-
   model: ITransaction = {
     title: '',
     amount: 0,
@@ -164,12 +169,10 @@ export class TransactionCreatorComponent {
     category: ECategories.EXPENSES,
     categories: [],
   };
+  @Input()
+  initFormValues: Required<ITransaction | null> = null;
 
   constructor(private rootService: RootService) {}
-
-  showDrawer() {
-    this.drawer.toggleDrawer();
-  }
 
   async onSubmit(formRef: NgForm) {
     const {
