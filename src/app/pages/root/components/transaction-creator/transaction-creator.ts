@@ -2,7 +2,9 @@ import {
   AfterViewInit,
   Component,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -156,7 +158,7 @@ import { AsyncSelectorComponent } from '../../../../shared/components/async-sele
     AsyncSelectorComponent,
   ],
 })
-export class TransactionCreatorComponent implements OnInit {
+export class TransactionCreatorComponent implements OnChanges {
   categories = ECategories;
 
   @ViewChild(DrawerComponent)
@@ -175,8 +177,10 @@ export class TransactionCreatorComponent implements OnInit {
 
   constructor(private rootService: RootService) {}
 
-  ngOnInit(): void {
-    this.initializeModel();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['initFormValues'] && !changes['initFormValues'].firstChange) {
+      this.initializeModel();
+    }
   }
 
   async onSubmit(formRef: NgForm) {
@@ -197,8 +201,23 @@ export class TransactionCreatorComponent implements OnInit {
 
   private initializeModel(): void {
     if (this.initFormValues) {
+      console.log('1111111111111', {
+        title: this.initFormValues.title,
+        amount: this.initFormValues.amount,
+        date: new Date(this.initFormValues.date),
+        payee: this.initFormValues.payee,
+        description: this.initFormValues.description,
+        category: this.initFormValues.category,
+        categories: this.initFormValues.categories,
+      });
       this.model = {
-        ...this.initFormValues,
+        title: this.initFormValues.title,
+        amount: this.initFormValues.amount,
+        date: new Date(this.initFormValues.date),
+        payee: this.initFormValues.payee,
+        description: this.initFormValues.description,
+        category: this.initFormValues.category,
+        categories: this.initFormValues.categories,
       };
     }
   }

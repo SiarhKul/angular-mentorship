@@ -10,24 +10,6 @@
     "description": "4"
   },
   {
-    "id": "9556c32e-3f58-43da-b35f-bb36dedcdd98",
-    "category": "Income",
-    "title": "Freelance Project",
-    "amount": 1200,
-    "date": "2025-07-10",
-    "payee": "Tech Solutions Ltd.",
-    "description": "Website development payment"
-  },
-  {
-    "id": "9556c32e-3f58-43da-b35f-bb36dedcdd93",
-    "category": "Income",
-    "title": "Freelance Project",
-    "amount": 1200,
-    "date": "2025-07-10",
-    "payee": "Tech Solutions Ltd.",
-    "description": "Website development payment"
-  },
-  {
     "id": "256eebc9-63e8-4899-8512-0e321b8c90d7",
     "category": "Expenses",
     "title": "test",
@@ -35,6 +17,16 @@
     "amount": 500,
     "date": "2025-07-19",
     "payee": "10",
+    "description": "descr1"
+  },
+  {
+    "id": "5bfa65f0-541a-4cba-96b3-b0c34fe22d23",
+    "category": "Expenses",
+    "title": "default",
+    "categories": ["test13"],
+    "amount": 4,
+    "date": "2025-07-20",
+    "payee": "Siarhei",
     "description": "descr1"
   }
 ]

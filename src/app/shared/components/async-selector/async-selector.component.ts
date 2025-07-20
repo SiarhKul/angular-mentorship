@@ -59,13 +59,15 @@ import { TUUID } from '../../types/types';
 export class AsyncSelectorComponent implements OnInit, ControlValueAccessor {
   @Input()
   inlineStyles: Partial<CSSStyleDeclaration> = {};
+  @Input()
+  defaultValue: string[] = [];
   formControl = new FormControl<string[]>([]);
   values: { name: string; id: TUUID | number | string }[] = [];
 
   constructor(private http: HttpClient) {}
 
   writeValue(value: string[] | null): void {
-    this.formControl.setValue(value || []);
+    this.formControl.setValue(value || this.defaultValue);
   }
 
   registerOnChange(fn: any): void {
@@ -85,6 +87,9 @@ export class AsyncSelectorComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit(): void {
+    // Initialize form control with default value
+    this.formControl.setValue(this.defaultValue);
+
     this.getAllCategories().subscribe({
       next: (category) => {
         this.values = category;
