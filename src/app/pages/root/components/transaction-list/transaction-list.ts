@@ -46,7 +46,10 @@ import { TransactionCreatorComponent } from '../transaction-creator/transaction-
           <mat-icon>delete</mat-icon>
         </button>
       </app-modal>
-      <app-transaction-creator>
+
+      <app-transaction-creator
+        [initFormValues]="modalComponent?.transactionSignal()"
+      >
         <div
           #updateTrigger
           ngProjectAs="alternative__trigger"

@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   Input,
+  OnInit,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -155,7 +156,7 @@ import { AsyncSelectorComponent } from '../../../../shared/components/async-sele
     AsyncSelectorComponent,
   ],
 })
-export class TransactionCreatorComponent {
+export class TransactionCreatorComponent implements OnInit {
   categories = ECategories;
 
   @ViewChild(DrawerComponent)
@@ -173,6 +174,10 @@ export class TransactionCreatorComponent {
   initFormValues: Required<ITransaction | null> | undefined;
 
   constructor(private rootService: RootService) {}
+
+  ngOnInit(): void {
+    this.initializeModel();
+  }
 
   async onSubmit(formRef: NgForm) {
     const {
