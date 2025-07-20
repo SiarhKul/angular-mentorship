@@ -73,8 +73,8 @@ export class TransactionList {
   }
 
   openDrawer() {
+    this.modalComponent.toggleModal();
     this.updateTrigger.nativeElement.click();
-    console.log(this.updateTrigger);
   }
 
   updateTransaction() {

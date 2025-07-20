@@ -44,9 +44,9 @@ export class RootService {
       .subscribe({
         next: (transactions: Required<Transaction>) => {
           this.transactionsSignal.set(transactions);
-          this.snakeBarComponent.openSnackBar(
-            'Transaction deleted successfully',
-          );
+          // this.snakeBarComponent.openSnackBar(
+          //   'Transaction deleted successfully',
+          // );
         },
         error: (error: Error) => {},
       });
