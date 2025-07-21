@@ -9,7 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { TransactionCreatorComponent } from '../transaction-creator/transaction-creator';
 import { IOnSubscriptionCallbacks } from '../../../../shared/types/interfaces';
 import { IonResponseCallbacks } from '../../../../shared/types/types';
-import { NgForm } from '@angular/forms';
+import { AbstractControl, NgForm } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -80,10 +80,11 @@ export class TransactionList {
     this.transactionsSignal = this.rootService.transactionsSignal;
   }
 
-  updateTransactionAction(formVal: NgForm, callbacks: IonResponseCallbacks) {
-    const r = formVal.form.value;
-
-    console.log(formVal);
+  updateTransactionAction(
+    values: AbstractControl<ITransaction>,
+    callbacks: IonResponseCallbacks,
+  ) {
+    console.log(values);
   }
 
   openDrawer() {

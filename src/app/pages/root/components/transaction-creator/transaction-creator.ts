@@ -11,7 +11,12 @@ import {
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
 import { MatButton } from '@angular/material/button';
-import { FormsModule, NgForm } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  FormsModule,
+  NgForm,
+} from '@angular/forms';
 import { CATEGORIES } from '../../../../shared/constants/dictionaries';
 import {
   MatError,
@@ -180,8 +185,10 @@ export class TransactionCreatorComponent implements OnChanges {
   constructor(private rootService: RootService) {}
 
   @Input({ required: true })
-  submitAction: (formVal: NgForm, callbacks: IonResponseCallbacks) => void =
-    () => undefined;
+  submitAction: (
+    formVal: AbstractControl<ITransaction>,
+    callbacks: IonResponseCallbacks,
+  ) => void = () => undefined;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initFormValues'] && !changes['initFormValues'].firstChange) {
@@ -196,7 +203,7 @@ export class TransactionCreatorComponent implements OnChanges {
     } = formRef;
 
     if (valid) {
-      this.submitAction(formRef, {
+      this.submitAction(value, {
         onSuccess: () => {},
       });
 
