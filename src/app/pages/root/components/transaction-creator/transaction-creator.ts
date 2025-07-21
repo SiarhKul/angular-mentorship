@@ -26,6 +26,7 @@ import { ECategories } from '../../../../features/categories/types/enums';
 import { RootService } from '../../root.service';
 import { ITransaction } from '../../types/interfaces';
 import { AsyncSelectorComponent } from '../../../../shared/components/async-selector/async-selector.component';
+import { IonResponseCallbacks } from '../../../../shared/types/types';
 
 @Component({
   selector: 'app-transaction-creator',
@@ -163,6 +164,9 @@ export class TransactionCreatorComponent implements OnChanges {
 
   @ViewChild(DrawerComponent)
   drawer!: DrawerComponent;
+
+  @Input()
+  initFormValues: Required<ITransaction | null> | undefined;
   model: ITransaction = {
     title: '',
     amount: 0,
@@ -172,10 +176,12 @@ export class TransactionCreatorComponent implements OnChanges {
     category: ECategories.EXPENSES,
     categories: [],
   };
-  @Input()
-  initFormValues: Required<ITransaction | null> | undefined;
 
   constructor(private rootService: RootService) {}
+
+  @Input({ required: true })
+  submitAction: (formVal: NgForm, callbacks: IonResponseCallbacks) => void =
+    () => undefined;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initFormValues'] && !changes['initFormValues'].firstChange) {
@@ -190,12 +196,16 @@ export class TransactionCreatorComponent implements OnChanges {
     } = formRef;
 
     if (valid) {
-      await this.rootService.createTransactionAsync(value, {
-        onSuccess: () => {
-          this.drawer.closeDrawer();
-          formRef.resetForm();
-        },
+      this.submitAction(formRef, {
+        onSuccess: () => {},
       });
+
+      // await this.rootService.createTransactionAsync(value, {
+      //   onSuccess: () => {
+      //     this.drawer.closeDrawer();
+      //     formRef.resetForm();
+      //   },
+      // });
     }
   }
 

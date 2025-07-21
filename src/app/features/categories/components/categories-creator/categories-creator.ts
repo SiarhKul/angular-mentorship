@@ -95,7 +95,6 @@ export class CategoriesCreator implements OnInit {
   @Input()
   initFormValues?: Required<ICategory>;
 
-  //todo: check Ts config
   @Input({ required: true })
   submitAction!: Function;
 

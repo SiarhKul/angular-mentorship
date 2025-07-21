@@ -7,6 +7,9 @@ import { ITransaction } from '../../types/interfaces';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TransactionCreatorComponent } from '../transaction-creator/transaction-creator';
+import { IOnSubscriptionCallbacks } from '../../../../shared/types/interfaces';
+import { IonResponseCallbacks } from '../../../../shared/types/types';
+import { NgForm } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -50,6 +53,7 @@ import { TransactionCreatorComponent } from '../transaction-creator/transaction-
       @if (modalComponent) {
         <app-transaction-creator
           [initFormValues]="modalComponent.transactionSignal()"
+          [submitAction]="updateTransactionAction"
         >
           <div
             #updateTrigger
@@ -74,6 +78,12 @@ export class TransactionList {
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
+  }
+
+  updateTransactionAction(formVal: NgForm, callbacks: IonResponseCallbacks) {
+    const r = formVal.form.value;
+
+    console.log(formVal);
   }
 
   openDrawer() {
