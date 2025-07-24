@@ -55,11 +55,7 @@ import { AbstractControl, NgForm } from '@angular/forms';
           [initFormValues]="modalComponent.transactionSignal()"
           [submitAction]="updateTransactionAction"
         >
-          <div
-            #updateTrigger
-            ngProjectAs="alternative__trigger"
-            (click)="updateTransaction()"
-          ></div>
+          <div #updateTrigger ngProjectAs="alternative__trigger"></div>
         </app-transaction-creator>
       }
     </div>
@@ -81,9 +77,14 @@ export class TransactionList {
   }
 
   updateTransactionAction(
-    values: AbstractControl<ITransaction>,
+    values: Required<ITransaction>,
     callbacks: IonResponseCallbacks,
   ) {
+    const currentTransaction = this.modalComponent.transactionSignal();
+    if (currentTransaction) {
+      this.rootService.updateTransaction(currentTransaction.id, values);
+    }
+
     console.log(values);
   }
 
@@ -92,15 +93,15 @@ export class TransactionList {
     this.updateTrigger.nativeElement.click();
   }
 
-  updateTransaction() {
-    const currentTransaction = this.modalComponent.transactionSignal();
-    if (currentTransaction) {
-      this.rootService.updateTransaction(
-        currentTransaction.id,
-        currentTransaction,
-      );
-    }
-  }
+  // updateTransaction() {
+  //   const currentTransaction = this.modalComponent.transactionSignal();
+  //   if (currentTransaction) {
+  //     this.rootService.updateTransaction(
+  //       currentTransaction.id,
+  //       currentTransaction,
+  //     );
+  //   }
+  // }
 
   deleteTransaction() {
     const currentTransaction = this.modalComponent.transactionSignal();

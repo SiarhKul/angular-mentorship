@@ -4,10 +4,8 @@ const {
   createTransaction,
   getAllTransactions,
   deleteTransaction,
+  updateTransaction,
 } = require("../core/domain/use-cases/createTransactionUC.js");
-const {
-  log,
-} = require("@angular-devkit/build-angular/src/builders/ssr-dev-server/index.js");
 
 router.post("/", async (req, res) => {
   try {
@@ -43,6 +41,10 @@ router.delete("/:id", async (req, res) => {
 
 router.put("/:id", (req, res) => {
   const { id } = req.params;
+  const { body: catetory } = req;
+
+  updateTransaction(id, catetory);
+
   try {
     console.log(id);
     res.status(200).json([]);

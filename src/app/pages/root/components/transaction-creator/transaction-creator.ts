@@ -186,7 +186,7 @@ export class TransactionCreatorComponent implements OnChanges {
 
   @Input({ required: true })
   submitAction: (
-    formVal: AbstractControl<ITransaction>,
+    formVal: Required<ITransaction>,
     callbacks: IonResponseCallbacks,
   ) => void = () => undefined;
 

@@ -35,8 +35,8 @@ async function deleteTransaction(id) {
   }
 }
 
-async function updateTransaction(transaction) {
-  TransactionRepository.update(transaction);
+async function updateTransaction(id, transaction) {
+  TransactionRepository.update(id, transaction);
 }
 
 module.exports = {

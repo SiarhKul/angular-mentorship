@@ -11,7 +11,9 @@ class TransactionRepository {
     saveToFile(FilePath.TRANSLATIONS, transactionsFiltered);
   };
 
-  static async update(transaction) {}
+  static async update(id, transaction) {
+    console.log({ id, transaction });
+  }
 }
 
 module.exports = TransactionRepository;
