@@ -7,9 +7,7 @@ import { ITransaction } from '../../types/interfaces';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TransactionCreatorComponent } from '../transaction-creator/transaction-creator';
-import { IOnSubscriptionCallbacks } from '../../../../shared/types/interfaces';
 import { IonResponseCallbacks } from '../../../../shared/types/types';
-import { AbstractControl, NgForm } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -83,6 +81,7 @@ export class TransactionList {
     const currentTransaction = this.modalComponent.transactionSignal();
     if (currentTransaction) {
       this.rootService.updateTransaction(currentTransaction.id, values);
+      callbacks.onSuccess?.(null);
     }
   }
 

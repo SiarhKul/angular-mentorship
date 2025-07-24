@@ -204,7 +204,10 @@ export class TransactionCreatorComponent implements OnChanges {
 
     if (valid) {
       this.submitAction(value, {
-        onSuccess: () => {},
+        onSuccess: () => {
+          this.drawer.closeDrawer();
+          formRef.resetForm();
+        },
       });
 
       // await this.rootService.createTransactionAsync(value, {
@@ -218,15 +221,6 @@ export class TransactionCreatorComponent implements OnChanges {
 
   private initializeModel(): void {
     if (this.initFormValues) {
-      console.log('1111111111111', {
-        title: this.initFormValues.title,
-        amount: this.initFormValues.amount,
-        date: new Date(this.initFormValues.date),
-        payee: this.initFormValues.payee,
-        description: this.initFormValues.description,
-        category: this.initFormValues.category,
-        categories: this.initFormValues.categories,
-      });
       this.model = {
         title: this.initFormValues.title,
         amount: this.initFormValues.amount,
