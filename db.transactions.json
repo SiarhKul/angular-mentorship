@@ -21,13 +21,13 @@
   },
   {
     "id": "5bfa65f0-541a-4cba-96b3-b0c34fe22d23",
-    "category": "Expenses",
+    "category": "Income",
     "title": "default",
     "categories": ["test13"],
     "amount": 4,
     "date": "2025-07-20",
     "payee": "Siarhei",
-    "description": "descr1"
+    "description": "descr111ff111"
   },
   {
     "id": "ce66b7b0-1195-4321-8551-83950a5fc77f",

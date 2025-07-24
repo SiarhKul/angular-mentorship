@@ -3,7 +3,6 @@ const FilePath = require("../../shared/file-path");
 
 class TransactionRepository {
   static deleteTransaction = async (id) => {
-    console.log("Repository", id);
     const transactionsDb = await readFromFile(FilePath.TRANSLATIONS);
 
     const transactionsFiltered = transactionsDb.filter((t) => t.id !== id);
@@ -12,7 +11,18 @@ class TransactionRepository {
   };
 
   static async update(id, transaction) {
-    console.log({ id, transaction });
+    const transactionsDb = await readFromFile(FilePath.TRANSLATIONS);
+
+    const transactionsUpdated = transactionsDb.map((t) => {
+      if (t.id === id) {
+        return { ...t, ...transaction };
+      } else {
+        return t;
+      }
+    });
+    console.log({ id, transaction, transactionsUpdated });
+
+    saveToFile(FilePath.TRANSLATIONS, transactionsUpdated);
   }
 }
 

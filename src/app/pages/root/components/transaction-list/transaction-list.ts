@@ -53,7 +53,7 @@ import { AbstractControl, NgForm } from '@angular/forms';
       @if (modalComponent) {
         <app-transaction-creator
           [initFormValues]="modalComponent.transactionSignal()"
-          [submitAction]="updateTransactionAction"
+          [submitAction]="updateTransactionAction.bind(this)"
         >
           <div #updateTrigger ngProjectAs="alternative__trigger"></div>
         </app-transaction-creator>
@@ -84,24 +84,12 @@ export class TransactionList {
     if (currentTransaction) {
       this.rootService.updateTransaction(currentTransaction.id, values);
     }
-
-    console.log(values);
   }
 
   openDrawer() {
     this.modalComponent.toggleModal();
     this.updateTrigger.nativeElement.click();
   }
-
-  // updateTransaction() {
-  //   const currentTransaction = this.modalComponent.transactionSignal();
-  //   if (currentTransaction) {
-  //     this.rootService.updateTransaction(
-  //       currentTransaction.id,
-  //       currentTransaction,
-  //     );
-  //   }
-  // }
 
   deleteTransaction() {
     const currentTransaction = this.modalComponent.transactionSignal();
