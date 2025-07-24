@@ -66,7 +66,7 @@ export class RootService {
     });
   }
 
-  async createTransactionAsync(
+  createTransactionAsync(
     transaction: ITransaction,
     { onSuccess }: IOnSubscriptionCallbacks,
   ) {

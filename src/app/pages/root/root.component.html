@@ -6,7 +6,9 @@
     <app-transaction-list />
   </div>
   <div slot="right">
-    <app-transaction-creator>
+    <app-transaction-creator
+      [submitAction]="createTransactionAction.bind(this)"
+    >
       <app-button
         [buttonContent]="'Create transaction'"
         [customStyles]="{

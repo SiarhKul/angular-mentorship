@@ -20,16 +20,6 @@
     "description": "descr1"
   },
   {
-    "id": "5bfa65f0-541a-4cba-96b3-b0c34fe22d23",
-    "category": "Expenses",
-    "title": "default11",
-    "categories": ["test13"],
-    "amount": 4,
-    "date": "2025-07-20",
-    "payee": "Siarhei",
-    "description": "3344"
-  },
-  {
     "id": "ce66b7b0-1195-4321-8551-83950a5fc77f",
     "category": "Income",
     "title": "title",
@@ -38,5 +28,15 @@
     "date": "2222-02-10",
     "payee": "payee",
     "description": "description"
+  },
+  {
+    "id": "1bd39239-0e3e-4a9e-9579-6f25b87836c5",
+    "category": "Expenses",
+    "title": "upd",
+    "categories": ["Category1"],
+    "amount": 444,
+    "date": "2025-07-24",
+    "payee": "111",
+    "description": "13"
   }
 ]

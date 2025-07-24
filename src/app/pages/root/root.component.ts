@@ -4,6 +4,9 @@ import { LayoutPage } from '../../shared/components/layout-page/layout-page.comp
 import { TransactionCreatorComponent } from './components/transaction-creator/transaction-creator';
 import { TransactionList } from './components/transaction-list/transaction-list';
 import { ButtonComponent } from '../../shared/components/button/button.component';
+import { ITransaction } from './types/interfaces';
+import { IonResponseCallbacks } from '../../shared/types/types';
+import { RootService } from './root.service';
 
 @Component({
   selector: 'app-categories',
@@ -16,4 +19,14 @@ import { ButtonComponent } from '../../shared/components/button/button.component
   ],
   templateUrl: './root.component.html',
 })
-export class RootComponent {}
+export class RootComponent {
+  constructor(private rootService: RootService) {}
+
+  createTransactionAction(
+    values: ITransaction,
+    callbacks: IonResponseCallbacks,
+  ) {
+    this.rootService.createTransactionAsync(values, callbacks);
+    callbacks.onSuccess?.(null);
+  }
+}
