@@ -44,6 +44,7 @@
   flex-grow: 1;
   overflow-y: auto;
   padding-top: var(--spacing-md);
+  padding: 0px 4px;
 }
 
 .drawer__button-block {
