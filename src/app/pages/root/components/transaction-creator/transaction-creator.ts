@@ -7,6 +7,7 @@ import {
   SimpleChanges,
   signal,
   ViewChild,
+  Optional,
 } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { DrawerComponent } from '../../../../shared/components/drawer/drawer.component';
@@ -182,11 +183,11 @@ export class TransactionCreatorComponent implements OnChanges {
     categories: [],
   };
 
-  constructor(private rootService: RootService) {}
+  constructor() {}
 
   @Input({ required: true })
-  submitAction: (
-    formVal: Required<ITransaction>,
+  submitAction: <T extends Required<ITransaction>>(
+    formVal: T,
     callbacks: IonResponseCallbacks,
   ) => void = () => undefined;
 
@@ -209,13 +210,6 @@ export class TransactionCreatorComponent implements OnChanges {
           formRef.resetForm();
         },
       });
-      //todo
-      // await this.rootService.createTransactionAsync(value, {
-      //   onSuccess: () => {
-      //     this.drawer.closeDrawer();
-      //     formRef.resetForm();
-      //   },
-      // });
     }
   }
 

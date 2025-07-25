@@ -74,8 +74,8 @@ export class TransactionList {
     this.transactionsSignal = this.rootService.transactionsSignal;
   }
 
-  updateTransactionAction(
-    values: Required<ITransaction>,
+  updateTransactionAction<T extends Required<ITransaction>>(
+    values: Required<T>,
     callbacks: IonResponseCallbacks,
   ) {
     const currentTransaction = this.modalComponent.transactionSignal();

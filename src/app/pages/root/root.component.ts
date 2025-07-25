@@ -21,9 +21,8 @@ import { RootService } from './root.service';
 })
 export class RootComponent {
   constructor(private rootService: RootService) {}
-
-  createTransactionAction(
-    values: ITransaction,
+  createTransactionAction<T extends ITransaction>(
+    values: T,
     callbacks: IonResponseCallbacks,
   ) {
     this.rootService.createTransactionAsync(values, callbacks);
