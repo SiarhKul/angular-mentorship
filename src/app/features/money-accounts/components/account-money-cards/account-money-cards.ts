@@ -56,8 +56,10 @@ const CURRENCIES_DICTIONARY: Record<string, string> = {
 export class AccountMoneyCards implements OnChanges {
   @Input()
   selectedMoneyAccountIdSignal: WritableSignal<number | null> | null = null;
+
   @Input()
   moneyAccounts: Required<AccountMoney>[] | null = null;
+
   protected readonly CURRENCIES_DICTIONARY = CURRENCIES_DICTIONARY;
 
   constructor(
@@ -69,6 +71,7 @@ export class AccountMoneyCards implements OnChanges {
     if (changes['moneyAccounts'] && this.moneyAccounts?.length) {
       const moneyAccountId =
         this.activeRoute.snapshot.queryParamMap.get('moneyAccountId');
+
       const firstElement = this.moneyAccounts[0];
 
       if (moneyAccountId === null && firstElement) {

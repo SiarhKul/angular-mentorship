@@ -1,4 +1,12 @@
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  signal,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { RootService } from '../../root.service';
 import { TransactionItemComponent } from '../transaction-item/transaction-item.component';
 import { ECategories } from '../../../../features/categories/types/enums';
@@ -59,7 +67,7 @@ import { IonResponseCallbacks } from '../../../../shared/types/types';
     </div>
   `,
 })
-export class TransactionList {
+export class TransactionList implements OnChanges {
   transactionsSignal = signal<any>([]);
 
   ECategories = ECategories;
@@ -70,8 +78,19 @@ export class TransactionList {
   @ViewChild('updateTrigger', { read: ElementRef })
   updateTrigger!: ElementRef;
 
+  @Input()
+  transactionId!: number | null;
+
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['transactionId']) {
+      console.log(changes);
+    }
+
+    throw new Error('Method not implemented.');
   }
 
   updateTransactionAction<T extends Required<ITransaction>>(
