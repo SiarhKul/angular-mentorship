@@ -1,8 +1,10 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
+  Output,
   signal,
   SimpleChanges,
   ViewChild,
@@ -79,7 +81,7 @@ export class TransactionList implements OnChanges {
   updateTrigger!: ElementRef;
 
   @Input()
-  transactionId!: number | null;
+  accountId!: number | null;
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;

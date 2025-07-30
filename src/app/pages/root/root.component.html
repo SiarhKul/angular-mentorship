@@ -1,9 +1,10 @@
 <app-layout-page>
   <div slot="left">
-    <money-accounts />
+    <div>{{ accountId | json }}</div>
+    <money-accounts (onChangeAccountId)="handleMoneyAccountId($event)" />
   </div>
   <div slot="middle">
-    <app-transaction-list [transactionId]="transactionId" />
+    <app-transaction-list [accountId]="accountId" />
   </div>
   <div slot="right">
     <app-transaction-creator

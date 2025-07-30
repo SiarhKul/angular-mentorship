@@ -8,6 +8,7 @@ import { ITransaction } from './types/interfaces';
 import { IonResponseCallbacks } from '../../shared/types/types';
 import { RootService } from './root.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-categories',
@@ -17,19 +18,24 @@ import { ActivatedRoute, Params } from '@angular/router';
     TransactionCreatorComponent,
     TransactionList,
     ButtonComponent,
+    JsonPipe,
   ],
   templateUrl: './root.component.html',
 })
 export class RootComponent implements OnInit {
-  transactionId: null | number = null;
+  accountId: null | number = null;
 
   constructor(
-    private rootService: RootService,
+    protected rootService: RootService,
     private activatedRoute: ActivatedRoute,
   ) {}
 
+  handleMoneyAccountId(id: number | null) {
+    this.accountId = id;
+  }
+
   ngOnInit(): void {
-    this.transactionId = this.extractMoneyAccountId(
+    this.accountId = this.extractMoneyAccountId(
       this.activatedRoute.snapshot.queryParams,
     );
   }
@@ -44,7 +50,7 @@ export class RootComponent implements OnInit {
 
   private extractMoneyAccountId(params: Params) {
     if ('moneyAccountId' in params) {
-      return (this.transactionId = Number(
+      return (this.accountId = Number(
         this.activatedRoute.snapshot.queryParams['moneyAccountId'],
       ));
     }
