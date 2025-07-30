@@ -32,9 +32,7 @@ export class RootService {
     private accountMoneyServiceApi: AccountMoneyServiceApi,
     private transactionServiceApi: TransactionServiceApi,
     private router: Router,
-  ) {
-    // this.fetchTransactions();
-  }
+  ) {}
 
   updateTransaction(transactionId: TUUID, transaction: Required<ITransaction>) {
     this.transactionServiceApi
@@ -81,13 +79,13 @@ export class RootService {
     transaction: ITransaction,
     { onSuccess }: IOnSubscriptionCallbacks,
   ) {
-    console.log('4444444444444444444', transaction);
-
     this.transactionServiceApi
       .createTransaction(transaction)
       .pipe(
         switchMap(() => {
-          return this.transactionServiceApi.getTransactions();
+          return this.transactionServiceApi.getTransactionsBy(
+            transaction.transactionId,
+          );
         }),
       )
       .subscribe({
