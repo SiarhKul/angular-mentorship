@@ -1,11 +1,8 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   Input,
   OnChanges,
-  OnInit,
-  Output,
   signal,
   SimpleChanges,
   ViewChild,
@@ -19,7 +16,6 @@ import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TransactionCreatorComponent } from '../transaction-creator/transaction-creator';
 import { IonResponseCallbacks } from '../../../../shared/types/types';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -32,11 +28,9 @@ import { JsonPipe } from '@angular/common';
     MatIcon,
     TransactionCreatorComponent,
     MatButtonModule,
-    JsonPipe,
   ],
   template: `
     <div>
-      <div>{{ accountId | json }}</div>
       <div class="transaction-list">
         @for (tx of transactionsSignal(); track tx.id) {
           <app-transaction-item
@@ -78,14 +72,11 @@ export class TransactionList implements OnChanges {
 
   ECategories = ECategories;
 
-  @ViewChild(ModalComponent)
-  modalComponent!: ModalComponent;
+  @ViewChild(ModalComponent) modalComponent!: ModalComponent;
 
-  @ViewChild('updateTrigger', { read: ElementRef })
-  updateTrigger!: ElementRef;
+  @ViewChild('updateTrigger', { read: ElementRef }) updateTrigger!: ElementRef;
 
-  @Input()
-  accountId!: number | null;
+  @Input() accountId!: number | null;
 
   constructor(private rootService: RootService) {
     this.transactionsSignal = this.rootService.transactionsSignal;

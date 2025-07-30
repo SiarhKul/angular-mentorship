@@ -5,6 +5,7 @@ const {
   getAllTransactions,
   deleteTransaction,
   updateTransaction,
+  getTransactionBy,
 } = require("../core/domain/use-cases/createTransactionUC.js");
 
 router.post("/", async (req, res) => {
@@ -43,11 +44,18 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
   const { body: catetory } = req;
 
-  updateTransaction(id, catetory);
-
   try {
-    console.log(id);
+    updateTransaction(id, catetory);
+
     res.status(200).json([]);
+  } catch (error) {}
+});
+
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const tr = await getTransactionBy(id);
+    res.status(200).json(tr);
   } catch (error) {}
 });
 

@@ -7,7 +7,8 @@
     "amount": 0,
     "date": "2025-07-14",
     "payee": "14",
-    "description": "4"
+    "description": "4",
+    "transactionId": "1748292098043"
   },
   {
     "id": "256eebc9-63e8-4899-8512-0e321b8c90d7",
@@ -17,7 +18,8 @@
     "amount": 500,
     "date": "2025-07-19",
     "payee": "10",
-    "description": "descr1"
+    "description": "descr1",
+    "transactionId": "1748292098043"
   },
   {
     "id": "ce66b7b0-1195-4321-8551-83950a5fc77f",
@@ -27,7 +29,8 @@
     "amount": 100,
     "date": "2222-02-10",
     "payee": "payee",
-    "description": "description"
+    "description": "description",
+    "transactionId": "1748292098043"
   },
   {
     "id": "1bd39239-0e3e-4a9e-9579-6f25b87836c5",
@@ -37,6 +40,18 @@
     "amount": 444,
     "date": "2025-07-24",
     "payee": "111",
-    "description": "13"
+    "description": "13",
+    "transactionId": "1748459574312"
+  },
+  {
+    "id": "1bd39239-0e3e-4a9e-9579-6f25b87836c7",
+    "category": "Expenses",
+    "title": "upd",
+    "categories": ["Category1"],
+    "amount": 444,
+    "date": "2025-07-24",
+    "payee": "111",
+    "description": "13",
+    "transactionId": "1748459574312"
   }
 ]

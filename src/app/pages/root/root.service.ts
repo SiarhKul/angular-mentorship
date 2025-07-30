@@ -33,7 +33,7 @@ export class RootService {
     private transactionServiceApi: TransactionServiceApi,
     private router: Router,
   ) {
-    this.fetchTransactions();
+    // this.fetchTransactions();
   }
 
   updateTransaction(transactionId: TUUID, transaction: Required<ITransaction>) {
