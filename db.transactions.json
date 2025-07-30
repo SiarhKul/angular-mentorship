@@ -8,7 +8,7 @@
     "date": "2025-07-14",
     "payee": "14",
     "description": "4",
-    "transactionId": "1748292098043"
+    "accountId": "1748292098043"
   },
   {
     "id": "256eebc9-63e8-4899-8512-0e321b8c90d7",
@@ -19,7 +19,7 @@
     "date": "2025-07-19",
     "payee": "10",
     "description": "descr1",
-    "transactionId": "1748292098043"
+    "accountId": "1748292098043"
   },
   {
     "id": "ce66b7b0-1195-4321-8551-83950a5fc77f",
@@ -30,7 +30,7 @@
     "date": "2222-02-10",
     "payee": "payee",
     "description": "description",
-    "transactionId": "1748292098043"
+    "accountId": "1748292098043"
   },
   {
     "id": "1bd39239-0e3e-4a9e-9579-6f25b87836c5",
@@ -41,7 +41,7 @@
     "date": "2025-07-24",
     "payee": "111",
     "description": "13",
-    "transactionId": "1748459574312"
+    "accountId": "1748459574312"
   },
   {
     "id": "1bd39239-0e3e-4a9e-9579-6f25b87836c7",
@@ -52,7 +52,7 @@
     "date": "2025-07-24",
     "payee": "111",
     "description": "13",
-    "transactionId": "1748459574312"
+    "accountId": "1748459574312"
   },
   {
     "id": "9ba3b33d-aac4-431b-a4c5-35b60d02f898",
@@ -63,7 +63,7 @@
     "date": "2025-07-30",
     "payee": "ggggg",
     "description": "dexd",
-    "transactionId": "1749309821718"
+    "accountId": "1749309821718"
   },
   {
     "id": "c4300f86-a11d-45b2-934a-f698bc890dcf",
@@ -74,7 +74,7 @@
     "date": "2025-07-30",
     "payee": "4444455",
     "description": "555555",
-    "transactionId": "1749309821718"
+    "accountId": "1749309821718"
   },
   {
     "id": "7891500f-6631-48e4-bc44-4fae54e20e51",
@@ -85,6 +85,6 @@
     "date": "2025-07-30",
     "payee": "5555555",
     "description": "44444",
-    "transactionId": "1749309821718"
+    "accountId": "1749309821718"
   }
 ]

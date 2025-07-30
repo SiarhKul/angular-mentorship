@@ -39,8 +39,8 @@ async function updateTransaction(id, transaction) {
   TransactionRepository.update(id, transaction);
 }
 
-async function getTransactionBy(transactionId) {
-  return TransactionRepository.getBy(transactionId);
+async function getTransactionBy(accountId) {
+  return TransactionRepository.getBy(accountId);
 }
 
 module.exports = {

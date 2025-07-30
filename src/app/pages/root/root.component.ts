@@ -33,7 +33,7 @@ export class RootComponent {
     callbacks: IonResponseCallbacks,
   ) {
     this.rootService.createTransactionAsync(
-      { ...values, transactionId: this.accountId?.toString() },
+      { ...values, accountId: this.accountId?.toString() },
       callbacks,
     );
     callbacks.onSuccess?.(null);

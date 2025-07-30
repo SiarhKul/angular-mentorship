@@ -27,13 +27,11 @@ class TransactionRepository {
 
     saveToFile(FilePath.TRANSLATIONS, transactionsUpdated);
   }
-  static async getBy(transactionId) {
+  static async getBy(accountId) {
     const transactionsDb = await readFromFile(FilePath.TRANSLATIONS);
     console.log("Transaction from the Db", transactionsDb);
-    const trans = transactionsDb.filter(
-      (tr) => tr.transactionId === transactionId,
-    );
-    console.log("transactionId", transactionId);
+    const trans = transactionsDb.filter((tr) => tr.accountId === accountId);
+    console.log("accountId", accountId);
     console.log("Transactions", trans);
     return trans;
   }
