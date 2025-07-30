@@ -10,4 +10,5 @@ export interface ITransaction {
   id?: TUUID;
   payee: string;
   title: string;
+  transactionId: number;
 }

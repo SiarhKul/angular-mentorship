@@ -34,7 +34,7 @@ class TransactionRepository {
       (tr) => tr.transactionId === transactionId,
     );
     console.log("transactionId", transactionId);
-    // console.log("Transactions", trans);
+    console.log("Transactions", trans);
     return trans;
   }
 }

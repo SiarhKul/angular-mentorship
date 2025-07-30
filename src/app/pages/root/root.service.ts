@@ -81,6 +81,8 @@ export class RootService {
     transaction: ITransaction,
     { onSuccess }: IOnSubscriptionCallbacks,
   ) {
+    console.log('4444444444444444444', transaction);
+
     this.transactionServiceApi
       .createTransaction(transaction)
       .pipe(

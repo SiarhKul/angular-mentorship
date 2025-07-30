@@ -34,7 +34,7 @@
   },
   {
     "id": "1bd39239-0e3e-4a9e-9579-6f25b87836c5",
-    "category": "Expenses",
+    "category": "Income",
     "title": "upd",
     "categories": ["Category1"],
     "amount": 444,
@@ -53,5 +53,27 @@
     "payee": "111",
     "description": "13",
     "transactionId": "1748459574312"
+  },
+  {
+    "id": "9ba3b33d-aac4-431b-a4c5-35b60d02f898",
+    "category": "Income",
+    "title": "gsdfsdf",
+    "categories": ["Category3"],
+    "amount": 555,
+    "date": "2025-07-30",
+    "payee": "ggggg",
+    "description": "dexd",
+    "transactionId": "1749309821718"
+  },
+  {
+    "id": "c4300f86-a11d-45b2-934a-f698bc890dcf",
+    "category": "Expenses",
+    "title": "11",
+    "categories": ["test13"],
+    "amount": 444,
+    "date": "2025-07-30",
+    "payee": "4444455",
+    "description": "555555",
+    "transactionId": "1749309821718"
   }
 ]

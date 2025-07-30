@@ -7,10 +7,10 @@ import { ITransaction } from '../types/interfaces';
 export class TransactionServiceApi {
   constructor(private http: HttpClient) {}
 
-  createTransaction(transaction: any) {
+  createTransaction(transaction: ITransaction) {
     const url =
       `${API_URLS.baseUrl}${TRANSACTION_ENDPOINT.transactions}` as const;
-
+    console.log('--------', transaction);
     return this.http.post<any>(url, transaction);
   }
 

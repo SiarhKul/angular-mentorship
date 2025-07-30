@@ -181,6 +181,7 @@ export class TransactionCreatorComponent implements OnChanges {
     description: '',
     category: ECategories.EXPENSES,
     categories: [],
+    transactionId: 0,
   };
 
   constructor() {}
@@ -223,6 +224,7 @@ export class TransactionCreatorComponent implements OnChanges {
         description: this.initFormValues.description,
         category: this.initFormValues.category,
         categories: this.initFormValues.categories,
+        transactionId: this.initFormValues.transactionId,
       };
     }
   }
