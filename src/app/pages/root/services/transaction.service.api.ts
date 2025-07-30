@@ -32,4 +32,12 @@ export class TransactionServiceApi {
     console.log(url, transaction);
     return this.http.put<void>(url, transaction);
   }
+
+  getTransactionsBy(transactionId: number) {
+    const url =
+      `${API_URLS.baseUrl}${TRANSACTION_ENDPOINT.transactions}/${transactionId}` as const;
+    console.log(url);
+
+    return this.http.get<Required<ITransaction>[]>(url);
+  }
 }

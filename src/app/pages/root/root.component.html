@@ -1,6 +1,5 @@
 <app-layout-page>
   <div slot="left">
-    <div>{{ accountId | json }}</div>
     <money-accounts (onChangeAccountId)="handleMoneyAccountId($event)" />
   </div>
   <div slot="middle">

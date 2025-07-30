@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   signal,
   SimpleChanges,
@@ -18,6 +19,7 @@ import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TransactionCreatorComponent } from '../transaction-creator/transaction-creator';
 import { IonResponseCallbacks } from '../../../../shared/types/types';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -30,9 +32,11 @@ import { IonResponseCallbacks } from '../../../../shared/types/types';
     MatIcon,
     TransactionCreatorComponent,
     MatButtonModule,
+    JsonPipe,
   ],
   template: `
     <div>
+      <div>{{ accountId | json }}</div>
       <div class="transaction-list">
         @for (tx of transactionsSignal(); track tx.id) {
           <app-transaction-item
@@ -88,11 +92,9 @@ export class TransactionList implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['transactionId']) {
-      console.log(changes);
+    if (changes['accountId'] && this.accountId) {
+      this.rootService.fetchTransactionsBy(this.accountId);
     }
-
-    throw new Error('Method not implemented.');
   }
 
   updateTransactionAction<T extends Required<ITransaction>>(

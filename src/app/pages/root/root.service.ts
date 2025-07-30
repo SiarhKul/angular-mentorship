@@ -55,6 +55,17 @@ export class RootService {
     return this.accountMoneyServiceApi.getMoneyAccounts();
   }
 
+  fetchTransactionsBy(accountId: number) {
+    return this.transactionServiceApi.getTransactionsBy(accountId).subscribe({
+      next: (transactions) => {
+        this.transactionsSignal.set(transactions);
+      },
+      error: (error) => {
+        console.error('Error fetching transactions:', error);
+      },
+    });
+  }
+
   fetchTransactions() {
     return this.transactionServiceApi.getTransactions().subscribe({
       next: (transactions) => {
