@@ -75,6 +75,7 @@ export class RootService {
     });
   }
 
+  //todo: Add sum subtraction
   createTransactionAsync(
     transaction: ITransaction,
     { onSuccess }: IOnSubscriptionCallbacks,
