@@ -13,4 +13,4 @@ export const RoutePaths = {
   ROOT: '',
   AUTH: 'auth',
   LANDING: 'landing',
-};
+} as const;

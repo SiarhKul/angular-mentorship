@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "start:dev": "node index.js",
     "start": "node ./bin/www"
   },
   "dependencies": {
