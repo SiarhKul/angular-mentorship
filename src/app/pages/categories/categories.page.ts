@@ -18,6 +18,6 @@ import { CategoriesComponent } from '../../features/categories/categories.compon
   ],
   templateUrl: './categories.page.html',
   styleUrl: './categories.page.css',
-  providers: [AccountMoneyServiceApi],
+  providers: [],
 })
 export class CategoriesPage {}
