@@ -72,6 +72,13 @@ import { IOnSubscriptionCallbacks } from '../../shared/types/interfaces';
           }"
         />
         <app-categories-creator [submitAction]="saveCategory">
+          <div>
+            <h1>header</h1>
+            <section>
+              <p>Paragraph 1</p>
+              <p>Paragraph 2</p>
+            </section>
+          </div>
           <div ngProjectAs="alternative__trigger">
             <app-button
               [buttonContent]="'Add categories'"
